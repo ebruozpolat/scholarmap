@@ -3,8 +3,29 @@ import { createRouter, publicQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import { papers } from "@db/schema";
 import { like, desc, sql, and, gte } from "drizzle-orm";
+import { searchLive } from "./sources/live-search";
 
 export const paperRouter = createRouter({
+  // Real-time search against external sources (arXiv + Crossref). This does
+  // not touch the database, so it works on Cloudflare Workers via fetch.
+  searchLive: publicQuery
+    .input(
+      z.object({
+        query: z.string().min(1),
+        source: z.enum(["all", "arxiv", "scholar"]).default("all"),
+        limit: z.number().min(1).max(50).default(25),
+      })
+    )
+    .query(async ({ input }) => {
+      const { papers: results, sources, errors } = await searchLive(input);
+      return {
+        papers: results,
+        total: results.length,
+        sources,
+        errors,
+      };
+    }),
+
   list: publicQuery
     .input(
       z.object({

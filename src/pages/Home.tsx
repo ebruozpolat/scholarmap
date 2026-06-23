@@ -38,7 +38,7 @@ export default function Home() {
             <button onClick={() => navigate('/pricing')} className="text-[#8A8A98] hover:text-[#F0F0F5] transition-colors">Pricing</button>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/login')} className="text-sm text-[#8A8A98] hover:text-[#F0F0F5]">Sign in</button>
+            <button onClick={() => navigate('/app')} className="text-sm text-[#8A8A98] hover:text-[#F0F0F5]">Open App</button>
             <button onClick={() => navigate('/app')} className="text-sm px-4 py-1.5 rounded-lg bg-[#6366F1] text-white hover:bg-[#818CF8] transition-colors">Get Started</button>
           </div>
         </div>
