@@ -2,7 +2,7 @@
 -- Run: npx wrangler d1 execute scholarmap-db --file=./db/seed.sql
 
 -- Papers (30 real attention mechanism papers)
-INSERT OR IGNORE INTO papers (id, title, authors, year, abstract, url, citation_count, source, venue, topic, createdAt) VALUES
+INSERT OR IGNORE INTO papers (id, title, authors, year, abstract, url, citation_count, source, venue, topic, created_at) VALUES
 (1, 'Attention is All You Need', 'A Vaswani, N Shazeer, N Parmar, J Uszkoreit, L Jones, et al.', '2017', 'The foundational transformer paper introducing self-attention mechanism.', 'https://arxiv.org/abs/1706.03762', '126000', 'arXiv', 'NeurIPS', 'Self-Attention', datetime('now')),
 (2, 'BERT: Pre-training of Deep Bidirectional Transformers', 'J Devlin, MW Chang, K Lee, K Toutanova', '2019', 'Bidirectional encoder representations from transformers for language understanding.', 'https://aclanthology.org/N19-1423/', '149000', 'Google Scholar', 'NAACL', 'NLP', datetime('now')),
 (3, 'An Image is Worth 16x16 Words', 'A Dosovitskiy, L Beyer, A Kolesnikov, D Weissenborn, et al.', '2021', 'Vision Transformer (ViT) applying transformers directly to image patches.', 'https://openaccess.thecvf.com/content/ICCV2021/html/Dosovitskiy_An_Image_Is_Worth_16x16_Words_Transformers_for_Image_Recognition_ICCV_2021_paper.html', '42000', 'Google Scholar', 'ICCV', 'Vision Transformer', datetime('now')),

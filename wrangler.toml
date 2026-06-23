@@ -5,14 +5,18 @@ compatibility_flags = ["nodejs_compat"]
 
 # ── Custom Domain ──
 # scholarmap.io is already purchased on Cloudflare
-# These routes auto-connect the Worker to your domain
-[[routes]]
-pattern = "scholarmap.io"
-custom_domain = true
+# These routes auto-connect the Worker to your domain.
+# Temporarily disabled to deploy to the *.workers.dev subdomain first.
+# Re-enable once the scholarmap.io zone is added to this Cloudflare account.
+# [[routes]]
+# pattern = "scholarmap.io"
+# custom_domain = true
 
-[[routes]]
-pattern = "www.scholarmap.io"
-custom_domain = true
+# [[routes]]
+# pattern = "www.scholarmap.io"
+# custom_domain = true
+
+workers_dev = true
 
 # ── D1 Database ──
 # Create: npx wrangler d1 create scholarmap-db
@@ -20,7 +24,7 @@ custom_domain = true
 [[d1_databases]]
 binding = "DB"
 database_name = "scholarmap-db"
-database_id = "REPLACE_WITH_REAL_DATABASE_ID"
+database_id = "9a9ab3e1-4e76-4400-a6ec-df6c996b9450"
 
 # ── Environment Variables ──
 [vars]
