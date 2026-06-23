@@ -1,0 +1,42 @@
+name = "scholarmap"
+main = "api/cf-worker.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Custom Domain ──
+# scholarmap.io is already purchased on Cloudflare
+# These routes auto-connect the Worker to your domain
+[[routes]]
+pattern = "scholarmap.io"
+custom_domain = true
+
+[[routes]]
+pattern = "www.scholarmap.io"
+custom_domain = true
+
+# ── D1 Database ──
+# Create: npx wrangler d1 create scholarmap-db
+# Then replace database_id below with the real ID
+[[d1_databases]]
+binding = "DB"
+database_name = "scholarmap-db"
+database_id = "REPLACE_WITH_REAL_DATABASE_ID"
+
+# ── Environment Variables ──
+[vars]
+APP_URL = "https://scholarmap.io"
+KIMI_AUTH_URL = "https://api.kimi.moonshot.cn"
+
+# ── Secrets (set via: npx wrangler secret put <NAME>) ──
+# KIMI_CLIENT_ID
+# KIMI_CLIENT_SECRET  
+# SESSION_SECRET
+# JWT_SECRET
+
+# ── Build ──
+[build]
+command = "npm run build:cf"
+
+# ── Static Assets ──
+[site]
+bucket = "./dist/public"

@@ -1,0 +1,352 @@
+[
+  {
+    "title": "Complex brain networks: graph theoretical analysis of structural and functional systems",
+    "authors": ["Ed Bullmore", "Olaf Sporns"],
+    "year": 2009,
+    "abstract": "Recent developments in the quantitative analysis of complex networks, based largely on graph theory, have been rapidly translated to studies of brain network organization. The brain's structural and functional systems have features of complex networks -- such as small-world topology, highly connected hubs and modularity -- both at the whole-brain scale of human neuroimaging and at a cellular scale in non-human animals. In this article, we review studies investigating complex brain network topology and its implications for understanding the brain's function, development, disease and evolution.",
+    "doi": "10.1038/nrn2575",
+    "url": "https://www.nature.com/articles/nrn2575",
+    "citation_count": 14965,
+    "source": "Google Scholar / Nature Reviews Neuroscience"
+  },
+  {
+    "title": "A default mode of brain function",
+    "authors": ["Marcus E. Raichle", "Abraham M. MacLeod", "Abraham Z. Snyder", "William J. Powers", "Debra A. Gusnard", "Gordon L. Shulman"],
+    "year": 2001,
+    "abstract": "A baseline or default state of brain activity has been hypothesized to exist in the human brain. This default mode is characterized by a consistent decrease in activity during goal-directed, attention-demanding tasks compared to a passive resting state. We propose that this default mode represents an organized, baseline state of brain function that is suspended during specific goal-directed behaviors.",
+    "doi": "10.1073/pnas.98.2.676",
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.98.2.676",
+    "citation_count": 16337,
+    "source": "Google Scholar / PNAS"
+  },
+  {
+    "title": "Complex network measures of brain connectivity: uses and interpretations",
+    "authors": ["Mikail Rubinov", "Olaf Sporns"],
+    "year": 2010,
+    "abstract": "Brain connectivity datasets comprise networks of brain regions connected by anatomical tracts or by functional associations. Complex network analysis aims to characterize these brain networks with a small number of neurobiologically meaningful and easily computable measures. This article discusses construction of brain networks from connectivity data and describes the most commonly used network measures of structural and functional connectivity, including measures that detect functional integration and segregation, quantify centrality of individual brain regions or pathways, characterize patterns of local anatomical circuitry, and test resilience of networks to insult.",
+    "doi": "10.1016/j.neuroimage.2009.10.003",
+    "url": "https://www.semanticscholar.org/paper/Complex-network-measures-of-brain-connectivity%3A-and-Rubinov-Sporns/9cd87eb83bc93161b226731116ec105c0a9c7cb5",
+    "citation_count": 13934,
+    "source": "Semantic Scholar / NeuroImage"
+  },
+  {
+    "title": "Mapping the structural core of human cerebral cortex",
+    "authors": ["Patric Hagmann", "Leila Cammoun", "Xavier Gigandet", "Reto Meuli", "Christopher J. Honey", "Van J. Wedeen", "Olaf Sporns"],
+    "year": 2008,
+    "abstract": "Structurally segregated and functionally specialized regions of the human cerebral cortex are interconnected by a dense network of cortico-cortical axonal pathways. Using diffusion spectrum imaging, we noninvasively mapped these pathways within and across cortical hemispheres in individual human participants. An analysis of the resulting large-scale structural brain networks reveals a structural core within posterior medial and parietal cerebral cortex, as well as several distinct temporal and frontal modules. Brain regions within the structural core share high degree, strength, and betweenness centrality, and they constitute connector hubs that link all major structural modules.",
+    "doi": "10.1371/journal.pbio.0060159",
+    "url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060159",
+    "citation_count": 5358,
+    "source": "Semantic Scholar / PLoS Biology"
+  },
+  {
+    "title": "The human connectome: a structural description of the human brain",
+    "authors": ["Olaf Sporns", "Giulio Tononi", "Rolf Kotter"],
+    "year": 2005,
+    "abstract": "To understand the functioning of a network, one must know its elements and their interconnections. The purpose of this article is to discuss research strategies aimed at a comprehensive structural description of the network of elements and connections forming the human brain. We propose to call this dataset the human 'connectome,' and we argue that it is fundamentally important in cognitive neuroscience and neuropsychology. The connectome will significantly increase our understanding of how functional brain states emerge from their underlying structural substrate.",
+    "doi": "10.1371/journal.pcbi.0010042",
+    "url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.0010042",
+    "citation_count": 4427,
+    "source": "Google Scholar / PLoS Computational Biology"
+  },
+  {
+    "title": "The economy of brain network organization",
+    "authors": ["Ed Bullmore", "Olaf Sporns"],
+    "year": 2012,
+    "abstract": "The brain is expensive, incurring high material and metabolic costs for its size. Many aspects of brain network organization can be mostly explained by a parsimonious drive to minimize these costs. However, brain networks also have high topological efficiency, robustness, modularity and a 'rich club' of connector hubs. We propose that brain organization is shaped by an economic trade-off between minimizing costs and allowing the emergence of adaptively valuable topological patterns of anatomical or functional connectivity between multiple neuronal populations.",
+    "doi": "10.1038/nrn3214",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22498897/",
+    "citation_count": 4214,
+    "source": "PubMed / Nature Reviews Neuroscience"
+  },
+  {
+    "title": "Predicting human resting-state functional connectivity from structural connectivity",
+    "authors": ["Christopher J. Honey", "Olaf Sporns", "Leila Cammoun", "Xavier Gigandet", "Jean-Philippe Thiran", "Reto Meuli", "Patric Hagmann"],
+    "year": 2009,
+    "abstract": "Structurally connected brain regions tend to show correlated spontaneous neural activity in the absence of an explicit task, a phenomenon known as resting-state functional connectivity. We investigated the relationship between structural connectivity and resting-state functional connectivity in healthy human participants. We found that functional connectivity was significantly correlated with structural connectivity, but the relationship was complex and nonlinear.",
+    "doi": "10.1073/pnas.0811168106",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.0811168106",
+    "citation_count": 4013,
+    "source": "Google Scholar / PNAS"
+  },
+  {
+    "title": "Dynamic functional connectivity: promise, issues, and interpretations",
+    "authors": ["R. Matthew Hutchison", "Thilo Womelsdorf", "Elena A. Allen", "Peter A. Bandettini", "Vince D. Calhoun", "Maurizio Corbetta", "Sandra E. Della Penna", "Jeff H. Duyn", "Gary H. Glover", "Javier Gonzalez-Castillo", "Daniel A. Handwerker", "Sheila Keilholz", "Vesa Kiviniemi", "David A. Leopold", "Francesco de Pasquale", "Olaf Sporns", "Martin Walter", "Catie Chang"],
+    "year": 2013,
+    "abstract": "The time-varying nature of functional connectivity has emerged as an important consideration in studies of brain network organization. This article reviews the growing body of literature on dynamic functional connectivity, examining the promise of this approach while also addressing methodological issues and interpretational challenges. We discuss the potential importance of time-varying connectivity for understanding brain function and its alterations in disease.",
+    "doi": "10.1016/j.neuroimage.2013.05.044",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/23707587/",
+    "citation_count": 3575,
+    "source": "PubMed / NeuroImage"
+  },
+  {
+    "title": "Network neuroscience",
+    "authors": ["Danielle S. Bassett", "Olaf Sporns"],
+    "year": 2017,
+    "abstract": "Network neuroscience describes the use of network science and graph theory to study the structure and function of complex neural systems. The brain can be understood as a network at multiple scales, from neurons to circuits to large-scale systems. Network approaches have revealed fundamental organizational principles of brain networks, including small-world topology, rich-club organization, and modular architecture, and have provided insights into brain development, function, and disease.",
+    "doi": "10.1038/nn.4502",
+    "url": "https://www.nature.com/articles/nn.4502",
+    "citation_count": 3415,
+    "source": "Google Scholar / Nature Neuroscience"
+  },
+  {
+    "title": "Networks of the Brain",
+    "authors": ["Olaf Sporns"],
+    "year": 2011,
+    "abstract": "In Networks of the Brain, Olaf Sporns describes how the integrative nature of brain function can be illuminated from a complex network perspective. The book synthesizes current knowledge about brain network organization across scales, from neurons to large-scale brain systems, and discusses how network approaches can help understand brain function, development, disease, and evolution. It covers fundamental concepts in network science and their application to neuroscience.",
+    "doi": "10.7551/mitpress/8406.001.0001",
+    "url": "https://mitpress.mit.edu/9780262014694/networks-of-the-brain/",
+    "citation_count": 3282,
+    "source": "Google Scholar / MIT Press"
+  },
+  {
+    "title": "Rich-club organization of the human connectome",
+    "authors": ["Martijn P. van den Heuvel", "Olaf Sporns"],
+    "year": 2011,
+    "abstract": "The human brain is a complex network of interlinked regions. Recent studies have demonstrated the existence of a number of highly connected and highly central neocortical hub regions. This study maps out both the subcortical and neocortical hubs of the brain and demonstrates that brain hubs form a so-called 'rich club,' characterized by a tendency for high-degree nodes to be more densely connected among themselves than nodes of a lower degree, providing important information on the higher-level topology of the brain network.",
+    "doi": "10.1523/JNEUROSCI.3539-11.2011",
+    "url": "https://www.jneurosci.org/content/31/44/15775",
+    "citation_count": 2843,
+    "source": "PubMed / Journal of Neuroscience"
+  },
+  {
+    "title": "Organization, development and function of complex brain networks",
+    "authors": ["Olaf Sporns", "Dante R. Chialvo", "Markus Kaiser", "Claus C. Hilgetag"],
+    "year": 2004,
+    "abstract": "Recent research has revealed general principles in the structural and functional organization of complex networks which are shared by various natural, social and technological systems. This review examines these principles as applied to the organization, development and function of complex brain networks. We examine the structural properties of large-scale anatomical and functional brain networks and discuss how they might arise in the course of network growth and rewiring.",
+    "doi": "10.1016/j.tics.2004.07.008",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15350243/",
+    "citation_count": 2776,
+    "source": "PubMed / Trends in Cognitive Sciences"
+  },
+  {
+    "title": "Network hubs in the human brain",
+    "authors": ["Martijn P. van den Heuvel", "Olaf Sporns"],
+    "year": 2013,
+    "abstract": "Network hubs are brain regions that occupy highly central positions in the brain's network architecture. Hubs play a crucial role in integrative brain function by linking diverse functional modules and facilitating efficient information flow. This review discusses the identification of network hubs, their structural and functional characteristics, their role in brain development and disease, and their evolutionary significance.",
+    "doi": "10.1016/j.tics.2013.09.012",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24231140/",
+    "citation_count": 2586,
+    "source": "PubMed / Trends in Cognitive Sciences"
+  },
+  {
+    "title": "A measure for brain complexity: relating functional segregation and integration in the nervous system",
+    "authors": ["Giulio Tononi", "Olaf Sporns", "Gerald M. Edelman"],
+    "year": 1994,
+    "abstract": "Understanding the function of the nervous system requires a comprehensive analysis of how the brain integrates information across specialized regions while maintaining functional segregation. We propose a measure for brain complexity that captures the interplay between functional segregation and integration. This measure, called neural complexity, reflects the degree to which a neural system can simultaneously exhibit both specialized (segregated) and unified (integrated) patterns of activity.",
+    "doi": "10.1073/pnas.91.11.5033",
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.91.11.5033",
+    "citation_count": 2252,
+    "source": "Google Scholar / PNAS"
+  },
+  {
+    "title": "Network structure of cerebral cortex shapes functional connectivity on multiple time scales",
+    "authors": ["Christopher J. Honey", "Rolf Kotter", "Michael Breakspear", "Olaf Sporns"],
+    "year": 2007,
+    "abstract": "Cortical circuits are composed of neurons that are recurrently connected through a complex pattern of synaptic connections. These circuits are embedded within a larger network of cortical areas that are interconnected through long-range projections. We investigated how the structure of cortical networks shapes functional connectivity at multiple temporal scales, finding that network architecture fundamentally constrains the patterns of correlated neural activity observed at different frequencies.",
+    "doi": "10.1073/pnas.0701519104",
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.0701519104",
+    "citation_count": 2130,
+    "source": "Google Scholar / PNAS"
+  },
+  {
+    "title": "Emerging concepts for the dynamical organization of resting-state activity in the brain",
+    "authors": ["Gustavo Deco", "Viktor K. Jirsa", "Anthony R. McIntosh"],
+    "year": 2011,
+    "abstract": "A broad body of experimental work has demonstrated that apparently spontaneous brain activity is not random. At the level of large-scale neural systems, as measured with fMRI, this ongoing activity reflects the organization of a series of highly coherent functional networks. These so-called resting-state networks closely relate to the underlying anatomical connectivity but cannot be understood in those terms alone. We review three large-scale neural system models that emphasize the key contributions of local dynamics, signal transmission delays and noise to the emerging resting-state networks.",
+    "doi": "10.1038/nrn2961",
+    "url": "https://www.nature.com/articles/nrn2961",
+    "citation_count": 2157,
+    "source": "PubMed / Nature Reviews Neuroscience"
+  },
+  {
+    "title": "The human brain is intrinsically organized into dynamic, anticorrelated functional networks",
+    "authors": ["Michael D. Fox", "Abraham Z. Snyder", "Justin L. Vincent", "Maurizio Corbetta", "David C. Van Essen", "Marcus E. Raichle"],
+    "year": 2005,
+    "abstract": "Many functional brain imaging studies have reported the existence of brain regions that decrease their activity during attention-demanding cognitive tasks, a phenomenon known as task-induced deactivation. We demonstrate that these regions are not simply deactivated but are instead organized into a coherent, functionally connected network that is anticorrelated with a task-positive network. The anticorrelated relationship between these networks suggests that the brain is intrinsically organized into dynamically competing functional systems.",
+    "doi": "10.1073/pnas.0504136102",
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.0504136102",
+    "citation_count": 8211,
+    "source": "Google Scholar / PNAS"
+  },
+  {
+    "title": "A resilient, low-frequency, small-world human brain functional network with highly connected association cortical hubs",
+    "authors": ["Sophie Achard", "Raymond Salvador", "Brandon Whitcher", "John Suckling", "Ed Bullmore"],
+    "year": 2006,
+    "abstract": "Small-world properties have been demonstrated for many complex networks. We applied the discrete wavelet transform to fMRI time series acquired from healthy volunteers in the resting state to estimate frequency-dependent correlation matrices characterizing functional connectivity between 90 cortical and subcortical regions. We found a small-world topology of sparse connections most salient in the low-frequency interval 0.03-0.06 Hz. The human functional network was dominated by a neocortical core of highly connected hubs.",
+    "doi": "10.1523/JNEUROSCI.3874-05.2006",
+    "url": "https://www.jneurosci.org/content/26/1/63",
+    "citation_count": 2950,
+    "source": "PubMed / Journal of Neuroscience"
+  },
+  {
+    "title": "Small-world brain networks",
+    "authors": ["Danielle S. Bassett", "Ed Bullmore"],
+    "year": 2006,
+    "abstract": "Many complex networks have a small-world topology characterized by dense local clustering of connections between neighboring nodes yet a short path length between any pair of nodes due to the existence of relatively few long-range connections. This is an attractive model for the organization of brain anatomical and functional networks because a small-world topology can support both segregated/specialized and distributed/integrated information processing. Small-world networks are economical, tending to minimize wiring costs while supporting high dynamical complexity.",
+    "doi": "10.1177/1073858406293182",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/17079517/",
+    "citation_count": 3400,
+    "source": "PubMed / Neuroscientist"
+  },
+  {
+    "title": "Functional and effective connectivity: a review",
+    "authors": ["Karl J. Friston"],
+    "year": 2011,
+    "abstract": "This article reviews the concepts of functional and effective connectivity in neuroimaging. Functional connectivity is defined as the temporal correlation between spatially remote neurophysiological events, while effective connectivity refers to the influence that one neural system exerts over another. We discuss the various methods used to estimate these measures, including correlation analysis, Granger causality, dynamic causal modeling, and structural equation modeling, and consider their strengths and limitations.",
+    "doi": "10.1089/brain.2011.0008",
+    "url": "https://www.liebertpub.com/doi/10.1089/brain.2011.0008",
+    "citation_count": 4590,
+    "source": "Google Scholar / Brain Connectivity"
+  },
+  {
+    "title": "Functional connectivity in the resting brain: a network analysis of the default mode hypothesis",
+    "authors": ["Michael D. Greicius", "Ben Krasnow", "Allan L. Reiss", "Vinod Menon"],
+    "year": 2003,
+    "abstract": "The brain's default mode network consists of regions that are more active during rest than during attention-demanding tasks. We used network analysis methods to characterize the functional connectivity of the default mode network in healthy volunteers. We found that regions of the default mode network are functionally connected to each other and that this network exhibits a small-world topology with highly connected hub regions in medial prefrontal and posterior cingulate cortex.",
+    "doi": "10.1073/pnas.0135058100",
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.0135058100",
+    "citation_count": 6313,
+    "source": "Google Scholar / PNAS"
+  },
+  {
+    "title": "Dissociable intrinsic connectivity networks for salience processing and executive control",
+    "authors": ["William W. Seeley", "Vinod Menon", "Alan F. Schatzberg", "Jennifer Keller", "Gary H. Glover", "Heather Kenna", "Allan L. Reiss", "Michael D. Greicius"],
+    "year": 2007,
+    "abstract": "Functional neuroimaging studies have identified multiple large-scale brain networks that are active during the resting state. We describe two distinct functional networks: a salience network involved in detecting and orienting to behaviorally relevant stimuli, and an executive control network involved in higher-order cognitive control processes. These two networks, although often co-activated during task performance, are anatomically and functionally distinct and demonstrate different patterns of connectivity.",
+    "doi": "10.1523/JNEUROSCI.5587-06.2007",
+    "url": "https://www.jneurosci.org/content/27/9/2349",
+    "citation_count": 6592,
+    "source": "Google Scholar / Journal of Neuroscience"
+  },
+  {
+    "title": "Adaptive reconfiguration of fractal small-world human brain functional networks",
+    "authors": ["Danielle S. Bassett", "Andreas Meyer-Lindenberg", "Sophie Achard", "Trevor Duke", "Ed Bullmore"],
+    "year": 2006,
+    "abstract": "Brain function depends on adaptive self-organization of large-scale neural assemblies. We describe the topology and synchronizability of frequency-specific brain functional networks using wavelet decomposition of magnetoencephalographic time series. Brain functional networks were characterized by small-world properties at all six wavelet scales considered, corresponding approximately to classical delta, theta, alpha, beta, and gamma frequency bands. Global topological parameters were conserved across scales, implying a scale-invariant or fractal small-world organization.",
+    "doi": "10.1073/pnas.0606005103",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.0606005103",
+    "citation_count": 1642,
+    "source": "PubMed / PNAS"
+  },
+  {
+    "title": "Dynamic reconfiguration of human brain networks during learning",
+    "authors": ["Danielle S. Bassett", "Nicholas F. Wymbs", "Mason A. Porter", "Peter J. Mucha", "Jean M. Carlson", "Scott T. Grafton"],
+    "year": 2011,
+    "abstract": "We investigated how brain networks change their topology as a function of learning in healthy human volunteers. Using functional MRI and graph theoretical analysis, we found that brain networks undergo dynamic reconfiguration during motor learning, with flexible reorganization of community structure. Learning was associated with changes in the modular organization of brain networks, suggesting that the brain reconfigures its functional architecture to support the acquisition of new skills.",
+    "doi": "10.1073/pnas.1018985108",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.1018985108",
+    "citation_count": 2126,
+    "source": "PubMed / PNAS"
+  },
+  {
+    "title": "The Brain's Default Mode Network",
+    "authors": ["Marcus E. Raichle"],
+    "year": 2015,
+    "abstract": "The brain's default mode network (DMN) comprises a set of regions that are consistently deactivated during goal-directed tasks and activated during rest. Since the initial description of this network, thousands of studies have been published characterizing its anatomy, function, and clinical relevance. The DMN is involved in internally focused mental processes including autobiographical memory, future planning, and theory of mind. This review provides a comprehensive overview of the DMN, its function, and its alterations in disease.",
+    "doi": "10.1146/annurev-neuro-071013-014030",
+    "url": "https://www.annualreviews.org/content/journals/10.1146/annurev-neuro-071013-014030",
+    "citation_count": 5319,
+    "source": "Google Scholar / Annual Review of Neuroscience"
+  },
+  {
+    "title": "The small world of the cerebral cortex",
+    "authors": ["Olaf Sporns", "Jonathan D. Zwi"],
+    "year": 2004,
+    "abstract": "The cerebral cortex can be viewed as a complex network of interconnected regions. We analyzed the anatomical connectivity of macaque and cat cortex and found that both exhibit small-world topology with high clustering and short path lengths. The small-world architecture of cortex may support both local specialized processing and global integration of information, providing an efficient compromise between these two competing demands.",
+    "doi": "10.1385/NI:2:2:145",
+    "url": "https://link.springer.com/article/10.1385/NI:2:2:145",
+    "citation_count": 1715,
+    "source": "Google Scholar / Neuroinformatics"
+  },
+  {
+    "title": "Modular brain networks",
+    "authors": ["Olaf Sporns", "Richard F. Betzel"],
+    "year": 2016,
+    "abstract": "Modularity is a fundamental organizational principle of brain networks, reflecting the tendency of brain regions to form densely interconnected groups (modules) with relatively few connections between groups. This article reviews the evidence for modular organization in brain networks across species and scales, discusses the developmental and evolutionary origins of modularity, and considers how modularity contributes to brain function and how its disruption may contribute to neurological and psychiatric disorders.",
+    "doi": "10.1146/annurev-psych-122414-033634",
+    "url": "https://www.annualreviews.org/content/journals/10.1146/annurev-psych-122414-033634",
+    "citation_count": 1689,
+    "source": "Google Scholar / Annual Review of Psychology"
+  },
+  {
+    "title": "Identification and classification of hubs in brain networks",
+    "authors": ["Olaf Sporns", "Christopher J. Honey", "Rolf Kotter"],
+    "year": 2007,
+    "abstract": "Hubs are brain regions that occupy positions of high centrality in brain networks, playing crucial roles in information integration and communication. We investigated the identification and classification of network hubs in anatomical and functional brain networks of humans and non-human primates. Hub regions were found to be predominantly located in association cortex, forming a structural core that links functionally specialized modules.",
+    "doi": "10.1371/journal.pone.0001049",
+    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0001049",
+    "citation_count": 1441,
+    "source": "Google Scholar / PLoS ONE"
+  },
+  {
+    "title": "Network centrality in the human functional connectome",
+    "authors": ["Xi-Nian Zuo", "Ross Ehmke", "Maarten Mennes", "Davide Imperati", "Francisco X. Castellanos", "Olaf Sporns", "Michael P. Milham"],
+    "year": 2012,
+    "abstract": "The functional connectome is a comprehensive map of functional connectivity across the entire brain. We examined network centrality measures in the human functional connectome derived from resting-state fMRI data in a large sample of healthy volunteers. We found that different centrality measures identify distinct but overlapping sets of hub regions, and that these hub regions show high test-retest reliability across independent datasets.",
+    "doi": "10.1093/cercor/bhr269",
+    "url": "https://academic.oup.com/cercor/article/22/8/1862/305503",
+    "citation_count": 1377,
+    "source": "Google Scholar / Cerebral Cortex"
+  },
+  {
+    "title": "Network attributes for segregation and integration in the human brain",
+    "authors": ["Olaf Sporns"],
+    "year": 2013,
+    "abstract": "The human brain exhibits a fundamental tension between two organizational requirements: the segregation of functionally specialized regions and the integration of information across these regions. Network analysis provides a framework for quantifying how brain networks simultaneously support both segregation and integration. This article reviews network attributes that capture these complementary aspects of brain organization, including modularity, clustering, path length, and communicability.",
+    "doi": "10.1016/j.conb.2013.03.007",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S0959438813000344",
+    "citation_count": 1326,
+    "source": "Google Scholar / Current Opinion in Neurobiology"
+  },
+  {
+    "title": "Understanding complexity in the human brain",
+    "authors": ["Danielle S. Bassett", "Michael S. Gazzaniga"],
+    "year": 2011,
+    "abstract": "The brain can be understood as a complex system or network, in which mental states emerge from the interaction between multiple physical and functional levels. We argue that recent advances in complex systems theory might provide crucial new insights into the mind-brain problem. We review evidence for the complexity of the brain and applications of complex network theory to brain connectivity, and discuss the philosophical concept of emergence as a framework for investigating mind-brain mechanisms.",
+    "doi": "10.1016/j.tics.2011.03.006",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S1364661311000416",
+    "citation_count": 863,
+    "source": "PubMed / Trends in Cognitive Sciences"
+  },
+  {
+    "title": "Collective dynamics of small-world networks",
+    "authors": ["Duncan J. Watts", "Steven H. Strogatz"],
+    "year": 1998,
+    "abstract": "Networks of coupled dynamical systems have been used to model biological oscillators, Josephson junction arrays, excitable media, neural networks, spatial games, genetic control networks and many other self-organizing systems. We study a simple model of a network that interpolates between regular and random networks and shows that these 'small-world' networks exhibit enhanced signal propagation speed, computational power, and synchronizability. The model may explain the small-world phenomenon observed in many real networks.",
+    "doi": "10.1038/30918",
+    "url": "https://www.nature.com/articles/30918",
+    "citation_count": 47623,
+    "source": "Google Scholar / Nature"
+  },
+  {
+    "title": "The structure and function of complex networks",
+    "authors": ["Mark E.J. Newman"],
+    "year": 2003,
+    "abstract": "Inspired by the empirical study of real-world networks, researchers have turned to a wide variety of theoretical models to understand how networks form, evolve, and function. This article reviews recent work on the structure and function of complex networks, with particular emphasis on graph theoretical models, network growth models, and dynamical processes on networks including the spread of information, disease, and synchronization phenomena.",
+    "doi": "10.1137/S003614450342480",
+    "url": "https://epubs.siam.org/doi/10.1137/S003614450342480",
+    "citation_count": 31897,
+    "source": "Google Scholar / SIAM Review"
+  },
+  {
+    "title": "Large-scale brain networks in cognition: emerging methods and principles",
+    "authors": ["Steven L. Bressler", "Vinod Menon"],
+    "year": 2010,
+    "abstract": "The brain can be understood as a complex network of interconnected regions that cooperate to produce cognition. Recent advances in neuroimaging and network analysis have made it possible to characterize the large-scale functional networks of the human brain. This review discusses emerging methods for studying large-scale brain networks and the principles of network organization that have been revealed, including the modular and hierarchical architecture of brain networks and their role in cognitive function.",
+    "doi": "10.1016/j.tics.2010.04.004",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S1364661310000685",
+    "citation_count": 2770,
+    "source": "Google Scholar / Trends in Cognitive Sciences"
+  },
+  {
+    "title": "Emergence of scaling in random networks",
+    "authors": ["Albert-Laszlo Barabasi", "Reka Albert"],
+    "year": 1999,
+    "abstract": "The network of connections between components of complex systems defines their structure and constrains their function. We show that many real-world networks exhibit a power-law degree distribution, meaning that they contain a few highly connected nodes (hubs) and many nodes with few connections. We propose a model based on preferential attachment that explains the emergence of this scale-free property and show that it captures the essential features of many real networks.",
+    "doi": "10.1126/science.286.5439.509",
+    "url": "https://www.science.org/doi/10.1126/science.286.5439.509",
+    "citation_count": 44225,
+    "source": "Google Scholar / Science"
+  }
+]
