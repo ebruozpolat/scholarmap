@@ -4,6 +4,7 @@ import { appRouter } from "./router";
 import { createContext } from "./context";
 import { Paths } from "@contracts/constants";
 import { createOAuthCallbackHandler } from "./kimi/auth";
+import { handleStripeWebhook } from "./stripe-router";
 
 // Import this for Cloudflare D1 type augmentation
 import type { ExecutionContext } from "@cloudflare/workers-types";
@@ -17,6 +18,10 @@ export interface Env {
   JWT_SECRET: string;
   APP_URL: string;
   KIMI_AUTH_URL: string;
+  STRIPE_SECRET_KEY?: string;
+  STRIPE_PUBLISHABLE_KEY?: string;
+  STRIPE_PRO_PRICE_ID?: string;
+  STRIPE_WEBHOOK_SECRET?: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -29,6 +34,19 @@ app.get(Paths.oauthCallback, async (c) => {
   // Set env vars from bindings for the auth handler
   const handler = createOAuthCallbackHandler();
   return handler(c.req.raw as any, c.env as any);
+});
+
+// Stripe webhook (raw body required for signature verification)
+app.post("/api/trpc/stripe.webhook", async (c) => {
+  try {
+    const payload = await c.req.text();
+    const signature = c.req.header("stripe-signature") ?? null;
+    const result = await handleStripeWebhook(c.env, payload, signature);
+    return c.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Webhook error";
+    return c.json({ error: message }, 400);
+  }
 });
 
 // tRPC API
@@ -98,7 +116,7 @@ function getIndexHtml() {
     <p>The academic research platform backend is running on Cloudflare's edge network. Connect the React frontend to start using the app.</p>
     <a href="/api/health" class="btn">Check API Health</a>
     <div class="stats">
-      <div><div class="stat-value">30</div><div class="stat-label">Papers Ready</div></div>
+      <div><div class="stat-value">147</div><div class="stat-label">Papers Ready</div></div>
       <div><div class="stat-value">4</div><div class="stat-label">API Routers</div></div>
       <div><div class="stat-value">Edge</div><div class="stat-label">Deployment</div></div>
     </div>
