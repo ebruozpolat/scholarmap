@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import { cn } from "@/lib/utils";
+import { trpc } from "@/providers/trpc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,6 +38,7 @@ import {
   Lock,
   Eye,
   EyeOff,
+  Loader2,
 } from "lucide-react";
 
 /* ──────────── types ──────────── */
@@ -259,8 +262,36 @@ function ProfileSection() {
 /* ──────────── Subscription Section ──────────── */
 
 function SubscriptionSection() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const upgradeSuccess = searchParams.get("upgrade") === "success";
+  const { data: subscription, refetch } = trpc.subscription.get.useQuery();
+  const checkout = trpc.stripe.createCheckout.useMutation({
+    onSuccess: ({ url }) => {
+      window.location.href = url;
+    },
+  });
+
+  useEffect(() => {
+    if (upgradeSuccess) {
+      refetch();
+      const next = new URLSearchParams(searchParams);
+      next.delete("upgrade");
+      setSearchParams(next, { replace: true });
+    }
+  }, [upgradeSuccess, refetch, searchParams, setSearchParams]);
+
+  const isPro = subscription?.isPro ?? false;
+  const searchesUsed = subscription?.searchesUsed ?? 0;
+  const searchesLimit = subscription?.searchesLimit ?? 10;
+  const searchPct = searchesLimit > 0 ? Math.min(100, (searchesUsed / searchesLimit) * 100) : 0;
+
   const billingHistory = [
-    { date: "Feb 15, 2025", desc: "Free Plan", amount: "$0.00", status: "Free" },
+    {
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      desc: isPro ? "ScholarMap Pro" : "Free Plan",
+      amount: isPro ? "$9.00" : "$0.00",
+      status: isPro ? "Active" : "Free",
+    },
   ];
 
   return (
@@ -272,6 +303,11 @@ function SubscriptionSection() {
         <p className="text-sm mt-1" style={{ color: "#8A8A98" }}>
           Manage your plan and billing information.
         </p>
+        {upgradeSuccess && (
+          <p className="text-sm mt-3 px-3 py-2 rounded-lg" style={{ background: "rgba(34,197,94,0.12)", color: "#22C55E" }}>
+            Payment successful! Your Pro plan is now active.
+          </p>
+        )}
       </div>
 
       {/* Current Plan */}
@@ -284,15 +320,15 @@ function SubscriptionSection() {
             <Badge
               className="text-[10px] h-5 mb-2"
               style={{
-                background: "rgba(99,102,241,0.12)",
-                color: "#6366F1",
+                background: isPro ? "rgba(34,197,94,0.12)" : "rgba(99,102,241,0.12)",
+                color: isPro ? "#22C55E" : "#6366F1",
                 border: "none",
               }}
             >
-              Free
+              {isPro ? "Pro" : "Free"}
             </Badge>
             <p className="text-sm" style={{ color: "#8A8A98" }}>
-              You are on the Free plan
+              You are on the {isPro ? "Pro" : "Free"} plan
             </p>
           </div>
         </div>
@@ -303,7 +339,7 @@ function SubscriptionSection() {
             <div className="flex justify-between text-sm mb-1.5">
               <span style={{ color: "#F0F0F5" }}>Searches</span>
               <span className="text-xs tabular-nums" style={{ color: "#5A5A68" }}>
-                7 / 10
+                {searchesUsed} / {isPro ? "Unlimited" : searchesLimit}
               </span>
             </div>
             <div
@@ -312,7 +348,7 @@ function SubscriptionSection() {
             >
               <div
                 className="h-full rounded-full transition-all"
-                style={{ width: "70%", background: "#6366F1" }}
+                style={{ width: isPro ? "100%" : `${searchPct}%`, background: "#6366F1" }}
               />
             </div>
           </div>
@@ -320,7 +356,7 @@ function SubscriptionSection() {
             <div className="flex justify-between text-sm mb-1.5">
               <span style={{ color: "#F0F0F5" }}>Library</span>
               <span className="text-xs tabular-nums" style={{ color: "#5A5A68" }}>
-                12 / 100
+                {isPro ? "Unlimited" : "12 / 100"}
               </span>
             </div>
             <div
@@ -329,7 +365,7 @@ function SubscriptionSection() {
             >
               <div
                 className="h-full rounded-full transition-all"
-                style={{ width: "12%", background: "#6366F1" }}
+                style={{ width: isPro ? "100%" : "12%", background: "#6366F1" }}
               />
             </div>
           </div>
@@ -337,6 +373,7 @@ function SubscriptionSection() {
       </div>
 
       {/* Pro CTA */}
+      {!isPro && (
       <div
         className="rounded-xl border p-5 relative overflow-hidden"
         style={{
@@ -373,11 +410,21 @@ function SubscriptionSection() {
           <Button
             className="h-9 text-sm px-5"
             style={{ background: "#6366F1" }}
+            onClick={() => checkout.mutate()}
+            disabled={checkout.isPending}
           >
-            Upgrade to Pro
+            {checkout.isPending ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
+                Redirecting to Stripe...
+              </>
+            ) : (
+              "Upgrade to Pro"
+            )}
           </Button>
         </div>
       </div>
+      )}
 
       {/* Billing History */}
       <div>
@@ -436,8 +483,8 @@ function SubscriptionSection() {
                     <Badge
                       className="text-[10px] h-5"
                       style={{
-                        background: "rgba(99,102,241,0.12)",
-                        color: "#6366F1",
+                        background: isPro ? "rgba(34,197,94,0.12)" : "rgba(99,102,241,0.12)",
+                        color: isPro ? "#22C55E" : "#6366F1",
                         border: "none",
                       }}
                     >

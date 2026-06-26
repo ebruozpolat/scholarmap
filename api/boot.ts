@@ -6,12 +6,24 @@ import { appRouter } from "./router";
 import { createContext } from "./context";
 import { env } from "./lib/env";
 import { createOAuthCallbackHandler } from "./kimi/auth";
+import { handleStripeWebhook } from "./stripe-router";
 import { Paths } from "@contracts/constants";
 
 const app = new Hono<{ Bindings: HttpBindings }>();
 
 app.use(bodyLimit({ maxSize: 50 * 1024 * 1024 }));
 app.get(Paths.oauthCallback, createOAuthCallbackHandler());
+app.post("/api/trpc/stripe.webhook", async (c) => {
+  try {
+    const payload = await c.req.text();
+    const signature = c.req.header("stripe-signature") ?? null;
+    const result = await handleStripeWebhook(process.env as any, payload, signature);
+    return c.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Webhook error";
+    return c.json({ error: message }, 400);
+  }
+});
 app.use("/api/trpc/*", async (c) => {
   return fetchRequestHandler({
     endpoint: "/api/trpc",
