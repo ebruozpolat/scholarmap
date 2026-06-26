@@ -45,6 +45,21 @@ KIMI_AUTH_URL = "https://api.kimi.moonshot.cn"
 [build]
 command = "npm run build:cf"
 
-# ── Static Assets ──
-[site]
-bucket = "./dist/public"
+# ── Static Assets (Workers Assets binding) ──
+[assets]
+directory = "./dist/public"
+binding = "ASSETS"
+
+# ── Preview environment (PR deployments) ──
+[env.preview]
+name = "scholarmap-preview"
+workers_dev = true
+
+[env.preview.vars]
+APP_URL = "https://scholarmap-preview.workers.dev"
+KIMI_AUTH_URL = "https://api.kimi.moonshot.cn"
+
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "scholarmap-db"
+database_id = "9a9ab3e1-4e76-4400-a6ec-df6c996b9450"

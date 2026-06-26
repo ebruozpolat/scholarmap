@@ -12,6 +12,7 @@ import type { ExecutionContext } from "@cloudflare/workers-types";
 export interface Env {
   DATABASE_URL: string;
   DB: D1Database; // D1 binding
+  ASSETS?: Fetcher;
   KIMI_CLIENT_ID: string;
   KIMI_CLIENT_SECRET: string;
   SESSION_SECRET: string;
