@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Check,
   X,
@@ -7,9 +8,11 @@ import {
   Users,
   Sparkles,
   ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { trpc } from "@/providers/trpc";
 import {
   Accordion,
   AccordionContent,
@@ -218,6 +221,20 @@ function FeatureRow({
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
   const prices = isYearly ? billingYearly : billingMonthly;
+  const navigate = useNavigate();
+  const checkout = trpc.stripe.createCheckout.useMutation({
+    onSuccess: ({ url }) => {
+      window.location.href = url;
+    },
+  });
+
+  const handleProCheckout = () => {
+    checkout.mutate();
+  };
+
+  const handleGetStarted = () => {
+    navigate("/app");
+  };
 
   return (
     <div className="min-h-screen bg-[#08080C]">
@@ -331,6 +348,7 @@ export default function Pricing() {
             <Button
               variant="outline"
               className="w-full h-11 border-[#23232D] text-[#F0F0F5] hover:bg-[#1E1E28] hover:text-[#F0F0F5] mb-6"
+              onClick={handleGetStarted}
             >
               Get Started
             </Button>
@@ -380,8 +398,19 @@ export default function Pricing() {
                 {isYearly ? "Billed annually ($84/year)" : "Billed monthly"}
               </p>
             </div>
-            <Button className="w-full h-12 bg-[#6366F1] hover:bg-[#818CF8] text-white text-base font-medium mb-2">
-              Start Pro Trial
+            <Button
+              className="w-full h-12 bg-[#6366F1] hover:bg-[#818CF8] text-white text-base font-medium mb-2"
+              onClick={handleProCheckout}
+              disabled={checkout.isPending}
+            >
+              {checkout.isPending ? (
+                <>
+                  <Loader2 className="size-4 mr-2 animate-spin" />
+                  Redirecting...
+                </>
+              ) : (
+                "Start Pro Trial"
+              )}
             </Button>
             <p className="text-[11px] text-[#5A5A68] text-center mb-6">
               14-day free trial, no credit card required
@@ -542,8 +571,8 @@ export default function Pricing() {
             and analyze academic papers.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button className="h-11 bg-[#6366F1] hover:bg-[#818CF8] text-white px-6">
-              Start 14-Day Free Trial
+            <Button className="h-11 bg-[#6366F1] hover:bg-[#818CF8] text-white px-6" onClick={handleProCheckout} disabled={checkout.isPending}>
+              {checkout.isPending ? "Redirecting..." : "Start 14-Day Free Trial"}
               <ArrowRight className="size-4 ml-1" />
             </Button>
             <Button
