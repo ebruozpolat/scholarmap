@@ -40,7 +40,7 @@ const CROSSREF_JSON = {
 function mockFetch(handler: (url: string) => Response | Promise<Response>) {
   vi.stubGlobal(
     "fetch",
-    vi.fn(async (input: RequestInfo | URL) => handler(String(input))),
+    vi.fn(async (input: unknown) => handler(String(input))),
   );
 }
 

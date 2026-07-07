@@ -6,8 +6,7 @@ import { Paths } from "@contracts/constants";
 import { createOAuthCallbackHandler } from "./kimi/auth";
 import { handleStripeWebhook } from "./stripe-router";
 
-// Import this for Cloudflare D1 type augmentation
-import type { ExecutionContext } from "@cloudflare/workers-types";
+import type { D1Database, ExecutionContext, Fetcher } from "@cloudflare/workers-types";
 
 export interface Env {
   DATABASE_URL: string;
