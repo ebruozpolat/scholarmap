@@ -6,12 +6,13 @@ import { Paths } from "@contracts/constants";
 import { createOAuthCallbackHandler } from "./kimi/auth";
 import { handleStripeWebhook } from "./stripe-router";
 
-import type { D1Database, ExecutionContext, Fetcher } from "@cloudflare/workers-types";
-
+// Bindings are typed structurally: @cloudflare/workers-types' nominal
+// Request/Response conflict with the Node lib types the rest of the API
+// compiles against.
 export interface Env {
   DATABASE_URL: string;
-  DB: D1Database; // D1 binding
-  ASSETS?: Fetcher;
+  DB: unknown; // D1 binding (accessed through the query layer at runtime)
+  ASSETS?: { fetch(request: Request): Promise<Response> };
   KIMI_CLIENT_ID: string;
   KIMI_CLIENT_SECRET: string;
   SESSION_SECRET: string;
@@ -123,7 +124,7 @@ function getIndexHtml() {
 }
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext) {
+  async fetch(request: Request, env: Env, ctx: Parameters<typeof app.fetch>[2]) {
     return app.fetch(request, env, ctx);
   },
 };
