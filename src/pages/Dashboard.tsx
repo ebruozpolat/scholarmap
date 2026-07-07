@@ -74,7 +74,7 @@ function getVenueShort(p: Paper): string {
       return "arXiv";
     }
   }
-  const m = v.match(/^[^,\-]+/);
+  const m = v.match(/^[^,-]+/);
   return m ? m[0].trim().slice(0, 18) : "Unknown";
 }
 

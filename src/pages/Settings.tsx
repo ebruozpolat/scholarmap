@@ -7,8 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Progress } from "@/components/ui/progress";
 import {
   Dialog,
   DialogContent,
@@ -32,10 +30,8 @@ import {
   Monitor,
   Sun,
   Moon,
-  Smartphone,
   Globe,
   AlertTriangle,
-  Lock,
   Eye,
   EyeOff,
   Loader2,

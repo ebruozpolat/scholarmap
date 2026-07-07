@@ -12,14 +12,29 @@ function getStripeEnv(ctx: TrpcContext): StripeEnv {
 }
 
 export const stripeRouter = createRouter({
-  createCheckout: authedQuery.mutation(async ({ ctx }) => {
+  createCheckout: authedQuery
+    .input(
+      z
+        .object({ interval: z.enum(["monthly", "yearly"]).default("monthly") })
+        .optional(),
+    )
+    .mutation(async ({ ctx, input }) => {
     const env = getStripeEnv(ctx);
-    const priceId = env.STRIPE_PRO_PRICE_ID;
+    const interval = input?.interval ?? "monthly";
+    const priceId =
+      interval === "yearly" ? env.STRIPE_PRO_YEARLY_PRICE_ID : env.STRIPE_PRO_PRICE_ID;
 
-    if (!env.STRIPE_SECRET_KEY || !priceId) {
+    if (!env.STRIPE_SECRET_KEY || !env.STRIPE_PRO_PRICE_ID) {
       throw new TRPCError({
         code: "PRECONDITION_FAILED",
         message: "Stripe is not configured. Add STRIPE_SECRET_KEY and STRIPE_PRO_PRICE_ID secrets.",
+      });
+    }
+    if (!priceId) {
+      throw new TRPCError({
+        code: "PRECONDITION_FAILED",
+        message:
+          "Annual billing is not configured. Add the STRIPE_PRO_YEARLY_PRICE_ID secret or choose monthly billing.",
       });
     }
 
@@ -70,14 +85,23 @@ export async function handleStripeWebhook(
       const userId = Number(session.metadata?.userId ?? session.client_reference_id);
       if (!userId) break;
 
+      // Upsert: the user may have paid before ever opening a page that
+      // auto-creates their subscription row.
       await db
-        .update(subscriptions)
-        .set({
+        .insert(subscriptions)
+        .values({
+          userId,
           plan: "pro",
           searchesLimit: "999999",
           searchesUsed: "0",
         })
-        .where(eq(subscriptions.userId, userId));
+        .onDuplicateKeyUpdate({
+          set: {
+            plan: "pro",
+            searchesLimit: "999999",
+            searchesUsed: "0",
+          },
+        });
       break;
     }
     case "customer.subscription.deleted": {

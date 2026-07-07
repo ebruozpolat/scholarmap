@@ -3,6 +3,7 @@ export interface StripeEnv {
   STRIPE_PUBLISHABLE_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
   STRIPE_PRO_PRICE_ID?: string;
+  STRIPE_PRO_YEARLY_PRICE_ID?: string;
   APP_URL?: string;
 }
 
@@ -79,6 +80,9 @@ export async function createCheckoutSession(
     "line_items[0][quantity]": 1,
     "metadata[userId]": String(opts.userId),
     "subscription_data[metadata][userId]": String(opts.userId),
+    // The pricing page promises a 14-day trial with no card required.
+    "subscription_data[trial_period_days]": 14,
+    payment_method_collection: "if_required",
     ...(opts.email ? { customer_email: opts.email } : {}),
   });
 }

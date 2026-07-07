@@ -229,7 +229,7 @@ export default function Pricing() {
   });
 
   const handleProCheckout = () => {
-    checkout.mutate();
+    checkout.mutate({ interval: isYearly ? "yearly" : "monthly" });
   };
 
   const handleGetStarted = () => {

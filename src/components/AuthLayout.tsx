@@ -119,6 +119,7 @@ function AuthLayoutContent({
 
   useEffect(() => {
     if (isCollapsed) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- collapse comes from useSidebar context; drag state must reset when it changes externally
       setIsResizing(false);
     }
   }, [isCollapsed]);
