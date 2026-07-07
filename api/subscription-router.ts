@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { createRouter, authedQuery, publicQuery } from "./middleware";
+import { createRouter, authedQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import { subscriptions, searchLogs } from "@db/schema";
-import { eq, and, sql, gte } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export const subscriptionRouter = createRouter({
   get: authedQuery.query(async ({ ctx }) => {

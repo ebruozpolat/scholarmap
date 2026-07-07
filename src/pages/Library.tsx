@@ -19,21 +19,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
   Search,
   List,
   LayoutGrid,
   Star,
   Folder,
-  FolderPlus,
   Inbox,
   BookOpen,
   Clock,
@@ -45,7 +35,6 @@ import {
   FileText,
   ChevronDown,
   Plus,
-  Upload,
   Download,
   Check,
 } from "lucide-react";

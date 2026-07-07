@@ -42,7 +42,7 @@ export const paperRouter = createRouter({
     )
     .query(async ({ input }) => {
       const db = getDb();
-      const filters = input || {};
+      const filters = input ?? { sortBy: "relevance" as const, page: 1, limit: 20 };
       const conditions = [];
 
       if (filters.query && filters.query.length > 0) {
