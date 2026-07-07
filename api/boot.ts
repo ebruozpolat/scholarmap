@@ -7,6 +7,7 @@ import { createContext } from "./context";
 import { env } from "./lib/env";
 import { createOAuthCallbackHandler } from "./kimi/auth";
 import { handleStripeWebhook } from "./stripe-router";
+import type { StripeEnv } from "./lib/stripe";
 import { Paths } from "@contracts/constants";
 
 const app = new Hono<{ Bindings: HttpBindings }>();
@@ -17,7 +18,7 @@ app.post("/api/trpc/stripe.webhook", async (c) => {
   try {
     const payload = await c.req.text();
     const signature = c.req.header("stripe-signature") ?? null;
-    const result = await handleStripeWebhook(process.env as any, payload, signature);
+    const result = await handleStripeWebhook(process.env as StripeEnv, payload, signature);
     return c.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Webhook error";

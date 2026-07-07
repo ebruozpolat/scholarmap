@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "./router";
-import { createContext } from "./context";
+import { createContext, type TrpcContext } from "./context";
 import { Paths } from "@contracts/constants";
 import { createOAuthCallbackHandler } from "./kimi/auth";
 import { handleStripeWebhook } from "./stripe-router";
@@ -31,12 +31,8 @@ const app = new Hono<{ Bindings: Env }>();
 // Health check
 app.get("/api/health", (c) => c.json({ ok: true, env: "cloudflare-workers" }));
 
-// OAuth callback
-app.get(Paths.oauthCallback, async (c) => {
-  // Set env vars from bindings for the auth handler
-  const handler = createOAuthCallbackHandler();
-  return handler(c.req.raw as any, c.env as any);
-});
+// OAuth callback (reads configuration from process.env via nodejs_compat)
+app.get(Paths.oauthCallback, createOAuthCallbackHandler());
 
 // Stripe webhook (raw body required for signature verification)
 app.post("/api/trpc/stripe.webhook", async (c) => {
@@ -60,7 +56,7 @@ app.use("/api/trpc/*", async (c) => {
     createContext: async (opts) => {
       // Pass D1 database and env to context
       const ctx = await createContext(opts);
-      (ctx as any).env = c.env;
+      (ctx as TrpcContext & { env?: Env }).env = c.env;
       return ctx;
     },
   });
