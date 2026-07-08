@@ -4,7 +4,7 @@ import { appRouter } from "./router";
 import { createContext, type TrpcContext } from "./context";
 import { Paths } from "@contracts/constants";
 import { createOAuthCallbackHandler } from "./kimi/auth";
-import { handleStripeWebhook } from "./stripe-router";
+import { handleLemonSqueezyWebhook } from "./billing-router";
 
 // Bindings are typed structurally: @cloudflare/workers-types' nominal
 // Request/Response conflict with the Node lib types the rest of the API
@@ -19,11 +19,11 @@ export interface Env {
   JWT_SECRET: string;
   APP_URL: string;
   KIMI_AUTH_URL: string;
-  STRIPE_SECRET_KEY?: string;
-  STRIPE_PUBLISHABLE_KEY?: string;
-  STRIPE_PRO_PRICE_ID?: string;
-  STRIPE_PRO_YEARLY_PRICE_ID?: string;
-  STRIPE_WEBHOOK_SECRET?: string;
+  LEMONSQUEEZY_API_KEY?: string;
+  LEMONSQUEEZY_STORE_ID?: string;
+  LEMONSQUEEZY_PRO_VARIANT_ID?: string;
+  LEMONSQUEEZY_PRO_YEARLY_VARIANT_ID?: string;
+  LEMONSQUEEZY_WEBHOOK_SECRET?: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -34,12 +34,12 @@ app.get("/api/health", (c) => c.json({ ok: true, env: "cloudflare-workers" }));
 // OAuth callback (reads configuration from process.env via nodejs_compat)
 app.get(Paths.oauthCallback, createOAuthCallbackHandler());
 
-// Stripe webhook (raw body required for signature verification)
-app.post("/api/trpc/stripe.webhook", async (c) => {
+// Lemon Squeezy webhook (raw body required for signature verification)
+app.post("/api/webhooks/lemonsqueezy", async (c) => {
   try {
     const payload = await c.req.text();
-    const signature = c.req.header("stripe-signature") ?? null;
-    const result = await handleStripeWebhook(c.env, payload, signature);
+    const signature = c.req.header("x-signature") ?? null;
+    const result = await handleLemonSqueezyWebhook(c.env, payload, signature);
     return c.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Webhook error";

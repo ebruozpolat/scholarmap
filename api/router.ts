@@ -2,7 +2,7 @@ import { authRouter } from "./auth-router";
 import { paperRouter } from "./paper-router";
 import { libraryRouter } from "./library-router";
 import { subscriptionRouter } from "./subscription-router";
-import { stripeRouter } from "./stripe-router";
+import { billingRouter } from "./billing-router";
 import { createRouter, publicQuery } from "./middleware";
 
 export const appRouter = createRouter({
@@ -11,7 +11,7 @@ export const appRouter = createRouter({
   paper: paperRouter,
   library: libraryRouter,
   subscription: subscriptionRouter,
-  stripe: stripeRouter,
+  billing: billingRouter,
 });
 
 export type AppRouter = typeof appRouter;

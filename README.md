@@ -83,6 +83,13 @@ npx wrangler secret put KIMI_CLIENT_SECRET
 npx wrangler secret put SESSION_SECRET
 npx wrangler secret put JWT_SECRET
 
+# Billing (Lemon Squeezy — merchant of record, no company required)
+npx wrangler secret put LEMONSQUEEZY_API_KEY
+npx wrangler secret put LEMONSQUEEZY_STORE_ID
+npx wrangler secret put LEMONSQUEEZY_PRO_VARIANT_ID
+npx wrangler secret put LEMONSQUEEZY_PRO_YEARLY_VARIANT_ID
+npx wrangler secret put LEMONSQUEEZY_WEBHOOK_SECRET
+
 # 5. Deploy
 npm run deploy:cf
 ```

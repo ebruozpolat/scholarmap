@@ -261,7 +261,7 @@ function SubscriptionSection() {
   const [searchParams, setSearchParams] = useSearchParams();
   const upgradeSuccess = searchParams.get("upgrade") === "success";
   const { data: subscription, refetch } = trpc.subscription.get.useQuery();
-  const checkout = trpc.stripe.createCheckout.useMutation({
+  const checkout = trpc.billing.createCheckout.useMutation({
     onSuccess: ({ url }) => {
       window.location.href = url;
     },
@@ -412,7 +412,7 @@ function SubscriptionSection() {
             {checkout.isPending ? (
               <>
                 <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
-                Redirecting to Stripe...
+                Redirecting to checkout...
               </>
             ) : (
               "Upgrade to Pro"
