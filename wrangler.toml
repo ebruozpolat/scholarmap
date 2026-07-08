@@ -4,15 +4,17 @@ compatibility_date = "2025-06-01"
 compatibility_flags = ["nodejs_compat"]
 
 # ── Custom Domain ──
-# The scholarmap.io zone lives in this Cloudflare account; these routes
-# auto-connect the Worker to the apex and www hosts on deploy.
-[[routes]]
-pattern = "scholarmap.io"
-custom_domain = true
+# scholarmap.io is already purchased on Cloudflare
+# These routes auto-connect the Worker to your domain.
+# Temporarily disabled to deploy to the *.workers.dev subdomain first.
+# Re-enable once the scholarmap.io zone is added to this Cloudflare account.
+# [[routes]]
+# pattern = "scholarmap.io"
+# custom_domain = true
 
-[[routes]]
-pattern = "www.scholarmap.io"
-custom_domain = true
+# [[routes]]
+# pattern = "www.scholarmap.io"
+# custom_domain = true
 
 workers_dev = true
 
