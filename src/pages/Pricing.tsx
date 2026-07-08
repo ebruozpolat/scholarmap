@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual Team plans. All payments are processed securely through Stripe.",
+    a: "We accept all major credit cards (Visa, Mastercard, American Express) and PayPal. All payments are processed securely through Lemon Squeezy, our merchant of record.",
   },
   {
     q: "Is my research data private?",
@@ -222,7 +222,7 @@ export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
   const prices = isYearly ? billingYearly : billingMonthly;
   const navigate = useNavigate();
-  const checkout = trpc.stripe.createCheckout.useMutation({
+  const checkout = trpc.billing.createCheckout.useMutation({
     onSuccess: ({ url }) => {
       window.location.href = url;
     },

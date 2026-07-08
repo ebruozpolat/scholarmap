@@ -8,7 +8,7 @@ belirleyici olan, teknik belirsizliği olan özgün bileşenlerdir. Yol haritas�
 
 Başvurudan önce demo ve repo profesyonel görünmeli:
 
-- [ ] PR #2'yi (Stripe + 147 makale) `cf`'e merge et, production'a deploy et
+- [x] PR #2'yi (ödeme altyapısı + 147 makale) `cf`'e merge et, production'a deploy et
 - [ ] Özel alan adı bağla (`scholarmap.io` rotaları `wrangler.toml`'da hazır, yorum satırında)
 - [ ] `.env.example` dosyasını tamamla; README'deki kurulum adımlarını doğrula
 - [ ] Test kapsamını genişlet (`vitest` kurulu; kritik yol: arama, abonelik, webhook)

@@ -21,7 +21,7 @@ Bu klasör, ScholarMap'in TÜBİTAK destek programlarına başvuru hazırlığı
 
 Gerekçe:
 1. Şirket kurmadan başvurulur; destek onayından sonra şirket kurulur.
-2. MVP + canlı demo + ödeme altyapısı (Stripe) hazır olması panelde büyük avantaj — girişimcilerin çoğu fikir aşamasında başvurur.
+2. MVP + canlı demo + ödeme altyapısı (Lemon Squeezy) hazır olması panelde büyük avantaj — girişimcilerin çoğu fikir aşamasında başvurur.
 3. BiGG çıkışı, ileride 1507/1501'e geçiş için doğal basamaktır.
 
 ### 2026-2 çağrı takvimi (kritik!)

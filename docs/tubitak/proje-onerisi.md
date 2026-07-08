@@ -8,7 +8,7 @@
 ScholarMap, araştırmacıların akademik literatürü **tek noktadan araması, görselleştirmesi ve
 anlamlandırması** için geliştirilen yapay zekâ destekli bir araştırma platformudur. Mevcut MVP;
 arXiv ve Crossref üzerinde gerçek zamanlı arama, kişisel kütüphane, konu/trend analizi ve
-abonelik altyapısını (Stripe) Cloudflare edge mimarisi üzerinde sunmaktadır
+abonelik altyapısını (Lemon Squeezy) Cloudflare edge mimarisi üzerinde sunmaktadır
 (canlı: https://scholarmap.alignxdigital.workers.dev).
 
 Proje kapsamında MVP, dört Ar-Ge bileşeniyle **akıllı literatür asistanına** dönüştürülecektir:
@@ -74,7 +74,7 @@ rakiplerin çok altındadır; bu, agresif fiyatlamayı sürdürülebilir kılar.
 ## 6. Ticarileşme planı
 
 - **Gelir modeli:** Freemium — Free (10 arama/gün) / Pro (sınırsız + analitik + sentez).
-  Stripe ödeme altyapısı canlıdır. Kurumsal lisans (üniversite/TTO) 2. yıl hedefi.
+  Lemon Squeezy (Merchant of Record) ödeme altyapısı canlıdır — şirket kurulumundan önce de yasal olarak ödeme alınabilir. Kurumsal lisans (üniversite/TTO) 2. yıl hedefi.
 - **1. yıl hedefleri:** 5.000 kayıtlı kullanıcı, 100+ Pro abone, 2 kurumsal pilot.
 - **Büyüme kanalları:** Akademik Twitter/X ve LinkedIn, lisansüstü öğrenci toplulukları,
   TTO iş birlikleri, DergiPark entegrasyonunun yaratacağı organik TR trafiği.

@@ -85,8 +85,9 @@ olarak farklılaşır; edge mimarisi sayesinde birim maliyet avantajı fiyata ya
 ## İş modeli
 
 Freemium SaaS: Ücretsiz katman (10 arama/gün) ile viral edinim; Pro abonelik (sınırsız arama,
-gelişmiş analitik, atıf haritası, LLM sentezi) ile gelir. Stripe ödeme altyapısı canlı ve
-çalışır durumda. İkinci yıl: üniversite kütüphaneleri/TTO'lara çok kullanıcılı kurumsal lisans.
+gelişmiş analitik, atıf haritası, LLM sentezi) ile gelir. Lemon Squeezy (Merchant of Record)
+ödeme altyapısı canlı — şirket kurulumu gerektirmeden yasal olarak ödeme alınabiliyor.
+İkinci yıl: üniversite kütüphaneleri/TTO'lara çok kullanıcılı kurumsal lisans.
 İlk yıl hedefi: 5.000 kayıtlı kullanıcı, 100+ ödeyen abone, 2 üniversite pilotu.
 
 ---
@@ -94,7 +95,7 @@ gelişmiş analitik, atıf haritası, LLM sentezi) ile gelir. Stripe ödeme alty
 ## Mevcut durum (geliştirme aşaması)
 
 Çalışan MVP canlıda: **https://scholarmap.alignxdigital.workers.dev** — arXiv/Crossref gerçek
-zamanlı arama, konu/trend analizi panosu, kişisel kütüphane, Stripe ile Pro abonelik akışı ve
+zamanlı arama, konu/trend analizi panosu, kişisel kütüphane, Lemon Squeezy ile Pro abonelik akışı ve
 147 makalelik başlangıç veri seti. Teknoloji Hazırlık Seviyesi: **TRL 6** (gerçek ortamda
 çalışan prototip). Teknik altyapı: React 19 + TypeScript, tRPC, Cloudflare Workers/D1 (edge).
 Proje desteğiyle hedef: Ar-Ge bileşenlerinin geliştirilip ürünleştirilmesi ve TRL 8–9'a ulaşmak.
@@ -108,7 +109,7 @@ Proje desteğiyle hedef: Ar-Ge bileşenlerinin geliştirilip ürünleştirilmesi
 
 [Ad Soyad] — Kurucu. [Üniversite/bölüm, mezuniyet yılı veya öğrencilik durumu]. ScholarMap'in
 tasarımı ve geliştirmesinin tamamını yürüttü: React/TypeScript ön yüz, tRPC/Cloudflare Workers
-arka uç, Stripe ödeme entegrasyonu ve veri toplama hattı. [Varsa: yayın, staj, iş deneyimi,
+arka uç, ödeme entegrasyonu ve veri toplama hattı. [Varsa: yayın, staj, iş deneyimi,
 hackathon, önceki proje.]
 
 *(BiGG bireysel başvurudur; ekip üyesi eklenecekse aynı formatta devam et.)*
