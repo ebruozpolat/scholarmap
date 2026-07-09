@@ -35,19 +35,22 @@ arkasında ve Türkçe akademik içerik (DergiPark, YÖK Tez) modern keşif ara�
 ## Çözüm (ürün/hizmet)
 
 ScholarMap, literatür taramasının tüm adımlarını tek platformda toplar: arXiv, Crossref ve
-OpenAlex üzerinde gerçek zamanlı arama; sonuçları anlamlandıran konu ve trend analizi; kişisel
-kütüphane ve koleksiyonlar; abonelik tabanlı erişim. Proje kapsamında platform dört Ar-Ge
-bileşeniyle akıllı literatür asistanına dönüşecek: (1) kavram düzeyinde eşleşme yapan çok dilli
-anlamsal arama — Türkçe sorguyla İngilizce literatür taranabilecek, (2) literatür kollarını
-otomatik tespit eden interaktif 3B atıf haritası, (3) kullanıcının makale kümesi üzerinden
+OpenAlex üzerinde gerçek zamanlı arama; DOI veya başlıktan üretilen interaktif atıf haritası
+(makale + referansları + ona atıf yapan çalışmalar, tıkla-genişlet); sonuçları anlamlandıran
+konu ve trend analizi; kişisel kütüphane ve koleksiyonlar; abonelik tabanlı erişim. Proje
+kapsamında platform dört Ar-Ge bileşeniyle akıllı literatür asistanına dönüşecek: (1) kavram
+düzeyinde eşleşme yapan çok dilli anlamsal arama — Türkçe sorguyla İngilizce literatür
+taranabilecek, (2) bugün canlıda olan atıf haritasının literatür kollarını otomatik tespit
+eden 3B analiz aracına dönüştürülmesi, (3) kullanıcının makale kümesi üzerinden
 kaynak-atıflı özet üreten LLM destekli literatür sentezi, (4) DergiPark / TR Dizin / YÖK Tez
 entegrasyonuyla Türkçe akademik üretimin ilk kez modern anlamsal keşif katmanına taşınması.
 Ürün Cloudflare edge mimarisinde çalışır; bu, altyapı maliyetini rakiplerin çok altında tutarak
 uygun fiyatlı bireysel abonelik modelini sürdürülebilir kılar.
 
-**Kısa versiyon:** Tek platformda gerçek zamanlı akademik arama + kişisel kütüphane + analiz.
-Ar-Ge hedefi: çok dilli anlamsal arama (TR sorgu → EN literatür), otomatik literatür kolu tespiti
-yapan 3B atıf haritası, kaynak-atıflı LLM literatür sentezi ve DergiPark/YÖK Tez entegrasyonu.
+**Kısa versiyon:** Tek platformda gerçek zamanlı akademik arama + interaktif atıf haritası
+(canlıda) + kişisel kütüphane + analiz. Ar-Ge hedefi: çok dilli anlamsal arama (TR sorgu → EN
+literatür), atıf haritasına otomatik literatür kolu tespiti ve 3B görselleştirme eklenmesi,
+kaynak-atıflı LLM literatür sentezi ve DergiPark/YÖK Tez entegrasyonu.
 Edge mimarisi sayesinde rakiplerden çok daha düşük maliyet ve fiyat.
 
 ---
@@ -58,9 +61,11 @@ Edge mimarisi sayesinde rakiplerden çok daha düşük maliyet ve fiyat.
    makale özetlerinin embedding'leri üzerinden kavram düzeyinde eşleştirme yapar ve Türkçe
    sorgularla İngilizce literatürün taranmasını hedefler (hedef: bilinen-öğe testinde ilk-10
    isabet ≥%85, TR→EN eşleştirme ≥%75).
-2. **Otomatik literatür kolu tespiti:** Atıf/ko-atıf grafında topluluk tespiti (Louvain) ile
-   literatür kollarının otomatik ayrıştırılması ve temel makalelerin merkezîlik ölçütleriyle
-   işaretlenmesi; interaktif 3B görselleştirme.
+2. **Otomatik literatür kolu tespiti:** İnteraktif atıf haritasının ilk sürümü canlıda
+   (OpenAlex tabanlı; DOI/başlıktan makale + referansları + atıf yapanlar, tıkla-genişlet).
+   Ar-Ge ile atıf/ko-atıf grafında topluluk tespiti (Louvain) eklenerek literatür kolları
+   otomatik ayrıştırılacak, temel makaleler merkezîlik ölçütleriyle işaretlenecek ve
+   görselleştirme 3B'ye taşınacak.
 3. **Kaynak-sadık LLM sentezi:** Üretilen her cümlenin kullanıcının kümesindeki makalelere
    atıfla doğrulanabildiği RAG mimarisi (hedef: ≥%90 doğrulanabilir iddia oranı) — halüsinasyon
    kontrolü açık bir araştırma problemidir.
@@ -95,7 +100,9 @@ gelişmiş analitik, atıf haritası, LLM sentezi) ile gelir. Lemon Squeezy (Mer
 ## Mevcut durum (geliştirme aşaması)
 
 Çalışan MVP canlıda: **https://scholarmap.alignxdigital.workers.dev** — arXiv/Crossref gerçek
-zamanlı arama, konu/trend analizi panosu, kişisel kütüphane, Lemon Squeezy ile Pro abonelik akışı ve
+zamanlı arama, OpenAlex destekli interaktif atıf haritası (DOI/başlık → makale + referansları +
+atıf yapanlar; düğüme tıklayınca özet ve genişletme), konu/trend analizi panosu, kişisel
+kütüphane, Lemon Squeezy ile Pro abonelik akışı ve
 147 makalelik başlangıç veri seti. Teknoloji Hazırlık Seviyesi: **TRL 6** (gerçek ortamda
 çalışan prototip). Teknik altyapı: React 19 + TypeScript, tRPC, Cloudflare Workers/D1 (edge).
 Proje desteğiyle hedef: Ar-Ge bileşenlerinin geliştirilip ürünleştirilmesi ve TRL 8–9'a ulaşmak.
@@ -133,8 +140,9 @@ maliyetleri ve pilot yaygınlaştırma giderlerine ayrılacaktır.
   atıf haritası yok, bulduklarını başka yere not ediyorsun. ScholarMap hepsini tek yerde
   topluyor ve yapay zekâyla Türkçe sorudan İngilizce literatüre ulaştırıyor. Canlıda çalışıyor,
   ödeme altyapısı hazır — destekle bunu Türkiye'nin akademik keşif standardı yapacağız."
-- Demo senaryosu: "attention mechanism" araması → trend grafiği → makaleyi kütüphaneye ekleme
-  → Pro'ya yükseltme ekranı. 3 dakikada bitmeli.
+- Demo senaryosu: "attention mechanism" araması → trend grafiği → "Attention Is All You Need"
+  DOI'siyle atıf haritası (düğüme tıkla, özeti göster, haritayı genişlet) → makaleyi kütüphaneye
+  ekleme → Pro'ya yükseltme ekranı. 3 dakikada bitmeli.
 - Sık sorulan panel soruları: "Google Scholar ücretsizken neden ödesinler?" (iş akışı + TR içerik
   + sentez), "Veriyi nereden alıyorsun, lisansı ne?" (OpenAlex açık lisans, DergiPark açık erişim),
   "LLM maliyetini nasıl karşılayacaksın?" (kota + önbellek + küçük model fallback).
