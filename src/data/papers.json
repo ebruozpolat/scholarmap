@@ -525,7 +525,11 @@
     },
     {
       "title": "A review on the attention mechanism of deep learning",
-      "authors": "Z Niu, G Zhong, H Yu",
+      "authors": [
+        "Z Niu",
+        "G Zhong",
+        "H Yu"
+      ],
       "year": 2021,
       "abstract": "… -art attention models proposed in recent years. Toward a better general understanding of attention mechanisms, we define a unified model that is suitable for most attention structures. …",
       "url": "https://www.sciencedirect.com/science/article/pii/S092523122100477X",
@@ -536,7 +540,10 @@
     },
     {
       "title": "A general survey on attention mechanisms in deep learning",
-      "authors": "G Brauwers, F Frasincar",
+      "authors": [
+        "G Brauwers",
+        "F Frasincar"
+      ],
       "year": 2021,
       "abstract": "… In this section, attention mechanisms are explained and categorized according to the presented taxonomy. Section 4 provides an overview of performance measures and methods for …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9609539/",
@@ -547,7 +554,11 @@
     },
     {
       "title": "Research progress in attention mechanism in deep learning",
-      "authors": "JW Liu, J LIU, X LUO",
+      "authors": [
+        "JW Liu",
+        "J LIU",
+        "X LUO"
+      ],
       "year": 2021,
       "abstract": "… , attention mechanism is an efficient information selection and widely used in deep learning fields … This survey first briefly introduces the origin of the attention mechanism and defines a …",
       "url": "http://cje.ustb.edu.cn/en/article/doi/10.13374/j.issn2095-9389.2021.01.30.005",
@@ -558,7 +569,10 @@
     },
     {
       "title": "Attention mechanisms in deep learning: Towards explainable artificial intelligence",
-      "authors": "NEH Dehimi, Z Tolba",
+      "authors": [
+        "NEH Dehimi",
+        "Z Tolba"
+      ],
       "year": 2024,
       "abstract": "… In summary, attention mechanisms in deep learning provide transparency and interpretability by focusing on relevant parts of the input data, whereas black box models excel at …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10541203/",
@@ -569,7 +583,11 @@
     },
     {
       "title": "Attention mechanisms and deep learning for machine vision: A survey of the state of the art",
-      "authors": "AM Hafiz, SA Parah, RUA Bhat",
+      "authors": [
+        "AM Hafiz",
+        "SA Parah",
+        "RUA Bhat"
+      ],
       "year": 2021,
       "abstract": "… In the next sub-section, we turn to another important category of techniques of attention mechanisms and deep learning in machine vision, namely CNN transformer pipelines. …",
       "url": "https://arxiv.org/abs/2106.07550",
@@ -580,7 +598,11 @@
     },
     {
       "title": "Examining attention mechanisms in deep learning models for sentiment analysis",
-      "authors": "S Kardakis, I Perikos, F Grivokostopoulou…",
+      "authors": [
+        "S Kardakis",
+        "I Perikos",
+        "F Grivokostopoulou…"
+      ],
       "year": 2021,
       "abstract": "… under various deep neural models, training methods and hyperparameters. Even though attention mechanisms are a powerful recent concept in the field of deep learning, their exact …",
       "url": "https://www.mdpi.com/2076-3417/11/9/3883",
@@ -591,7 +613,11 @@
     },
     {
       "title": "Effect of attention mechanism in deep learning-based remote sensing image processing: A systematic literature review",
-      "authors": "S Ghaffarian, J Valente, M Van Der Voort…",
+      "authors": [
+        "S Ghaffarian",
+        "J Valente",
+        "M Van Der Voort…"
+      ],
       "year": 2021,
       "abstract": "… with an embedded attention mechanism for RS image … of attention mechanism in the performance of deep learning-… in publications, using attention mechanism-based DL (At-DL) …",
       "url": "https://www.mdpi.com/2072-4292/13/15/2965",
@@ -602,7 +628,14 @@
     },
     {
       "title": "Deep learning attention mechanism in medical image analysis: Basics and beyonds",
-      "authors": "X Li, M Li, P Yan, G Li, Y Jiang, H Luo…",
+      "authors": [
+        "X Li",
+        "M Li",
+        "P Yan",
+        "G Li",
+        "Y Jiang",
+        "H Luo…"
+      ],
       "year": 2023,
       "abstract": "… mechanism is a research hotspot and has achieved state-of-the-art results in many medical image tasks. This paper reviews the deep learning attention … of the attention mechanism. For …",
       "url": "https://www.sciltp.com/journals/ijndi/article/view/173",
@@ -613,7 +646,10 @@
     },
     {
       "title": "Enhancing Explainability in Deep Learning Models Using Hybrid Attention Mechanisms",
-      "authors": "S Banerjee, SK Parisa",
+      "authors": [
+        "S Banerjee",
+        "SK Parisa"
+      ],
       "year": 2024,
       "abstract": "… The increasing complexity of deep learning models has raised concerns about their interpretability and transparency. This paper introduces a novel hybrid attention mechanism that …",
       "url": "https://www.researchgate.net/profile/Somnath-Banerjee-13/publication/391460958_Enhancing_Explainability_in_Deep_Learning_Models_Using_Hybrid_Attention_Mechanisms/links/68197a39bd3f1930dd6ca381/Enhancing-Explainability-in-Deep-Learning-Models-Using-Hybrid-Attention-Mechanisms.pdf",
@@ -624,7 +660,12 @@
     },
     {
       "title": "Deep learning-based identification of maize leaf diseases is improved by an attention mechanism: Self-attention",
-      "authors": "X Qian, C Zhang, L Chen, K Li",
+      "authors": [
+        "X Qian",
+        "C Zhang",
+        "L Chen",
+        "K Li"
+      ],
       "year": 2022,
       "abstract": "… The attention mechanism of this article will be based on these tokens to identify those … with our model based on the attention mechanism, and they both prefer critical information. …",
       "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2022.864486/full",
@@ -635,7 +676,12 @@
     },
     {
       "title": "A review on speech emotion recognition using deep learning and attention mechanism",
-      "authors": "E Lieskovská, M Jakubec, R Jarina, M Chmulík",
+      "authors": [
+        "E Lieskovská",
+        "M Jakubec",
+        "R Jarina",
+        "M Chmulík"
+      ],
       "year": 2021,
       "abstract": "… To the best of the authors’ knowledge, none of the other reviews or surveys (listed in Table 2) deal with attention mechanism in more detail; hence, we consider it to be our main …",
       "url": "https://www.mdpi.com/2079-9292/10/10/1163",
@@ -646,7 +692,14 @@
     },
     {
       "title": "End-to-end deep learning architecture for continuous blood pressure estimation using attention mechanism",
-      "authors": "H Eom, D Lee, S Han, YS Hariyani, Y Lim, I Sohn…",
+      "authors": [
+        "H Eom",
+        "D Lee",
+        "S Han",
+        "YS Hariyani",
+        "Y Lim",
+        "I Sohn…"
+      ],
       "year": 2020,
       "abstract": "… -end deep learning architecture … attention mechanism. The proposed model consisted of a convolutional neural network, a bidirectional gated recurrent unit, and an attention mechanism…",
       "url": "https://www.mdpi.com/1424-8220/20/8/2338",
@@ -657,7 +710,13 @@
     },
     {
       "title": "Deep learning based mineral image classification combined with visual attention mechanism",
-      "authors": "Y Liu, Z Zhang, X Liu, W Lei, X Xia",
+      "authors": [
+        "Y Liu",
+        "Z Zhang",
+        "X Liu",
+        "W Lei",
+        "X Xia"
+      ],
       "year": 2021,
       "abstract": "… application potentials of the deep learning-based ore sorting … the visual attention mechanism in the deep learningbased … After that, we embedded four visual attention modules into …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9475982/",
@@ -668,7 +727,12 @@
     },
     {
       "title": "A novel deep learning method based on attention mechanism for bearing remaining useful life prediction",
-      "authors": "Y Chen, G Peng, Z Zhu, S Li",
+      "authors": [
+        "Y Chen",
+        "G Peng",
+        "Z Zhu",
+        "S Li"
+      ],
       "year": 2020,
       "abstract": "Rolling bearing is a key component in rotation machine, whose remaining useful life (RUL) prediction is an essential issue of constructing condition-based maintenance (CBM) system. …",
       "url": "https://www.sciencedirect.com/science/article/pii/S1568494619307008",
@@ -679,7 +743,12 @@
     },
     {
       "title": "A deep learning method based on an attention mechanism for wireless network traffic prediction",
-      "authors": "M Li, Y Wang, Z Wang, H Zheng",
+      "authors": [
+        "M Li",
+        "Y Wang",
+        "Z Wang",
+        "H Zheng"
+      ],
       "year": 2020,
       "abstract": "… In this paper, a spatio-temporal convolutional network (LA-ResNet) is presented that uses an attention mechanism to solve spatio-temporal modeling and predict wireless network traffic. …",
       "url": "https://www.sciencedirect.com/science/article/pii/S1570870519310923",
@@ -690,7 +759,10 @@
     },
     {
       "title": "Brain tumor segmentation based on deep learning and an attention mechanism using MRI multi-modalities brain images",
-      "authors": "R Ranjbarzadeh, A Bagherian Kasgari…",
+      "authors": [
+        "R Ranjbarzadeh",
+        "A Bagherian Kasgari…"
+      ],
       "year": 2021,
       "abstract": "… Adding an attention mechanism to a two-route model without using the preprocessing … only using an attention mechanism. In other words, the proposed attention mechanism can be …",
       "url": "https://www.nature.com/articles/s41598-021-90428-8",
@@ -701,7 +773,12 @@
     },
     {
       "title": "Parallel deep learning algorithms with hybrid attention mechanism for image segmentation of lung tumors",
-      "authors": "H Hu, Q Li, Y Zhao, Y Zhang",
+      "authors": [
+        "H Hu",
+        "Q Li",
+        "Y Zhao",
+        "Y Zhang"
+      ],
       "year": 2020,
       "abstract": "… deep learning algorithm with hybrid attention mechanism for … Then, images were input into hybrid attention mechanism and … hybrid attention mechanism consisted of a spatial attention …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9190051/",
@@ -712,7 +789,11 @@
     },
     {
       "title": "Developing a wind power forecasting system based on deep learning with attention mechanism",
-      "authors": "C Tian, T Niu, W Wei",
+      "authors": [
+        "C Tian",
+        "T Niu",
+        "W Wei"
+      ],
       "year": 2022,
       "abstract": "… A dual-stage self-attention mechanism is proposed in the self-attention module to determine the … A deep learning model is used with the optimization module, built into the forecasting …",
       "url": "https://www.sciencedirect.com/science/article/pii/S036054422201653X",
@@ -723,7 +804,11 @@
     },
     {
       "title": "Improving deep learning-based plant disease classification with attention mechanism",
-      "authors": "P Alirezazadeh, M Schirrmann, F Stolzenburg",
+      "authors": [
+        "P Alirezazadeh",
+        "M Schirrmann",
+        "F Stolzenburg"
+      ],
       "year": 2023,
       "abstract": "… a huge deep learning model with … attention module for learning representations of plant diseases in classification performance. We show the effectiveness of the attention mechanism to …",
       "url": "https://link.springer.com/article/10.1007/s10343-022-00796-y",
@@ -734,7 +819,10 @@
     },
     {
       "title": "Interpretable deep learning model for building energy consumption prediction based on attention mechanism",
-      "authors": "Y Gao, Y Ruan",
+      "authors": [
+        "Y Gao",
+        "Y Ruan"
+      ],
       "year": 2021,
       "abstract": "… Attention based on hidden layer states and feature-based attention improves the interpretability of the deep learning … The visualization of the model attention weights improves the …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0378778821006630",
@@ -745,7 +833,13 @@
     },
     {
       "title": "Short-term wind power forecasting based on attention mechanism and deep learning",
-      "authors": "B Xiong, L Lou, X Meng, X Wang, H Ma…",
+      "authors": [
+        "B Xiong",
+        "L Lou",
+        "X Meng",
+        "X Wang",
+        "H Ma…"
+      ],
       "year": 2022,
       "abstract": "… The Attention Mechanism is utilized to dynamically assign the weight of physical attribute data, which effectively deals with the model's failure to distinguish the difference in importance …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0378779622000062",
@@ -756,7 +850,13 @@
     },
     {
       "title": "On the effect of the attention mechanism for automatic welding defects detection based on deep learning",
-      "authors": "X Wang, S D'Avella, Z Liang, B Zhang, J Wu…",
+      "authors": [
+        "X Wang",
+        "S D'Avella",
+        "Z Liang",
+        "B Zhang",
+        "J Wu…"
+      ],
       "year": 2025,
       "abstract": "… However, the solo effect of the attention mechanism on the automatic welding defects … attention mechanisms, including channel attention mechanism and spatial attention mechanism, …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0957417425000089",
@@ -767,7 +867,12 @@
     },
     {
       "title": "Human activity recognition using attention-mechanism-based deep learning feature combination",
-      "authors": "M Akter, S Ansary, MAM Khan, D Kim",
+      "authors": [
+        "M Akter",
+        "S Ansary",
+        "MAM Khan",
+        "D Kim"
+      ],
       "year": 2023,
       "abstract": "… This study introduces a DL model that incorporates an attention mechanism to extract more sophisticated features, leading to increased accuracy. Instead of utilizing complex signal …",
       "url": "https://www.mdpi.com/1424-8220/23/12/5715",
@@ -778,7 +883,12 @@
     },
     {
       "title": "DCAMCP: A deep learning model based on capsule network and attention mechanism for molecular carcinogenicity prediction",
-      "authors": "Z Chen, L Zhang, J Sun, R Meng…",
+      "authors": [
+        "Z Chen",
+        "L Zhang",
+        "J Sun",
+        "R Meng…"
+      ],
       "year": 2023,
       "abstract": "… In this study, we construct a deep learning model based on capsule network and attention mechanism named DCAMCP to discriminate between carcinogenic and non-carcinogenic …",
       "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/jcmm.17889",
@@ -789,7 +899,13 @@
     },
     {
       "title": "Exploration of attention mechanism-enhanced deep learning models in the mining of medical textual data",
-      "authors": "L Xiao, M Li, Y Feng, M Wang, Z Zhu…",
+      "authors": [
+        "L Xiao",
+        "M Li",
+        "Y Feng",
+        "M Wang",
+        "Z Zhu…"
+      ],
       "year": 2024,
       "abstract": "… First, we will introduce the principles of attention mechanisms and how they can be applied to deep learning models. Then, we discuss how to apply attention mechanism to medical text …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10729303/",
@@ -800,7 +916,10 @@
     },
     {
       "title": "Attention Mechanism and Transformers",
-      "authors": "B Ghojogh, A Ghodsi",
+      "authors": [
+        "B Ghojogh",
+        "A Ghodsi"
+      ],
       "year": 2026,
       "abstract": "… This chapter explores the attention mechanism in machine learning, a … Attention enables models to assign varying levels of … The chapter begins by introducing the attention mechanism …",
       "url": "https://link.springer.com/chapter/10.1007/978-3-032-10738-1_9",
@@ -811,7 +930,13 @@
     },
     {
       "title": "A hierarchical intrusion detection model combining multiple deep learning models with attention mechanism",
-      "authors": "H Xu, L Sun, G Fan, W Li, G Kuang",
+      "authors": [
+        "H Xu",
+        "L Sun",
+        "G Fan",
+        "W Li",
+        "G Kuang"
+      ],
       "year": 2023,
       "abstract": "… The limitation of this method is low training efficiency and poor learning ability. This … attention mechanism and LSTM network. This method uses the advantages of attention mechanism …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10168116/",
@@ -822,7 +947,12 @@
     },
     {
       "title": "A novel deep learning prediction model for concrete dam displacements using interpretable mixed attention mechanism",
-      "authors": "Q Ren, M Li, H Li, Y Shen",
+      "authors": [
+        "Q Ren",
+        "M Li",
+        "H Li",
+        "Y Shen"
+      ],
       "year": 2021,
       "abstract": "… proposes an interpretable mixed attention mechanism long short-term … In the encoder stage, a factor attention mechanism is … In the decoder stage, a temporal attention mechanism is …",
       "url": "https://www.sciencedirect.com/science/article/pii/S1474034621001592",
@@ -833,7 +963,13 @@
     },
     {
       "title": "A deep learning framework under attention mechanism for wheat yield estimation using remotely sensed indices in the Guanzhong Plain, PR China",
-      "authors": "H Tian, P Wang, K Tansey, D Han, J Zhang…",
+      "authors": [
+        "H Tian",
+        "P Wang",
+        "K Tansey",
+        "D Han",
+        "J Zhang…"
+      ],
       "year": 2021,
       "abstract": "… with an attention mechanism (ALSTM), which the main idea is to assign attention to the key … In conclusion, our findings highlighted that the attention mechanism helped to improve the …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0303243421000829",
@@ -844,7 +980,14 @@
     },
     {
       "title": "A comparative study of attention mechanism based deep learning methods for bladder tumor segmentation",
-      "authors": "Q Zhang, Y Liang, Y Zhang, Z Tao, R Li, H Bi",
+      "authors": [
+        "Q Zhang",
+        "Y Liang",
+        "Y Zhang",
+        "Z Tao",
+        "R Li",
+        "H Bi"
+      ],
       "year": 2023,
       "abstract": "… of various attention modules for improving … attention mechanism based cystoscopic images segmentation (ACS) model, which was featured by the following points: (1) A mixed attention …",
       "url": "https://www.sciencedirect.com/science/article/pii/S1386505623000011",
@@ -855,7 +998,13 @@
     },
     {
       "title": "A deep learning semantic segmentation network with attention mechanism for concrete crack detection",
-      "authors": "J Hang, Y Wu, Y Li, T Lai, J Zhang…",
+      "authors": [
+        "J Hang",
+        "Y Wu",
+        "Y Li",
+        "T Lai",
+        "J Zhang…"
+      ],
       "year": 2023,
       "abstract": "… To solve these problems, this research designs a novel model combining FCN and two attention mechanism modules to aggregate rich contextual information for automatic concrete …",
       "url": "https://journals.sagepub.com/doi/abs/10.1177/14759217221126170",
@@ -866,7 +1015,12 @@
     },
     {
       "title": "HyperAttentionDTI: improving drug–protein interaction prediction by sequence-based deep learning with attention mechanism",
-      "authors": "Q Zhao, H Zhao, K Zheng, J Wang",
+      "authors": [
+        "Q Zhao",
+        "H Zhao",
+        "K Zheng",
+        "J Wang"
+      ],
       "year": 2022,
       "abstract": "… We use deep CNNs to learn the feature matrices of drugs and proteins. To model complex … , we utilize the attention mechanism on the feature matrices and assign an attention vector to …",
       "url": "https://academic.oup.com/bioinformatics/article-abstract/38/3/655/6401997",
@@ -877,7 +1031,12 @@
     },
     {
       "title": "AttentionDTA: Drug–target binding affinity prediction by sequence-based deep learning with attention mechanism",
-      "authors": "Q Zhao, G Duan, M Yang, Z Cheng…",
+      "authors": [
+        "Q Zhao",
+        "G Duan",
+        "M Yang",
+        "Z Cheng…"
+      ],
       "year": 2022,
       "abstract": "… a deep learning-based model, named AttentionDTA, which uses attention mechanism to … novelty of our work is to use attention mechanism to focus on key subsequences which are …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9763375/",
@@ -888,7 +1047,14 @@
     },
     {
       "title": "Classification of multi-differentiated liver cancer pathological images based on deep learning attention mechanism",
-      "authors": "C Chen, C Chen, M Ma, X Ma, X Lv, X Dong…",
+      "authors": [
+        "C Chen",
+        "C Chen",
+        "M Ma",
+        "X Ma",
+        "X Lv",
+        "X Dong…"
+      ],
       "year": 2022,
       "abstract": "… a deep learning model for histopathological image classification. Therefore, this paper adds … visual attention mechanism to the deep learning model. The attention mechanism increases …",
       "url": "https://link.springer.com/article/10.1186/s12911-022-01919-1",
@@ -899,7 +1065,12 @@
     },
     {
       "title": "A comparative evaluation of deep learning architectures for prostate cancer segmentation: introducing trionixnet with n-core multi-attention mechanism",
-      "authors": "Y Narayan, DP Singh, T Banerjee, P Kour…",
+      "authors": [
+        "Y Narayan",
+        "DP Singh",
+        "T Banerjee",
+        "P Kour…"
+      ],
       "year": 2026,
       "abstract": "… , a novel tri-modular deep learning architecture tailored for … a dynamic channel attention mechanism applied throughout the … the novel N-Core Attention mechanism, a generalized multi-…",
       "url": "https://link.springer.com/article/10.1007/s11831-025-10411-8",
@@ -910,7 +1081,11 @@
     },
     {
       "title": "A novel deep-learning method with channel attention mechanism for underwater target recognition",
-      "authors": "L Xue, X Zeng, A Jin",
+      "authors": [
+        "L Xue",
+        "X Zeng",
+        "A Jin"
+      ],
       "year": 2022,
       "abstract": "… This paper proposes deep learning with a channel attention mechanism approach for … the deep abstraction spectral features of the targets. Then, the channel attention mechanism is …",
       "url": "https://www.mdpi.com/1424-8220/22/15/5492",
@@ -921,7 +1096,11 @@
     },
     {
       "title": "A deep learning approach using attention mechanism and transfer learning for electromyographic hand gesture estimation",
-      "authors": "Y Wang, P Zhao, Z Zhang",
+      "authors": [
+        "Y Wang",
+        "P Zhao",
+        "Z Zhang"
+      ],
       "year": 2023,
       "abstract": "… Therefore, a deep learning model using attention mechanism and transfer learning for electromyographic hand gesture estimation is proposed in this study. The proposed model …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0957417423015579",
@@ -932,7 +1111,11 @@
     },
     {
       "title": "Use of deep learning model with attention mechanism for software fault prediction",
-      "authors": "TY Yu, CY Huang, NC Fang",
+      "authors": [
+        "TY Yu",
+        "CY Huang",
+        "NC Fang"
+      ],
       "year": 2021,
       "abstract": "… , we constructed a deep learning model called Defect Prediction via Self-Attention mechanism (… With input features, we trained a self-attention mechanism to extract semantic features of …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9622921/",
@@ -943,7 +1126,12 @@
     },
     {
       "title": "A self-interpretable soft sensor based on deep learning and multiple attention mechanism: From data selection to sensor modeling",
-      "authors": "R Guo, H Liu, G Xie, Y Zhang…",
+      "authors": [
+        "R Guo",
+        "H Liu",
+        "G Xie",
+        "Y Zhang…"
+      ],
       "year": 2022,
       "abstract": "… called the deep multiple attention soft sensor (… attention mechanism and time lag attention mechanism are proposed. When DMASS’s training is completed, the obtained attention …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9794453/",
@@ -954,7 +1142,13 @@
     },
     {
       "title": "A robust CSI-based Wi-Fi passive sensing method using attention mechanism deep learning",
-      "authors": "Z He, X Zhang, Y Wang, Y Lin, G Gui…",
+      "authors": [
+        "Z He",
+        "X Zhang",
+        "Y Wang",
+        "Y Lin",
+        "G Gui…"
+      ],
       "year": 2023,
       "abstract": "… of convolutional neural networks (CNN) and attention-based bi-directional long short term … by machine learning (ML) algorithms. Thirdly, we introduce attention mechanism to deal with …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10123930/",
@@ -965,7 +1159,10 @@
     },
     {
       "title": "Attention, please! A survey of neural attention models in deep learning",
-      "authors": "A de Santana Correia, EL Colombini",
+      "authors": [
+        "A de Santana Correia",
+        "EL Colombini"
+      ],
       "year": 2022,
       "abstract": "… In humans, Attention is a core property … , attention mechanisms select, modulate, and focus on the information most relevant to behavior. For decades, concepts and functions of attention …",
       "url": "https://link.springer.com/article/10.1007/s10462-022-10148-x",
@@ -976,7 +1173,10 @@
     },
     {
       "title": "An innovative deep learning framework for skin cancer detection employing ConvNeXtV2 and focal self-attention mechanisms",
-      "authors": "B Ozdemir, I Pacal",
+      "authors": [
+        "B Ozdemir",
+        "I Pacal"
+      ],
       "year": 2025,
       "abstract": "… Deep learning has emerged as a powerful tool, capable of … and focal self-attention mechanisms, addressing challenges … , while focal self-attention in the subsequent stages enhances …",
       "url": "https://www.sciencedirect.com/science/article/pii/S2590123024019352",
@@ -987,7 +1187,13 @@
     },
     {
       "title": "Optimized deep learning for brain tumor detection: a hybrid approach with attention mechanisms and clinical explainability",
-      "authors": "AJ Aiya, N Wani, M Ramani, A Kumar, S Pant…",
+      "authors": [
+        "AJ Aiya",
+        "N Wani",
+        "M Ramani",
+        "A Kumar",
+        "S Pant…"
+      ],
       "year": 2025,
       "abstract": "… In this study, we propose a hybrid deep learning (DL) model that integrates VGG16, an attention mechanism, and optimized hyperparameters to classify brain tumors into different …",
       "url": "https://www.nature.com/articles/s41598-025-04591-3",
@@ -998,7 +1204,13 @@
     },
     {
       "title": "Visual attention methods in deep learning: An in-depth survey",
-      "authors": "M Hassanin, S Anwar, I Radwan, FS Khan, A Mian",
+      "authors": [
+        "M Hassanin",
+        "S Anwar",
+        "I Radwan",
+        "FS Khan",
+        "A Mian"
+      ],
       "year": 2024,
       "abstract": "… the strengths and limitations of each attention category, describe their fundamental … attention mechanisms. Finally, we recommend possible future research directions for deep attention…",
       "url": "https://www.sciencedirect.com/science/article/pii/S1566253524001957",
@@ -1009,7 +1221,11 @@
     },
     {
       "title": "Improving long-term flood forecasting accuracy using ensemble deep learning models and an attention mechanism",
-      "authors": "M Kordani, MR Nikoo, M Fooladi…",
+      "authors": [
+        "M Kordani",
+        "MR Nikoo",
+        "M Fooladi…"
+      ],
       "year": 2024,
       "abstract": "… In order to achieve this goal, we explore three deep learning … Then, we integrate an attention mechanism (AM) that utilizes … deep-learning models. Additionally, two traditional machine …",
       "url": "https://ascelibrary.org/doi/abs/10.1061/JHYEFF.HEENG-6262",
@@ -1020,7 +1236,14 @@
     },
     {
       "title": "A new deep learning network for automatic bridge detection from SAR images based on balanced and attention mechanism",
-      "authors": "L Chen, T Weng, J Xing, Z Pan, Z Yuan, X Xing…",
+      "authors": [
+        "L Chen",
+        "T Weng",
+        "J Xing",
+        "Z Pan",
+        "Z Yuan",
+        "X Xing…"
+      ],
       "year": 2020,
       "abstract": "… In this paper, a new deep learning-based network is proposed to identify bridges from SAR … resolution attention and balance network (MABN). It mainly includes three parts, the attention …",
       "url": "https://www.mdpi.com/2072-4292/12/3/441",
@@ -1031,7 +1254,13 @@
     },
     {
       "title": "Limitations of deep learning attention mechanisms in clinical research: empirical case study based on the Korean diabetic disease setting",
-      "authors": "J Kim, S Lee, E Hwang, KS Ryu, H Jeong…",
+      "authors": [
+        "J Kim",
+        "S Lee",
+        "E Hwang",
+        "KS Ryu",
+        "H Jeong…"
+      ],
       "year": 2020,
       "abstract": "… of attention mechanisms. In addition, we aimed to empirically assess the potential limitations of current attention mechanisms … key considerations regarding attention mechanisms were …",
       "url": "https://www.jmir.org/2020/12/e18418/",
@@ -1042,7 +1271,13 @@
     },
     {
       "title": "Understanding more about human and machine attention in deep neural networks",
-      "authors": "Q Lai, S Khan, Y Nie, H Sun, J Shen…",
+      "authors": [
+        "Q Lai",
+        "S Khan",
+        "Y Nie",
+        "H Sun",
+        "J Shen…"
+      ],
       "year": 2020,
       "abstract": "… mechanism known as Human attention. Inspired by this, recent deep learning models encode attention mechanisms … focus on the three neural attention mechanisms above. The reason …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9133499/",
@@ -1053,7 +1288,15 @@
     },
     {
       "title": "Psychological stress detection according to ECG using a deep learning model with attention mechanism",
-      "authors": "P Zhang, F Li, L Du, R Zhao, X Chen, T Yang, Z Fang",
+      "authors": [
+        "P Zhang",
+        "F Li",
+        "L Du",
+        "R Zhao",
+        "X Chen",
+        "T Yang",
+        "Z Fang"
+      ],
       "year": 2021,
       "abstract": "… of the attention mechanism based on the deep learning model … Memory) As different attention mechanisms can cause the … , this discussion adds attention mechanisms to the CNN layer …",
       "url": "https://www.mdpi.com/2076-3417/11/6/2848",
@@ -1064,7 +1307,14 @@
     },
     {
       "title": "Deep learning with an attention mechanism for differentiating the origin of brain metastasis using MR images",
-      "authors": "T Jiao, F Li, Y Cui, X Wang, B Li, F Shi…",
+      "authors": [
+        "T Jiao",
+        "F Li",
+        "Y Cui",
+        "X Wang",
+        "B Li",
+        "F Shi…"
+      ],
       "year": 2023,
       "abstract": "… Our findings may indicate that DL models with an attention mechanism based on MRI data exhibited good performance for identifying the primary tumor in patients with BM properly. …",
       "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/jmri.28695",
@@ -1075,7 +1325,14 @@
     },
     {
       "title": "Focal self-attention for local-global interactions in vision transformers",
-      "authors": "J Yang, C Li, P Zhang, X Dai, B Xiao, L Yuan…",
+      "authors": [
+        "J Yang",
+        "C Li",
+        "P Zhang",
+        "X Dai",
+        "B Xiao",
+        "L Yuan…"
+      ],
       "year": 2021,
       "abstract": "… In this paper, we present focal self-attention, a new mechanism that incorporates both … self-attention, we propose a new variant of Vision Transformer models, called Focal Transformer…",
       "url": "https://arxiv.org/abs/2107.00641",
@@ -1086,7 +1343,13 @@
     },
     {
       "title": "Uniformer: Unifying convolution and self-attention for visual recognition",
-      "authors": "K Li, Y Wang, J Zhang, P Gao, G Song…",
+      "authors": [
+        "K Li",
+        "Y Wang",
+        "J Zhang",
+        "P Gao",
+        "G Song…"
+      ],
       "year": 2023,
       "abstract": "… transFormer (UniFormer), which can seamlessly integrate the merits of convolution and self-attention in a concise transformer … We take the well-known Vision Transformers (ViTs) in both …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10143709/",
@@ -1097,7 +1360,12 @@
     },
     {
       "title": "Lite vision transformer with enhanced self-attention",
-      "authors": "C Yang, Y Wang, J Zhang, H Zhang…",
+      "authors": [
+        "C Yang",
+        "Y Wang",
+        "J Zhang",
+        "H Zhang…"
+      ],
       "year": 2022,
       "abstract": "… We suspect that the power of their self-attention mechanism is limited in shallower … Vision Transformer (LVT), a novel light-weight transformer network with two enhanced self-attention …",
       "url": "http://openaccess.thecvf.com/content/CVPR2022/html/Yang_Lite_Vision_Transformer_With_Enhanced_Self-Attention_CVPR_2022_paper.html",
@@ -1108,7 +1376,12 @@
     },
     {
       "title": "Slide-transformer: Hierarchical vision transformer with local self-attention",
-      "authors": "X Pan, T Ye, Z Xia, S Song…",
+      "authors": [
+        "X Pan",
+        "T Ye",
+        "Z Xia",
+        "S Song…"
+      ],
       "year": 2023,
       "abstract": "… Vision Transformer Transformer and the self-attention mechanism have shown great progress in … [5, 29] and successfully applied to vision tasks thanks to the pioneering work of Vision …",
       "url": "http://openaccess.thecvf.com/content/CVPR2023/html/Pan_Slide-Transformer_Hierarchical_Vision_Transformer_With_Local_Self-Attention_CVPR_2023_paper.html",
@@ -1119,7 +1392,13 @@
     },
     {
       "title": "Cas-vit: Convolutional additive self-attention vision transformers for efficient mobile applications",
-      "authors": "T Zhang, L Li, Y Zhou, W Liu, C Qian…",
+      "authors": [
+        "T Zhang",
+        "L Li",
+        "Y Zhou",
+        "W Liu",
+        "C Qian…"
+      ],
       "year": 2026,
       "abstract": "… Abstract—Vision Transformers (ViTs) mark a revolutionary … : Convolutional Additive Self-attention Vision Transformers, to … We introduce Convolutional Additive Self-attention(CAS) block …",
       "url": "https://ieeexplore.ieee.org/abstract/document/11363151/",
@@ -1130,7 +1409,12 @@
     },
     {
       "title": "Vision transformer with deformable attention",
-      "authors": "Z Xia, X Pan, S Song, LE Li…",
+      "authors": [
+        "Z Xia",
+        "X Pan",
+        "S Song",
+        "LE Li…"
+      ],
       "year": 2022,
       "abstract": "… novel deformable self-attention module, where the positions of key and value pairs in self-attention are selected in a data-dependent way. This flexible scheme enables the self-attention …",
       "url": "https://openaccess.thecvf.com/content/CVPR2022/html/Xia_Vision_Transformer_With_Deformable_Attention_CVPR_2022_paper.html?ref=https://githubhelp.com",
@@ -1141,7 +1425,14 @@
     },
     {
       "title": "Elsa: Enhanced local self-attention for vision transformer",
-      "authors": "J Zhou, P Wang, F Wang, Q Liu, H Li, R Jin",
+      "authors": [
+        "J Zhou",
+        "P Wang",
+        "F Wang",
+        "Q Liu",
+        "H Li",
+        "R Jin"
+      ],
       "year": 2021,
       "abstract": "… , we design a new local self-attention module that surpasses both the LSA in Swin Transformer and dynamic filters. This is accomplished with our enhanced local self-attention (ELSA), …",
       "url": "https://arxiv.org/abs/2112.12786",
@@ -1152,7 +1443,13 @@
     },
     {
       "title": "Local-to-global self-attention in vision transformers",
-      "authors": "J Li, Y Yan, S Liao, X Yang, L Shao",
+      "authors": [
+        "J Li",
+        "Y Yan",
+        "S Liao",
+        "X Yang",
+        "L Shao"
+      ],
       "year": 2021,
       "abstract": "… in self-attention modules of Vision Transformers and propose a local-to-global multi-path mechanism in self-attention, which we refer to as the LG-Transformer… connected Transformers [2…",
       "url": "https://arxiv.org/abs/2107.04735",
@@ -1163,7 +1460,14 @@
     },
     {
       "title": "Refiner: Refining self-attention for vision transformers",
-      "authors": "D Zhou, Y Shi, B Kang, W Yu, Z Jiang, Y Li…",
+      "authors": [
+        "D Zhou",
+        "Y Shi",
+        "B Kang",
+        "W Yu",
+        "Z Jiang",
+        "Y Li…"
+      ],
       "year": 2021,
       "abstract": "… transformers (BERT) by a large margin. Though refiner is limited to improving diversity of the selfattention … works on understanding and further improving the self-attention mechanism. …",
       "url": "https://arxiv.org/abs/2106.03714",
@@ -1174,7 +1478,11 @@
     },
     {
       "title": "Plg-vit: Vision transformer with parallel local and global self-attention",
-      "authors": "N Ebert, D Stricker, O Wasenmüller",
+      "authors": [
+        "N Ebert",
+        "D Stricker",
+        "O Wasenmüller"
+      ],
       "year": 2023,
       "abstract": "… The structure was inspired by the original transformer-encoder block [7,8], but we replaced standard multihead self-attention with a parallel local-global self-attention operation. This …",
       "url": "https://www.mdpi.com/1424-8220/23/7/3447",
@@ -1185,7 +1493,13 @@
     },
     {
       "title": "Rethinking the self-attention in vision transformers",
-      "authors": "K Kim, B Wu, X Dai, P Zhang, Z Yan…",
+      "authors": [
+        "K Kim",
+        "B Wu",
+        "X Dai",
+        "P Zhang",
+        "Z Yan…"
+      ],
       "year": 2021,
       "abstract": "… Self-attention is a corner stone for transformer models. However, our analysis shows that self-attention in vision transformer … 95% sparsity on the self-attention maps while maintaining …",
       "url": "https://openaccess.thecvf.com/content/CVPR2021W/ECV/html/Kim_Rethinking_the_Self-Attention_in_Vision_Transformers_CVPRW_2021_paper.html",
@@ -1196,7 +1510,13 @@
     },
     {
       "title": "Castling-vit: Compressing self-attention via switching towards linear-angular attention at vision transformer inference",
-      "authors": "H You, Y Xiong, X Dai, B Wu, P Zhang…",
+      "authors": [
+        "H You",
+        "Y Xiong",
+        "X Dai",
+        "B Wu",
+        "P Zhang…"
+      ],
       "year": 2023,
       "abstract": "Vision Transformers (ViTs) have shown impressive performance but still require a high computation cost as compared to convolutional neural networks (CNNs), one reason is that ViTs' …",
       "url": "http://openaccess.thecvf.com/content/CVPR2023/html/You_Castling-ViT_Compressing_Self-Attention_via_Switching_Towards_Linear-Angular_Attention_at_Vision_CVPR_2023_paper.html",
@@ -1207,7 +1527,10 @@
     },
     {
       "title": "Self-attention in vision transformers performs perceptual grouping, not attention",
-      "authors": "P Mehrani, JK Tsotsos",
+      "authors": [
+        "P Mehrani",
+        "JK Tsotsos"
+      ],
       "year": 2023,
       "abstract": "… , the purely feed-forward architecture of vision transformers suggests that attention in these … a family of vision transformers. Our results suggest that self-attention modules group figures …",
       "url": "https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2023.1178450/full",
@@ -1218,7 +1541,12 @@
     },
     {
       "title": "PSLT: a light-weight vision transformer with ladder self-attention and progressive shift",
-      "authors": "G Wu, WS Zheng, Y Lu, Q Tian",
+      "authors": [
+        "G Wu",
+        "WS Zheng",
+        "Y Lu",
+        "Q Tian"
+      ],
       "year": 2023,
       "abstract": "… the global self-attention. In this work, we propose a ladder self-attention block with multiple branches and a progressive shift mechanism to develop a light-weight transformer backbone …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10097573/",
@@ -1229,7 +1557,12 @@
     },
     {
       "title": "Lightweight vision transformer with spatial and channel enhanced self-attention",
-      "authors": "J Zheng, L Yang, Y Li, K Yang…",
+      "authors": [
+        "J Zheng",
+        "L Yang",
+        "Y Li",
+        "K Yang…"
+      ],
       "year": 2023,
       "abstract": "… As a result, the design of efficient vision transformer models has become the focus … Self-Attention (SCSA) for lightweight vision transformers. Specially, we utilize multi-head self-attention …",
       "url": "https://openaccess.thecvf.com/content/ICCV2023W/RCV/html/Zheng_Lightweight_Vision_Transformer_with_Spatial_and_Channel_Enhanced_Self-Attention_ICCVW_2023_paper.html",
@@ -1240,7 +1573,10 @@
     },
     {
       "title": "Multi-head self-attention via vision transformer for zero-shot learning",
-      "authors": "F Alamri, A Dutta",
+      "authors": [
+        "F Alamri",
+        "A Dutta"
+      ],
       "year": 2021,
       "abstract": "… We argue that self-attention allows our model to attend to image regions that can be semantically relevant for classification and learns the visual features across the entire image. Since …",
       "url": "https://arxiv.org/abs/2108.00045",
@@ -1251,7 +1587,10 @@
     },
     {
       "title": "Separable self-attention for mobile vision transformers",
-      "authors": "S Mehta, M Rastegari",
+      "authors": [
+        "S Mehta",
+        "M Rastegari"
+      ],
       "year": 2022,
       "abstract": "… the multi-headed self-attention (MHA) in transformers, which … question: can self-attention in transformer block be optimized … for optimizing the self-attention operation in transformers (not …",
       "url": "https://arxiv.org/abs/2206.02680",
@@ -1262,7 +1601,11 @@
     },
     {
       "title": "Microvit: A vision transformer with low complexity self attention for edge device",
-      "authors": "N Setyawan, CC Sun, MH Hsu…",
+      "authors": [
+        "N Setyawan",
+        "CC Sun",
+        "MH Hsu…"
+      ],
       "year": 2025,
       "abstract": "… vision tasks, but its high computational demands make it impractical for edge devices with limited resources. This paper presents MicroViT, a lightweight Vision Transformer … selfattention …",
       "url": "https://ieeexplore.ieee.org/abstract/document/11043206/",
@@ -1273,7 +1616,10 @@
     },
     {
       "title": "Attention guided CAM: visual explanations of vision transformer guided by self-attention",
-      "authors": "S Leem, H Seo",
+      "authors": [
+        "S Leem",
+        "H Seo"
+      ],
       "year": 2024,
       "abstract": "… • We propose a gradient-based method applicable to Vision Transformer that fully considers the major structures of the model and provides a reliable high-semantic explanation of the …",
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28077",
@@ -1284,7 +1630,13 @@
     },
     {
       "title": "On the integration of self-attention and convolution",
-      "authors": "X Pan, C Ge, R Lu, S Song, G Chen…",
+      "authors": [
+        "X Pan",
+        "C Ge",
+        "R Lu",
+        "S Song",
+        "G Chen…"
+      ],
       "year": 2022,
       "abstract": "… is mostly adopted in the last stages to replace the original 3×3 convolution [3, 40], and convolutions at early stages are proved to be more effective for vision transformers [49]. …",
       "url": "http://openaccess.thecvf.com/content/CVPR2022/html/Pan_On_the_Integration_of_Self-Attention_and_Convolution_CVPR_2022_paper.html",
@@ -1295,7 +1647,12 @@
     },
     {
       "title": "Self-attention as the backbone: A survey on Vision Transformers",
-      "authors": "A Waseem, P Ruiu, S Nixon, A Lagorio…",
+      "authors": [
+        "A Waseem",
+        "P Ruiu",
+        "S Nixon",
+        "A Lagorio…"
+      ],
       "year": 2026,
       "abstract": "… techniques that improve ViTs through novel self-attention designs or hybrid integrations, … We first outline self-attention and Transformers, then introduce a taxonomy of self-attention …",
       "url": "https://www.sciencedirect.com/science/article/pii/S107731422600158X",
@@ -1306,7 +1663,12 @@
     },
     {
       "title": "Flatten transformer: Vision transformer using focused linear attention",
-      "authors": "D Han, X Pan, Y Han, S Song…",
+      "authors": [
+        "D Han",
+        "X Pan",
+        "Y Han",
+        "S Song…"
+      ],
       "year": 2023,
       "abstract": "… of Vision Transformer [11, 39], self-attention techniques have shown great potential in a variety of vision … We first revisit the general form of self-attention in Vision Transformers. Given the …",
       "url": "http://openaccess.thecvf.com/content/ICCV2023/html/Han_FLatten_Transformer_Vision_Transformer_using_Focused_Linear_Attention_ICCV_2023_paper.html",
@@ -1317,7 +1679,11 @@
     },
     {
       "title": "Efficient brain tumor segmentation using Swin transformer and enhanced local self-attention",
-      "authors": "F Ghazouani, P Vera, S Ruan",
+      "authors": [
+        "F Ghazouani",
+        "P Vera",
+        "S Ruan"
+      ],
       "year": 2024,
       "abstract": "… In this paper, we mainly explore the effectiveness of the vision Transformer for image segmentation task and propose a novel method for brain tumor segmentation. The method …",
       "url": "https://link.springer.com/article/10.1007/s11548-023-03024-8",
@@ -1328,7 +1694,13 @@
     },
     {
       "title": "Davit: Dual attention vision transformers",
-      "authors": "M Ding, B Xiao, N Codella, P Luo, J Wang…",
+      "authors": [
+        "M Ding",
+        "B Xiao",
+        "N Codella",
+        "P Luo",
+        "J Wang…"
+      ],
       "year": 2022,
       "abstract": "… self-attention mechanism that captures global information but is still efficient concerning the spatial size? In this work, we introduce such a self-attention … ” by applying self-attention to the …",
       "url": "https://link.springer.com/chapter/10.1007/978-3-031-20053-3_5",
@@ -1339,7 +1711,12 @@
     },
     {
       "title": "Dual vision transformer",
-      "authors": "T Yao, Y Li, Y Pan, Y Wang…",
+      "authors": [
+        "T Yao",
+        "Y Li",
+        "Y Pan",
+        "Y Wang…"
+      ],
       "year": 2023,
       "abstract": "… decomposing the global self-attention procedure over … Transformer architecture that elegantly exploits the global semantics for self-attention learning, namely Dual Vision Transformer (…",
       "url": "https://ieeexplore.ieee.org/abstract/document/10105499/",
@@ -1350,7 +1727,12 @@
     },
     {
       "title": "Towards robust diagnosis of COVID-19 using vision self-attention transformer",
-      "authors": "F Mehboob, A Rauf, R Jiang, AKJ Saudagar…",
+      "authors": [
+        "F Mehboob",
+        "A Rauf",
+        "R Jiang",
+        "AKJ Saudagar…"
+      ],
       "year": 2022,
       "abstract": "… In this paper, a self-attention transformer-based approach has been … Vision Transformer (ViT) based approach model the long-range dependency between the pixels using self-attention …",
       "url": "https://www.nature.com/articles/s41598-022-13039-x",
@@ -1361,7 +1743,11 @@
     },
     {
       "title": "Keyword transformer: A self-attention model for keyword spotting",
-      "authors": "A Berg, M O'Connor, MT Cruz",
+      "authors": [
+        "A Berg",
+        "M O'Connor",
+        "MT Cruz"
+      ],
       "year": 2021,
       "abstract": "… Recent works in machine learning show that the Transformer architecture, first introduced by … Inspired by the strength of the simple Vision Transformer (ViT) model [2] in computer vision …",
       "url": "https://arxiv.org/abs/2104.00769",
@@ -1372,7 +1758,12 @@
     },
     {
       "title": "Fairness-aware vision transformer via debiased self-attention",
-      "authors": "Y Qiang, C Li, P Khanduri, D Zhu",
+      "authors": [
+        "Y Qiang",
+        "C Li",
+        "P Khanduri",
+        "D Zhu"
+      ],
       "year": 2024,
       "abstract": "… Vision Transformer (ViT) has recently gained significant attention in solving computer vision … need to develop our novel framework via Debiased Self-Attention (DSA). DSA is a fairness-…",
       "url": "https://link.springer.com/chapter/10.1007/978-3-031-72913-3_20",
@@ -1383,7 +1774,12 @@
     },
     {
       "title": "Shunted self-attention via multi-scale token aggregation",
-      "authors": "S Ren, D Zhou, S He, J Feng…",
+      "authors": [
+        "S Ren",
+        "D Zhou",
+        "S He",
+        "J Feng…"
+      ],
       "year": 2022,
       "abstract": "… self-attention scheme, termed shunted selfattention (SSA), which explicitly allows the self-attention … demonstrate that our Shunted Transformer consistently outperform previous Vision …",
       "url": "http://openaccess.thecvf.com/content/CVPR2022/html/Ren_Shunted_Self-Attention_via_Multi-Scale_Token_Aggregation_CVPR_2022_paper.html",
@@ -1394,7 +1790,10 @@
     },
     {
       "title": "A novel vision transformer with selective residual in multihead self-attention for pattern recognition",
-      "authors": "AK Sharma, NK Verma",
+      "authors": [
+        "AK Sharma",
+        "NK Verma"
+      ],
       "year": 2025,
       "abstract": "… This article presents a novel vision transformer with a selective residual in the multihead self-attention network, called Selective Residual Vision Transformer (SeReViT), for improved …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0031320325011604",
@@ -1405,7 +1804,12 @@
     },
     {
       "title": "Synthesizer: Rethinking self-attention for transformer models",
-      "authors": "Y Tay, D Bahri, D Metzler, DC Juan…",
+      "authors": [
+        "Y Tay",
+        "D Bahri",
+        "D Metzler",
+        "DC Juan…"
+      ],
       "year": 2021,
       "abstract": "… The dot product self-attention is known to be central and … self-attention mechanism on the performance of Transformer … when compared against vanilla Transformer models across a …",
       "url": "https://proceedings.mlr.press/v139/tay21a.html",
@@ -1416,7 +1820,9 @@
     },
     {
       "title": "Vision transformer with self-attention for automated plant seedling classification",
-      "authors": "S Patel",
+      "authors": [
+        "S Patel"
+      ],
       "year": 2024,
       "abstract": "… vision and image classification applications [4]. On the other hand, Vision Transformer (ViT) … In this paper, vision transformer is utilized for classification of various plant leaves at their …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10551144/",
@@ -1427,7 +1833,11 @@
     },
     {
       "title": "Sit: Self-supervised vision transformer",
-      "authors": "S Atito, M Awais, J Kittler",
+      "authors": [
+        "S Atito",
+        "M Awais",
+        "J Kittler"
+      ],
       "year": 2021,
       "abstract": "… encoder consists of L consecutive Multi-head Self-Attention (MSA) and Multi-Layer … h selfattention heads where each head outputs a sequence of size n × d. The employed self attention …",
       "url": "https://arxiv.org/abs/2104.03602",
@@ -1438,7 +1848,11 @@
     },
     {
       "title": "Regionvit: Regional-to-local attention for vision transformers",
-      "authors": "CF Chen, R Panda, Q Fan",
+      "authors": [
+        "CF Chen",
+        "R Panda",
+        "Q Fan"
+      ],
       "year": 2021,
       "abstract": "… of vision transformers, in this work, we develop a memory-friendly and efficient self-attention method for transformer models to reach their promising potential for vision applications. We …",
       "url": "https://arxiv.org/abs/2106.02689",
@@ -1449,7 +1863,14 @@
     },
     {
       "title": "Deepvit: Towards deeper vision transformer",
-      "authors": "D Zhou, B Kang, X Jin, L Yang, X Lian, Z Jiang…",
+      "authors": [
+        "D Zhou",
+        "B Kang",
+        "X Jin",
+        "L Yang",
+        "X Lian",
+        "Z Jiang…"
+      ],
       "year": 2021,
       "abstract": "… This indicates that as the ViT goes deeper, the self-attention mechanism becomes less … the vision transformer to be deeper, We present a simple yet effective self-attention mechanism, …",
       "url": "https://arxiv.org/abs/2103.11886",
@@ -1460,7 +1881,13 @@
     },
     {
       "title": "Less is more: Pay less attention in vision transformers",
-      "authors": "Z Pan, B Zhuang, H He, J Liu, J Cai",
+      "authors": [
+        "Z Pan",
+        "B Zhuang",
+        "H He",
+        "J Liu",
+        "J Cai"
+      ],
       "year": 2022,
       "abstract": "… vIsion Transformer (LIT), building upon the fact that the early self-attention layers in Transformers still … For the last two stages, we set Ns self-attention heads in each Transformer block. …",
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/20099",
@@ -1471,7 +1898,10 @@
     },
     {
       "title": "Self-attention vision transformer with transfer learning for efficient crops and weeds classification",
-      "authors": "S Sharma, M Vardhan",
+      "authors": [
+        "S Sharma",
+        "M Vardhan"
+      ],
       "year": 2023,
       "abstract": "… Self-Attention Vision Transformer Our approach involves using Self-Attention Vision Transformers … ViT is a neural network architecture that utilizes self-attention layers to extract intrinsic …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10112049/",
@@ -1482,7 +1912,14 @@
     },
     {
       "title": "Local self-attention in transformer for visual question answering",
-      "authors": "X Shen, D Han, Z Guo, C Chen, J Hua, G Luo",
+      "authors": [
+        "X Shen",
+        "D Han",
+        "Z Guo",
+        "C Chen",
+        "J Hua",
+        "G Luo"
+      ],
       "year": 2023,
       "abstract": "… proposes a novel Local Self-Attention in Transformer (LSAT) for a … the shortcomings of global self-attention (such as high … for designing end-to-end vision tasks based on Transformer. …",
       "url": "https://link.springer.com/article/10.1007/s10489-022-04355-w",
@@ -1493,7 +1930,13 @@
     },
     {
       "title": "TripleFormer: improving transformer-based image classification method using multiple self-attention inputs",
-      "authors": "Y Gong, P Wu, R Xu, X Zhang, T Wang…",
+      "authors": [
+        "Y Gong",
+        "P Wu",
+        "R Xu",
+        "X Zhang",
+        "T Wang…"
+      ],
       "year": 2024,
       "abstract": "… We consider self-attention from a different perspective and propose channel-wise attention within windows. Previous self-attention in vision with pixels in windows gathers the …",
       "url": "https://search.proquest.com/openview/d8c96b9783990e1422e66f788233c348/1?pq-origsite=gscholar&cbl=2043737",
@@ -1504,7 +1947,13 @@
     },
     {
       "title": "Dropkey for vision transformer",
-      "authors": "B Li, Y Hu, X Nie, C Han, X Jiang…",
+      "authors": [
+        "B Li",
+        "Y Hu",
+        "X Nie",
+        "C Han",
+        "X Jiang…"
+      ],
       "year": 2023,
       "abstract": "… in self-attention layer, further pushing forward the frontier of ViTs for vision tasks in a general way. Specifically, we focus on three core aspects: What to drop in self-attention layer …",
       "url": "http://openaccess.thecvf.com/content/CVPR2023/html/Li_DropKey_for_Vision_Transformer_CVPR_2023_paper.html",
@@ -1515,7 +1964,13 @@
     },
     {
       "title": "Mamba in speech: Towards an alternative to self-attention",
-      "authors": "X Zhang, Q Zhang, H Liu, T Xiao, X Qian…",
+      "authors": [
+        "X Zhang",
+        "Q Zhang",
+        "H Liu",
+        "T Xiao",
+        "X Qian…"
+      ],
       "year": 2025,
       "abstract": "… in diverse tasks across computer vision, natural language … multi-head self-attention mechanism in Transformer, Selective … to the self-attention module in the Transformer model and its …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10985910/",
@@ -1526,7 +1981,14 @@
     },
     {
       "title": "A lightweight convolution and vision transformer integrated model with multi-scale self-attention mechanism",
-      "authors": "Y Zhang, L Wei, B Zhang, Z Liu, K Yi, S Hu",
+      "authors": [
+        "Y Zhang",
+        "L Wei",
+        "B Zhang",
+        "Z Liu",
+        "K Yi",
+        "S Hu"
+      ],
       "year": 2025,
       "abstract": "… Vision Transformer (ViT) has prevailed in computer vision tasks due to its strong long-range … To balance computation efficiency and performance in downstream vision tasks, we propose …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0925231225023422",
@@ -1537,7 +1999,11 @@
     },
     {
       "title": "Covit-gan: vision transformer forcovid-19 detection in ct scan imageswith self-attention gan forDataAugmentation",
-      "authors": "AAE Ambita, ENV Boquio, PC Naval Jr",
+      "authors": [
+        "AAE Ambita",
+        "ENV Boquio",
+        "PC Naval Jr"
+      ],
       "year": 2021,
       "abstract": "… The Vision Transformer (ViT) is currently gaining popularity in computer vision circles due to its … In this study, the Vision Transformer is applied to the task of COVID-19 detection from …",
       "url": "https://link.springer.com/chapter/10.1007/978-3-030-86340-1_47",
@@ -1548,7 +2014,12 @@
     },
     {
       "title": "Action transformer: A self-attention model for short-time pose-based human action recognition",
-      "authors": "V Mazzia, S Angarano, F Salvetti, F Angelini…",
+      "authors": [
+        "V Mazzia",
+        "S Angarano",
+        "F Salvetti",
+        "F Angelini…"
+      ],
       "year": 2022,
       "abstract": "… In this work, we introduce Action Transformer (AcT), a simple, fully, self-attentional architecture that consistently outperforms more elaborated networks that mix convolutional, recurrent, …",
       "url": "https://www.sciencedirect.com/science/article/pii/S0031320321006634",
@@ -1559,7 +2030,12 @@
     },
     {
       "title": "Self-attention and transformers: Driving the evolution of large language models",
-      "authors": "Q Luo, W Zeng, M Chen, G Peng…",
+      "authors": [
+        "Q Luo",
+        "W Zeng",
+        "M Chen",
+        "G Peng…"
+      ],
       "year": 2023,
       "abstract": "… the self-attention mechanism and transformer architecture from a … in LLMs based on self-attention and transformers, along with their … to vision tasks emerged under the name ViT …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10245906/",
@@ -1570,7 +2046,13 @@
     },
     {
       "title": "Probing inter-modality: Visual parsing with self-attention for vision-and-language pre-training",
-      "authors": "H Xue, Y Huang, B Liu, H Peng, J Fu…",
+      "authors": [
+        "H Xue",
+        "Y Huang",
+        "B Liu",
+        "H Peng",
+        "J Fu…"
+      ],
       "year": 2021,
       "abstract": "… of self-attention for visual feature learning in Vision-Language Pre-training (VLP). We explore CNN’s limitation in intra-vision modality learning by introducing fully Transformer for visual …",
       "url": "https://proceedings.neurips.cc/paper/2021/hash/23fa71cc32babb7b91130824466d25a5-Abstract.html",
@@ -1581,7 +2063,13 @@
     },
     {
       "title": "A survey on vision transformer",
-      "authors": "K Han, Y Wang, H Chen, X Chen, J Guo…",
+      "authors": [
+        "K Han",
+        "Y Wang",
+        "H Chen",
+        "X Chen",
+        "J Guo…"
+      ],
       "year": 2022,
       "abstract": "… We also include efficient transformer methods for pushing transformer into real device-… look at the selfattention mechanism in computer vision, as it is the base component in transformer. …",
       "url": "https://ieeexplore.ieee.org/abstract/document/9716741/",
@@ -1592,7 +2080,11 @@
     },
     {
       "title": "Sclip: Rethinking self-attention for dense vision-language inference",
-      "authors": "F Wang, J Mei, A Yuille",
+      "authors": [
+        "F Wang",
+        "J Mei",
+        "A Yuille"
+      ],
       "year": 2024,
       "abstract": "… of the last transformer layer in CLIP vision encoder equipped with the original self-attention (right) and our correlative self-attention (left). Our correlative self-attention exhibits spatially …",
       "url": "https://link.springer.com/chapter/10.1007/978-3-031-72664-4_18",
@@ -1603,7 +2095,11 @@
     },
     {
       "title": "Beyond self-attention: Deformable large kernel attention for medical image segmentation",
-      "authors": "R Azad, L Niggemeier, M Hüttemann…",
+      "authors": [
+        "R Azad",
+        "L Niggemeier",
+        "M Hüttemann…"
+      ],
       "year": 2024,
       "abstract": "… self-attention mechanism within pure Transformer models. In this vein, Swin-Unet [13] integrates a Swin Transformer [… the Efficient Transformer [55] to address parameter issues in vision …",
       "url": "https://openaccess.thecvf.com/content/WACV2024/html/Azad_Beyond_Self-Attention_Deformable_Large_Kernel_Attention_for_Medical_Image_Segmentation_WACV_2024_paper.html",
@@ -1614,7 +2110,11 @@
     },
     {
       "title": "Fswin transformer: Feature-space window attention vision transformer for image classification",
-      "authors": "D Yoo, J Kim, J Yoo",
+      "authors": [
+        "D Yoo",
+        "J Kim",
+        "J Yoo"
+      ],
       "year": 2024,
       "abstract": "… The vision transformer (ViT) with global self-attention exhibits … To address this issue, window-based self-attention ViT limits … Transformer, a representative windowbased self-attention …",
       "url": "https://ieeexplore.ieee.org/abstract/document/10509828/",
