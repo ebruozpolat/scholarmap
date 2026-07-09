@@ -1,4 +1,5 @@
 import { authRouter } from "./auth-router";
+import { mapRouter } from "./map-router";
 import { paperRouter } from "./paper-router";
 import { libraryRouter } from "./library-router";
 import { subscriptionRouter } from "./subscription-router";
@@ -8,6 +9,7 @@ import { createRouter, publicQuery } from "./middleware";
 export const appRouter = createRouter({
   ping: publicQuery.query(() => ({ ok: true, ts: Date.now() })),
   auth: authRouter,
+  map: mapRouter,
   paper: paperRouter,
   library: libraryRouter,
   subscription: subscriptionRouter,

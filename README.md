@@ -7,6 +7,7 @@ A premium academic research platform for discovering, analyzing, and organizing 
 ## Features
 
 - **Advanced search** — query papers across sources (arXiv, Google Scholar) with keyword, author, and year filters.
+- **Citation map** — paste a DOI or title and get an interactive graph (OpenAlex-powered) of the paper, its references, and the works citing it; click any node to read it or expand the map.
 - **Interactive dashboard** — browse results in table/card views with sorting and filtering.
 - **Topic analysis** — automatic topic categorization, trend charts, and citation distribution.
 - **Personal library** — save favorite papers and organize them into collections.
@@ -24,7 +25,7 @@ A premium academic research platform for discovering, analyzing, and organizing 
 | Auth | Kimi OAuth (JWT sessions via `jose`) |
 | Deployment | Cloudflare Workers (edge) |
 
-The tRPC API is organized into four routers: `auth`, `paper`, `library`, and `subscription`.
+The tRPC API is organized into five routers: `auth`, `map`, `paper`, `library`, and `subscription`. The citation map is rendered with Cytoscape.js on top of the OpenAlex API.
 
 ## Project structure
 
