@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router';
-import { LayoutDashboard, Bookmark, BarChart3, Settings, Search } from 'lucide-react';
+import { LayoutDashboard, Bookmark, BarChart3, Settings, Search, Network } from 'lucide-react';
 
 const navItems = [
   { to: '/app', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/app/map', label: 'Citation Map', icon: Network },
   { to: '/app/library', label: 'Library', icon: Bookmark },
   { to: '/app/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/app/settings', label: 'Settings', icon: Settings },
