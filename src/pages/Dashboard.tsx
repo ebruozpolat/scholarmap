@@ -17,6 +17,8 @@ import {
   Download,
   Loader2,
   Radio,
+  Sparkles,
+  Languages,
 } from "lucide-react";
 import { trpc } from "@/providers/trpc";
 import { Button } from "@/components/ui/button";
@@ -64,6 +66,19 @@ function getSourceFromPaper(p: Paper): string {
   return p.source || "arXiv";
 }
 
+// Some seed records store authors as a comma-separated string rather than an
+// array; coerce so downstream .some()/.length/[0] never crash on typing.
+function getAuthors(p: Paper): string[] {
+  if (Array.isArray(p.authors)) return p.authors;
+  if (typeof p.authors === "string") {
+    return (p.authors as string)
+      .split(/[,;]/)
+      .map((a) => a.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
 function getVenueShort(p: Paper): string {
   const v = p.venue || "";
   if (v.startsWith("[")) {
@@ -92,6 +107,7 @@ export default function Dashboard() {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
   const [turkishOnly, setTurkishOnly] = useState(false);
   const [thesesOnly, setThesesOnly] = useState(false);
+  const [semantic, setSemantic] = useState(false);
 
   // Debounce the typed query so we don't fire a live request per keystroke.
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -118,6 +134,7 @@ export default function Dashboard() {
       limit: 30,
       language: turkishOnly ? "tr" : "all",
       docType: thesesOnly ? "dissertation" : "all",
+      semantic,
     },
     {
       enabled: isLive,
@@ -162,7 +179,7 @@ export default function Dashboard() {
       result = result.filter(
         (p) =>
           p.title.toLowerCase().includes(q) ||
-          p.authors.some((a) => a.toLowerCase().includes(q)) ||
+          getAuthors(p).some((a) => a.toLowerCase().includes(q)) ||
           p.abstract.toLowerCase().includes(q)
       );
     }
@@ -423,7 +440,46 @@ export default function Dashboard() {
                 >
                   Tezler
                 </button>
+                <button
+                  onClick={() => {
+                    setSemantic((v) => !v);
+                    setPage(1);
+                  }}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    semantic
+                      ? "bg-[#6366F1]/10 text-[#818CF8] border border-[#6366F1]/40"
+                      : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                  }`}
+                  title="Türkçe sorguyu İngilizce literatüre genişletir (anlamsal arama)"
+                >
+                  <Sparkles className="size-3" />
+                  Anlamsal
+                </button>
               </div>
+
+              {/* Cross-lingual expansion transparency */}
+              {isLive && semantic && liveSearch.data?.expansion?.translated && (
+                <div className="flex items-center gap-2 mt-3 flex-wrap">
+                  <span className="inline-flex items-center gap-1 text-[10px] text-[#818CF8]">
+                    <Languages className="size-3" />
+                    İngilizce literatüre genişletildi:
+                  </span>
+                  {liveSearch.data.expansion.translations.map((t) => (
+                    <span
+                      key={t.en}
+                      className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#6366F1]/10 text-[#818CF8] text-[10px] font-medium border border-[#6366F1]/20"
+                    >
+                      {t.tr} → {t.en}
+                    </span>
+                  ))}
+                  {liveSearch.data.reranked && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#22C55E]/10 text-[#22C55E] text-[10px] font-medium border border-[#22C55E]/20">
+                      <Sparkles className="size-2.5" />
+                      anlam sıralaması
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
@@ -452,7 +508,7 @@ export default function Dashboard() {
                 icon: Users,
                 label: "Authors",
                 value: String(
-                  new Set(basePapers.flatMap((p) => p.authors)).size
+                  new Set(basePapers.flatMap((p) => getAuthors(p))).size
                 ),
                 change: "unique researchers",
               },
@@ -683,8 +739,8 @@ export default function Dashboard() {
                             </div>
                           </td>
                           <td className="px-3 py-3 text-[#8A8A98] text-xs truncate max-w-40">
-                            {paper.authors[0]}
-                            {paper.authors.length > 1 ? " et al." : ""}
+                            {getAuthors(paper)[0] ?? "Unknown"}
+                            {getAuthors(paper).length > 1 ? " et al." : ""}
                           </td>
                           <td className="px-3 py-3 text-[#8A8A98] text-xs font-mono">
                             {paper.year}

@@ -26,6 +26,12 @@ binding = "DB"
 database_name = "scholarmap-db"
 database_id = "9a9ab3e1-4e76-4400-a6ec-df6c996b9450"
 
+# ── Workers AI (multilingual embeddings for semantic search) ──
+# Free-tier daily allocation covers MVP traffic. Used by paper.searchLive
+# when semantic mode is on; search degrades to keyword order if unavailable.
+[ai]
+binding = "AI"
+
 # ── Environment Variables ──
 [vars]
 APP_URL = "https://scholarmap.io"
@@ -64,3 +70,6 @@ KIMI_AUTH_URL = "https://api.kimi.moonshot.cn"
 binding = "DB"
 database_name = "scholarmap-db"
 database_id = "9a9ab3e1-4e76-4400-a6ec-df6c996b9450"
+
+[env.preview.ai]
+binding = "AI"
