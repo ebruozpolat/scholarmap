@@ -154,6 +154,46 @@ describe("searchLive", () => {
     expect(decodeURIComponent(seen[0])).toContain("type:dissertation");
   });
 
+  it("expands a Turkish query with English terms in semantic mode", async () => {
+    let capturedUrl = "";
+    mockFetch((url) => {
+      capturedUrl = url;
+      return Response.json(OPENALEX_JSON);
+    });
+    const result = await searchLive({
+      query: "derin öğrenme",
+      source: "openalex",
+      semantic: true,
+    });
+    expect(result.expansion?.translated).toBe(true);
+    // URLSearchParams encodes spaces as "+"; normalize before asserting.
+    expect(decodeURIComponent(capturedUrl).replace(/\+/g, " ")).toContain(
+      "deep learning",
+    );
+    expect(result.reranked).toBe(false); // no embedder supplied
+  });
+
+  it("reranks results by similarity when an embedder is supplied", async () => {
+    mockFetch(() =>
+      Response.json({
+        results: [
+          { ...OPENALEX_JSON.results[0], display_name: "Alakasız Konu" },
+          { ...OPENALEX_JSON.results[0], display_name: "MATCH eden makale" },
+        ],
+      }),
+    );
+    const embed = async (texts: string[]) =>
+      texts.map((t) => (t.includes("MATCH") ? [1, 0] : [0, 1]));
+    const result = await searchLive({
+      query: "MATCH cancer",
+      source: "openalex",
+      semantic: true,
+      embed,
+    });
+    expect(result.reranked).toBe(true);
+    expect(result.papers[0].title).toBe("MATCH eden makale");
+  });
+
   it("keeps results from healthy sources when others fail", async () => {
     mockFetch((url) =>
       url.includes("crossref")

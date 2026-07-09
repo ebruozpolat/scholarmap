@@ -12,6 +12,7 @@ import { handleLemonSqueezyWebhook } from "./billing-router";
 export interface Env {
   DATABASE_URL: string;
   DB: unknown; // D1 binding (accessed through the query layer at runtime)
+  AI?: { run(model: string, inputs: { text: string[] }): Promise<{ data?: number[][] }> };
   ASSETS?: { fetch(request: Request): Promise<Response> };
   KIMI_CLIENT_ID: string;
   KIMI_CLIENT_SECRET: string;
@@ -54,9 +55,9 @@ app.use("/api/trpc/*", async (c) => {
     req: c.req.raw,
     router: appRouter,
     createContext: async (opts) => {
-      // Pass D1 database and env to context
+      // Pass D1 database, Workers AI, and other bindings to context.
       const ctx = await createContext(opts);
-      (ctx as TrpcContext & { env?: Env }).env = c.env;
+      ctx.env = c.env as unknown as TrpcContext["env"];
       return ctx;
     },
   });

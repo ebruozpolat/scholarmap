@@ -57,10 +57,12 @@ Edge mimarisi sayesinde rakiplerden çok daha düşük maliyet ve fiyat.
 
 ## Yenilikçi / özgün yön
 
-1. **Çok dilli anlamsal arama:** Mevcut araçlar anahtar kelime eşleşmesine dayanır. ScholarMap,
-   makale özetlerinin embedding'leri üzerinden kavram düzeyinde eşleştirme yapar ve Türkçe
-   sorgularla İngilizce literatürün taranmasını hedefler (hedef: bilinen-öğe testinde ilk-10
-   isabet ≥%85, TR→EN eşleştirme ≥%75).
+1. **Çok dilli anlamsal arama:** Mevcut araçlar anahtar kelime eşleşmesine dayanır. İlk sürüm
+   canlıda: Türkçe sorgu, akademik terim eşlemesiyle İngilizce'ye genişletilip OpenAlex'te her iki
+   dilde taranıyor (ör. "derin öğrenme ile tümör tespiti" → "deep learning tumor detection"), ve
+   Workers AI çok dilli embedding'leriyle (bge-m3) anlam benzerliğine göre yeniden sıralanıyor.
+   Ar-Ge ile bu, makale özetlerinin embedding'leri üzerinden tam kavram düzeyinde eşleştirmeye
+   derinleştirilecek (hedef: bilinen-öğe testinde ilk-10 isabet ≥%85, TR→EN eşleştirme ≥%75).
 2. **Otomatik literatür kolu tespiti:** İnteraktif atıf haritasının ilk sürümü canlıda
    (OpenAlex tabanlı; DOI/başlıktan makale + referansları + atıf yapanlar, tıkla-genişlet).
    Ar-Ge ile atıf/ko-atıf grafında topluluk tespiti (Louvain) eklenerek literatür kolları
@@ -99,10 +101,12 @@ gelişmiş analitik, atıf haritası, LLM sentezi) ile gelir. Lemon Squeezy (Mer
 
 ## Mevcut durum (geliştirme aşaması)
 
-Çalışan MVP canlıda: **https://scholarmap.alignxdigital.workers.dev** — arXiv/Crossref gerçek
-zamanlı arama, OpenAlex destekli interaktif atıf haritası (DOI/başlık → makale + referansları +
-atıf yapanlar; düğüme tıklayınca özet ve genişletme), konu/trend analizi panosu, kişisel
-kütüphane, Lemon Squeezy ile Pro abonelik akışı ve
+Çalışan MVP canlıda: **https://scholarmap.alignxdigital.workers.dev** — arXiv/Crossref/OpenAlex
+gerçek zamanlı arama (Türkçe ve tez filtreleri dahil), çok dilli anlamsal aramanın ilk sürümü
+(Türkçe sorgu → İngilizce literatür + embedding yeniden sıralama), OpenAlex destekli interaktif
+atıf haritası (DOI/başlık → makale + referansları + atıf yapanlar; düğüme tıklayınca özet ve
+genişletme), Türkçe akademik metinler için AI dedektörü (ücretsiz edinim aracı), konu/trend analizi
+panosu, kişisel kütüphane, Lemon Squeezy ile Pro abonelik akışı ve
 147 makalelik başlangıç veri seti. Teknoloji Hazırlık Seviyesi: **TRL 6** (gerçek ortamda
 çalışan prototip). Teknik altyapı: React 19 + TypeScript, tRPC, Cloudflare Workers/D1 (edge).
 Proje desteğiyle hedef: Ar-Ge bileşenlerinin geliştirilip ürünleştirilmesi ve TRL 8–9'a ulaşmak.

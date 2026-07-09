@@ -4,6 +4,7 @@ import { getDb } from "./queries/connection";
 import { papers } from "@db/schema";
 import { like, desc, sql, and, gte } from "drizzle-orm";
 import { searchLive } from "./sources/live-search";
+import { workersAiEmbedder } from "./sources/semantic-rerank";
 
 export const paperRouter = createRouter({
   // Real-time search against external sources (arXiv + Crossref + OpenAlex).
@@ -18,15 +19,26 @@ export const paperRouter = createRouter({
         limit: z.number().min(1).max(50).default(25),
         language: z.enum(["all", "tr", "en"]).default("all"),
         docType: z.enum(["all", "article", "dissertation"]).default("all"),
+        // Cross-lingual semantic search: expand a Turkish query with English
+        // academic terms and (when Workers AI is available) rerank by meaning.
+        semantic: z.boolean().default(false),
       })
     )
-    .query(async ({ input }) => {
-      const { papers: results, sources, errors } = await searchLive(input);
+    .query(async ({ input, ctx }) => {
+      const embed = input.semantic
+        ? (workersAiEmbedder(ctx.env?.AI) ?? undefined)
+        : undefined;
+      const { papers, sources, errors, expansion, reranked } = await searchLive({
+        ...input,
+        embed,
+      });
       return {
-        papers: results,
-        total: results.length,
+        papers,
+        total: papers.length,
         sources,
         errors,
+        expansion,
+        reranked,
       };
     }),
 

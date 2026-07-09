@@ -3,6 +3,8 @@
 // the Node server and Cloudflare Workers (no DOMParser / Node-only deps).
 
 import { searchOpenAlexWorks } from "./openalex";
+import { expandQuery, type Expansion } from "./cross-lingual";
+import { rerankBySimilarity, type Embedder } from "./semantic-rerank";
 
 export interface LivePaper {
   title: string;
@@ -190,20 +192,40 @@ function dedupeByTitle(papers: LivePaper[]): LivePaper[] {
   return out;
 }
 
+export interface SearchLiveResult {
+  papers: LivePaper[];
+  sources: string[];
+  errors: string[];
+  /** Cross-lingual expansion applied to the query (semantic mode only). */
+  expansion?: Expansion;
+  /** Whether embedding-based reranking actually ran. */
+  reranked?: boolean;
+}
+
 export async function searchLive(opts: {
   query: string;
   source?: LiveSource;
   limit?: number;
   language?: LiveLanguage;
   docType?: LiveDocType;
-}): Promise<{ papers: LivePaper[]; sources: string[]; errors: string[] }> {
-  const query = opts.query.trim();
+  /** Enable cross-lingual query expansion (TR → EN) and optional rerank. */
+  semantic?: boolean;
+  /** Optional embedder (Workers AI). When present, results are reranked. */
+  embed?: Embedder;
+}): Promise<SearchLiveResult> {
+  const rawQuery = opts.query.trim();
   const source = opts.source ?? "all";
   const limit = Math.min(Math.max(opts.limit ?? 25, 1), 50);
   const language = opts.language ?? "all";
   const docType = opts.docType ?? "all";
+  const semantic = opts.semantic ?? false;
 
-  if (!query) return { papers: [], sources: [], errors: [] };
+  if (!rawQuery) return { papers: [], sources: [], errors: [] };
+
+  // In semantic mode, expand a Turkish query with English academic terms so
+  // OpenAlex returns cross-lingual matches. English queries pass through.
+  const expansion = semantic ? expandQuery(rawQuery) : undefined;
+  const query = expansion?.expandedQuery || rawQuery;
 
   // Language and document-type filters are only supported by OpenAlex;
   // when either is active the other sources would pollute the results,
@@ -238,5 +260,17 @@ export async function searchLive(opts: {
     }
   });
 
-  return { papers: dedupeByTitle(collected), sources, errors };
+  let papers = dedupeByTitle(collected);
+  let reranked = false;
+
+  // When an embedder is supplied, reorder by semantic similarity to the
+  // original (user-typed) query — that carries the true intent, not the
+  // keyword-expanded string. Falls back to keyword order on any failure.
+  if (semantic && opts.embed && papers.length > 0) {
+    const result = await rerankBySimilarity(rawQuery, papers, opts.embed);
+    papers = result.papers;
+    reranked = result.reranked;
+  }
+
+  return { papers, sources, errors, expansion, reranked };
 }
