@@ -107,7 +107,8 @@ export default function Dashboard() {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
   const [turkishOnly, setTurkishOnly] = useState(false);
   const [thesesOnly, setThesesOnly] = useState(false);
-  const [semantic, setSemantic] = useState(false);
+  // null = auto (on for Turkish-looking queries); boolean = user override.
+  const [semanticOverride, setSemanticOverride] = useState<boolean | null>(null);
 
   // Debounce the typed query so we don't fire a live request per keystroke.
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -115,6 +116,15 @@ export default function Dashboard() {
     const id = setTimeout(() => setDebouncedQuery(searchQuery.trim()), 450);
     return () => clearTimeout(id);
   }, [searchQuery]);
+
+  // Default semantic on for Turkish queries so TR→EN expansion is the happy
+  // path; English queries stay off unless the user opts in.
+  const queryLooksTurkish = (q: string) =>
+    /[çğıöşüİ]/i.test(q) ||
+    /\b(ve|ile|için|bir|bu|nasıl|nedir)\b/i.test(q);
+  const semantic =
+    semanticOverride ??
+    (searchQuery.trim().length > 0 && queryLooksTurkish(searchQuery.trim()));
 
   const liveSource =
     sourceFilter === "arXiv"
@@ -442,7 +452,7 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={() => {
-                    setSemantic((v) => !v);
+                    setSemanticOverride(!semantic);
                     setPage(1);
                   }}
                   className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${

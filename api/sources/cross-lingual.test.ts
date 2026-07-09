@@ -73,4 +73,12 @@ describe("expandQuery", () => {
     const en = result.translations.map((t) => t.en);
     expect(en).toContain("artificial intelligence");
   });
+
+  it("covers newer ML / IR terms from the expanded dictionary", () => {
+    const result = expandQuery("çok dilli bilgi erişimi ve duygu analizi");
+    const en = result.translations.map((t) => t.en);
+    expect(en).toContain("multilingual");
+    expect(en).toContain("information retrieval");
+    expect(en).toContain("sentiment analysis");
+  });
 });

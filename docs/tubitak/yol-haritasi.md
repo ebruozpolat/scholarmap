@@ -10,17 +10,17 @@ Başvurudan önce demo ve repo profesyonel görünmeli:
 
 - [x] PR #2'yi (ödeme altyapısı + 147 makale) `cf`'e merge et, production'a deploy et
 - [ ] Özel alan adı bağla (`scholarmap.io` rotaları `wrangler.toml`'da hazır, yorum satırında)
-- [ ] `.env.example` dosyasını tamamla; README'deki kurulum adımlarını doğrula
-- [ ] Test kapsamını genişlet (`vitest` kurulu; kritik yol: arama, abonelik, webhook)
-- [ ] GitHub Actions CI: lint + typecheck + test her PR'da çalışsın
+- [x] `.env.example` dosyasını tamamla; README'deki kurulum adımlarını doğrula
+- [x] Test kapsamını genişlet (`vitest` kurulu; kritik yol: arama, abonelik, webhook, anlamsal genişletme)
+- [x] GitHub Actions CI: lint + typecheck + test her PR'da çalışsın
 - [ ] Temel izleme: hata takibi (Sentry/Workers Analytics), kullanım metrikleri
 - [ ] Landing sayfasına gerçek ekran görüntüleri + değer önerisi metni (panel jürisi ilk oraya bakar)
 
 ## Faz 1 — Veri omurgası (1–3. ay)
 
-Şu an arama arXiv/Crossref'e canlı gidiyor; ölçek ve zenginlik için yerel indeks gerekli:
+Şu an arama arXiv/Crossref/OpenAlex'e canlı gidiyor; ölçek ve zenginlik için yerel indeks gerekli:
 
-- [ ] **OpenAlex** entegrasyonu (açık lisanslı, 250M+ çalışma, atıf verisi dahil) — ana omurga
+- [x] **OpenAlex** entegrasyonu (açık lisanslı, 250M+ çalışma, atıf verisi dahil) — canlı arama + atıf haritası
 - [ ] Semantic Scholar API bağdaştırıcısı (atıf bağlamları için)
 - [ ] **DergiPark / TR Dizin / YÖK Tez** bağdaştırıcıları — Türkçe içerik farklılaştırıcısı
 - [ ] Meta-veri normalizasyon katmanı (DOI eşleme, yazar birleştirme, mükerrer temizliği)
@@ -28,7 +28,8 @@ Başvurudan önce demo ve repo profesyonel görünmeli:
 
 ## Faz 2 — Anlamsal arama (3–7. ay) · Ar-Ge
 
-- [ ] Özet embedding'leri (çok dilli model — TR sorgu ile EN makale eşleşmeli)
+- [x] **İlk sürüm canlıda:** TR→EN sorgu genişletme (ek-ayıklama + akademik sözlük) + opsiyonel Workers AI `bge-m3` yeniden sıralama
+- [ ] Özet embedding'leri kalıcı indeks (çok dilli model — TR sorgu ile EN makale eşleşmeli)
 - [ ] Vektör indeksi (Cloudflare Vectorize) + hibrit sıralama (BM25 + vektör + atıf ağırlığı)
 - [ ] Değerlendirme seti: bilinen-öğe testi, ilk-10 isabet ölçümü (başarı kriteri: ≥%85)
 - [ ] "Benzer makaleler" ve "bu makaleyi okuyanlar" önerileri
@@ -37,7 +38,8 @@ Başvurudan önce demo ve repo profesyonel görünmeli:
 
 `plan.md`'deki 3B yıldız haritası fikri burada ürünleşiyor:
 
-- [ ] Atıf/ko-atıf grafı çıkarımı (OpenAlex referans verisi)
+- [x] **İlk sürüm canlıda:** OpenAlex tabanlı interaktif atıf haritası (DOI/başlık → referanslar + atıf yapanlar)
+- [ ] Atıf/ko-atıf grafı çıkarımı (OpenAlex referans verisi) — topluluk ölçeğinde
 - [ ] Louvain topluluk tespiti → literatür kollarının otomatik renklendirilmesi
 - [ ] Merkezîlik ölçütleriyle "temel makale" (seminal paper) tespiti
 - [ ] İnteraktif 3B görselleştirme (react-force-graph-3d) — Pro özelliği
