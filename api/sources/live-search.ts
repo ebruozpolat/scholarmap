@@ -1,6 +1,8 @@
-// Live academic search across external sources (arXiv + Crossref).
+// Live academic search across external sources (arXiv + Crossref + OpenAlex).
 // Uses only fetch + standard string parsing so it runs unchanged on both
 // the Node server and Cloudflare Workers (no DOMParser / Node-only deps).
+
+import { searchOpenAlexWorks } from "./openalex";
 
 export interface LivePaper {
   title: string;
@@ -14,7 +16,9 @@ export interface LivePaper {
   topic?: string;
 }
 
-export type LiveSource = "all" | "arxiv" | "scholar";
+export type LiveSource = "all" | "arxiv" | "scholar" | "openalex";
+export type LiveLanguage = "all" | "tr" | "en";
+export type LiveDocType = "all" | "article" | "dissertation";
 
 const ARXIV_ENDPOINT = "https://export.arxiv.org/api/query";
 const CROSSREF_ENDPOINT = "https://api.crossref.org/works";
@@ -148,6 +152,31 @@ async function searchCrossref(query: string, limit: number): Promise<LivePaper[]
   });
 }
 
+// ── OpenAlex — 250M+ works incl. Turkish journals (DergiPark) and theses ──
+async function searchOpenAlex(
+  query: string,
+  limit: number,
+  language: LiveLanguage,
+  docType: LiveDocType,
+): Promise<LivePaper[]> {
+  const works = await searchOpenAlexWorks({
+    query,
+    limit,
+    language,
+    type: docType,
+  });
+  return works.map((w) => ({
+    title: w.title,
+    authors: w.authors,
+    year: w.year || new Date().getFullYear(),
+    abstract: w.abstract,
+    url: w.url,
+    citations: w.citations,
+    source: "OpenAlex",
+    venue: w.venue || "Journal",
+  }));
+}
+
 function dedupeByTitle(papers: LivePaper[]): LivePaper[] {
   const seen = new Set<string>();
   const out: LivePaper[] = [];
@@ -165,19 +194,34 @@ export async function searchLive(opts: {
   query: string;
   source?: LiveSource;
   limit?: number;
+  language?: LiveLanguage;
+  docType?: LiveDocType;
 }): Promise<{ papers: LivePaper[]; sources: string[]; errors: string[] }> {
   const query = opts.query.trim();
   const source = opts.source ?? "all";
   const limit = Math.min(Math.max(opts.limit ?? 25, 1), 50);
+  const language = opts.language ?? "all";
+  const docType = opts.docType ?? "all";
 
   if (!query) return { papers: [], sources: [], errors: [] };
 
+  // Language and document-type filters are only supported by OpenAlex;
+  // when either is active the other sources would pollute the results,
+  // so the search is routed to OpenAlex alone.
+  const filtered = language !== "all" || docType !== "all";
+
   const tasks: { name: string; run: Promise<LivePaper[]> }[] = [];
-  if (source === "all" || source === "arxiv") {
+  if (!filtered && (source === "all" || source === "arxiv")) {
     tasks.push({ name: "arXiv", run: searchArxiv(query, limit) });
   }
-  if (source === "all" || source === "scholar") {
+  if (!filtered && (source === "all" || source === "scholar")) {
     tasks.push({ name: "Google Scholar", run: searchCrossref(query, limit) });
+  }
+  if (filtered || source === "all" || source === "openalex") {
+    tasks.push({
+      name: "OpenAlex",
+      run: searchOpenAlex(query, limit, language, docType),
+    });
   }
 
   const settled = await Promise.allSettled(tasks.map((t) => t.run));

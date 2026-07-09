@@ -56,7 +56,7 @@ const TOPICS = [
 
 type Topic = (typeof TOPICS)[number];
 type SortOption = "relevance" | "citations" | "year" | "title";
-type SourceFilter = "All" | "arXiv" | "Google Scholar";
+type SourceFilter = "All" | "arXiv" | "Google Scholar" | "OpenAlex";
 
 const YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
@@ -90,6 +90,8 @@ export default function Dashboard() {
   const [perPage, setPerPage] = useState(10);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
+  const [turkishOnly, setTurkishOnly] = useState(false);
+  const [thesesOnly, setThesesOnly] = useState(false);
 
   // Debounce the typed query so we don't fire a live request per keystroke.
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -103,12 +105,20 @@ export default function Dashboard() {
       ? "arxiv"
       : sourceFilter === "Google Scholar"
         ? "scholar"
-        : "all";
+        : sourceFilter === "OpenAlex"
+          ? "openalex"
+          : "all";
 
   const isLive = debouncedQuery.length > 0;
 
   const liveSearch = trpc.paper.searchLive.useQuery(
-    { query: debouncedQuery, source: liveSource, limit: 30 },
+    {
+      query: debouncedQuery,
+      source: liveSource,
+      limit: 30,
+      language: turkishOnly ? "tr" : "all",
+      docType: thesesOnly ? "dissertation" : "all",
+    },
     {
       enabled: isLive,
       staleTime: 5 * 60 * 1000,
@@ -343,7 +353,7 @@ export default function Dashboard() {
                     setSearchQuery(e.target.value);
                     setPage(1);
                   }}
-                  placeholder="Search papers across arXiv and Google Scholar..."
+                  placeholder="Search papers across arXiv, Google Scholar and OpenAlex..."
                   className="flex-1 bg-transparent text-lg text-[#F0F0F5] placeholder-[#5A5A68] outline-none"
                 />
                 {isLive && liveSearch.isFetching ? (
@@ -362,8 +372,8 @@ export default function Dashboard() {
                   </kbd>
                 )}
               </div>
-              <div className="flex items-center gap-2 mt-3">
-                {(["All", "arXiv", "Google Scholar"] as SourceFilter[]).map(
+              <div className="flex items-center gap-2 mt-3 flex-wrap">
+                {(["All", "arXiv", "Google Scholar", "OpenAlex"] as SourceFilter[]).map(
                   (src) => (
                     <button
                       key={src}
@@ -371,7 +381,8 @@ export default function Dashboard() {
                         setSourceFilter(src);
                         setPage(1);
                       }}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                      disabled={(turkishOnly || thesesOnly) && src !== "All" && src !== "OpenAlex"}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
                         sourceFilter === src
                           ? "bg-[#6366F1]/10 text-[#6366F1] border border-[#6366F1]/30"
                           : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
@@ -381,6 +392,37 @@ export default function Dashboard() {
                     </button>
                   )
                 )}
+                <span className="w-px h-5 bg-[#23232D]" />
+                <button
+                  onClick={() => {
+                    setTurkishOnly((v) => !v);
+                    setSourceFilter("All");
+                    setPage(1);
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    turkishOnly
+                      ? "bg-[#EF4444]/10 text-[#F87171] border border-[#EF4444]/30"
+                      : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                  }`}
+                  title="Yalnızca Türkçe yayınlar (DergiPark dahil, OpenAlex üzerinden)"
+                >
+                  Türkçe
+                </button>
+                <button
+                  onClick={() => {
+                    setThesesOnly((v) => !v);
+                    setSourceFilter("All");
+                    setPage(1);
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    thesesOnly
+                      ? "bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30"
+                      : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                  }`}
+                  title="Yalnızca tezler (OpenAlex üzerinden)"
+                >
+                  Tezler
+                </button>
               </div>
             </div>
           </div>
@@ -664,7 +706,9 @@ export default function Dashboard() {
                               className={`text-[10px] font-medium ${
                                 source === "arXiv"
                                   ? "bg-[#6366F1]/10 text-[#6366F1] hover:bg-[#6366F1]/20"
-                                  : "bg-[#22C55E]/10 text-[#22C55E] hover:bg-[#22C55E]/20"
+                                  : source === "OpenAlex"
+                                    ? "bg-[#F59E0B]/10 text-[#F59E0B] hover:bg-[#F59E0B]/20"
+                                    : "bg-[#22C55E]/10 text-[#22C55E] hover:bg-[#22C55E]/20"
                               }`}
                             >
                               {source}

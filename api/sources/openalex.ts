@@ -171,6 +171,33 @@ export async function resolveWork(input: string): Promise<MapPaper | null> {
   return first ? toMapPaper(first) : null;
 }
 
+/**
+ * Full-text search over OpenAlex works with optional language and
+ * document-type filters (e.g. language:"tr", type:"dissertation").
+ * This is what lets ScholarMap surface Turkish journal articles
+ * (DergiPark DOIs are indexed by OpenAlex) and theses.
+ */
+export async function searchOpenAlexWorks(opts: {
+  query: string;
+  limit?: number;
+  language?: string;
+  type?: string;
+}): Promise<MapPaper[]> {
+  const limit = Math.min(Math.max(opts.limit ?? 25, 1), 50);
+  const params = new URLSearchParams({
+    search: opts.query,
+    per_page: String(limit),
+    select: WORK_FIELDS,
+  });
+  const filters: string[] = [];
+  if (opts.language && opts.language !== "all") filters.push(`language:${opts.language}`);
+  if (opts.type && opts.type !== "all") filters.push(`type:${opts.type}`);
+  if (filters.length > 0) params.set("filter", filters.join(","));
+
+  const data = await fetchJson<{ results?: OpenAlexWork[] }>("/works", params);
+  return (data.results ?? []).map(toMapPaper);
+}
+
 async function fetchWorksByIds(ids: string[], limit: number): Promise<MapPaper[]> {
   if (ids.length === 0) return [];
   const batch = ids.slice(0, MAX_IDS_PER_FILTER);
