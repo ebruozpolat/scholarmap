@@ -10,8 +10,8 @@ export const mapRouter = createRouter({
     .input(
       z.object({
         query: z.string().min(1),
-        refLimit: z.number().min(1).max(25).default(12),
-        citedByLimit: z.number().min(0).max(25).default(12),
+        refLimit: z.number().min(1).max(50).default(20),
+        citedByLimit: z.number().min(0).max(50).default(20),
       })
     )
     .query(async ({ input }) => {
@@ -34,8 +34,8 @@ export const mapRouter = createRouter({
     .input(
       z.object({
         id: z.string().regex(/^W\d+$/i, "Expected an OpenAlex work id like W123"),
-        refLimit: z.number().min(1).max(25).default(8),
-        citedByLimit: z.number().min(0).max(25).default(8),
+        refLimit: z.number().min(1).max(50).default(10),
+        citedByLimit: z.number().min(0).max(50).default(10),
       })
     )
     .query(async ({ input }) => {

@@ -76,7 +76,17 @@ function mergeGraph(prev: GraphState, fragment: CitationGraph, isInitial: boolea
 }
 
 function nodeSize(citations: number): number {
-  return 18 + Math.log10(citations + 1) * 7;
+  return 9 + Math.log10(citations + 1) * 3.5;
+}
+
+/** Fit the whole graph, but never zoom in so far that nodes look huge. */
+function fitGraph(cy: Core) {
+  if (cy.elements().length === 0) return;
+  cy.fit(undefined, 40);
+  if (cy.zoom() > 1.2) {
+    cy.zoom(1.2);
+    cy.center();
+  }
 }
 
 function toElements(graph: GraphState): ElementDefinition[] {
@@ -193,7 +203,7 @@ export default function MapView() {
     // opens/closes or the window changes size.
     const observer = new ResizeObserver(() => {
       cy.resize();
-      if (cy.elements().length > 0) cy.fit(undefined, 40);
+      fitGraph(cy);
     });
     observer.observe(containerRef.current);
     return () => {
@@ -214,10 +224,11 @@ export default function MapView() {
         name: "cose",
         animate: false,
         padding: 40,
-        nodeRepulsion: () => 12000,
-        idealEdgeLength: () => 90,
+        nodeRepulsion: () => 400000,
+        idealEdgeLength: () => 110,
+        nodeOverlap: 12,
       }).run();
-      cy.fit(undefined, 40);
+      fitGraph(cy);
     }
   }, [graph]);
 

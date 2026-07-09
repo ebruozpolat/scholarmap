@@ -226,8 +226,8 @@ export async function fetchCitationGraph(opts: {
   citedByLimit?: number;
 }): Promise<CitationGraph> {
   const { center } = opts;
-  const refLimit = Math.min(Math.max(opts.refLimit ?? 12, 1), 25);
-  const citedByLimit = Math.min(Math.max(opts.citedByLimit ?? 12, 0), 25);
+  const refLimit = Math.min(Math.max(opts.refLimit ?? 20, 1), MAX_IDS_PER_FILTER);
+  const citedByLimit = Math.min(Math.max(opts.citedByLimit ?? 20, 0), MAX_IDS_PER_FILTER);
 
   const errors: string[] = [];
   const [refsResult, citingResult] = await Promise.allSettled([
