@@ -6,14 +6,18 @@ import { like, desc, sql, and, gte } from "drizzle-orm";
 import { searchLive } from "./sources/live-search";
 
 export const paperRouter = createRouter({
-  // Real-time search against external sources (arXiv + Crossref). This does
-  // not touch the database, so it works on Cloudflare Workers via fetch.
+  // Real-time search against external sources (arXiv + Crossref + OpenAlex).
+  // This does not touch the database, so it works on Cloudflare Workers via
+  // fetch. language/docType filters are served by OpenAlex (covers Turkish
+  // journals incl. DergiPark DOIs, and dissertations).
   searchLive: publicQuery
     .input(
       z.object({
         query: z.string().min(1),
-        source: z.enum(["all", "arxiv", "scholar"]).default("all"),
+        source: z.enum(["all", "arxiv", "scholar", "openalex"]).default("all"),
         limit: z.number().min(1).max(50).default(25),
+        language: z.enum(["all", "tr", "en"]).default("all"),
+        docType: z.enum(["all", "article", "dissertation"]).default("all"),
       })
     )
     .query(async ({ input }) => {

@@ -37,6 +37,22 @@ const CROSSREF_JSON = {
   },
 };
 
+const OPENALEX_JSON = {
+  results: [
+    {
+      id: "https://openalex.org/W555",
+      doi: "https://doi.org/10.16986/huje.2019",
+      display_name: "Derin Öğrenme ile Türkçe Metin Sınıflandırma",
+      publication_year: 2021,
+      cited_by_count: 42,
+      authorships: [{ author: { display_name: "Ayşe Yılmaz" } }],
+      abstract_inverted_index: { Bu: [0], çalışmada: [1] },
+      primary_location: { source: { display_name: "DergiPark" } },
+      referenced_works: [],
+    },
+  ],
+};
+
 function mockFetch(handler: (url: string) => Response | Promise<Response>) {
   vi.stubGlobal(
     "fetch",
@@ -103,16 +119,52 @@ describe("searchLive", () => {
     expect(titles).toContain("BERT: Pre-training of Deep Bidirectional Transformers");
   });
 
-  it("keeps results from healthy sources when one source fails", async () => {
+  it("parses OpenAlex results as a live source", async () => {
+    mockFetch((url) => {
+      expect(url).toContain("api.openalex.org");
+      return Response.json(OPENALEX_JSON);
+    });
+    const { papers, sources } = await searchLive({ query: "derin öğrenme", source: "openalex" });
+    expect(sources).toEqual(["OpenAlex"]);
+    expect(papers[0]).toMatchObject({
+      title: "Derin Öğrenme ile Türkçe Metin Sınıflandırma",
+      authors: ["Ayşe Yılmaz"],
+      year: 2021,
+      citations: 42,
+      source: "OpenAlex",
+      venue: "DergiPark",
+    });
+  });
+
+  it("routes to OpenAlex alone with language/type filters applied", async () => {
+    const seen: string[] = [];
+    mockFetch((url) => {
+      seen.push(url);
+      return Response.json(OPENALEX_JSON);
+    });
+    const { sources } = await searchLive({
+      query: "makine öğrenmesi",
+      source: "all",
+      language: "tr",
+      docType: "dissertation",
+    });
+    expect(sources).toEqual(["OpenAlex"]);
+    expect(seen).toHaveLength(1);
+    expect(decodeURIComponent(seen[0])).toContain("language:tr");
+    expect(decodeURIComponent(seen[0])).toContain("type:dissertation");
+  });
+
+  it("keeps results from healthy sources when others fail", async () => {
     mockFetch((url) =>
-      url.includes("arxiv")
-        ? new Response("upstream down", { status: 503 })
-        : Response.json(CROSSREF_JSON),
+      url.includes("crossref")
+        ? Response.json(CROSSREF_JSON)
+        : new Response("upstream down", { status: 503 }),
     );
     const { papers, sources, errors } = await searchLive({ query: "attention", source: "all" });
     expect(sources).toEqual(["Google Scholar"]);
     expect(papers.length).toBeGreaterThan(0);
-    expect(errors).toHaveLength(1);
+    expect(errors).toHaveLength(2);
     expect(errors[0]).toContain("arXiv");
+    expect(errors[1]).toContain("OpenAlex");
   });
 });
