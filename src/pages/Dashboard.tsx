@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import {
   Search,
   FileText,
@@ -15,7 +15,12 @@ import {
   Quote,
   Library,
   Download,
+  Loader2,
+  Radio,
+  Sparkles,
+  Languages,
 } from "lucide-react";
+import { trpc } from "@/providers/trpc";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -53,12 +58,25 @@ const TOPICS = [
 
 type Topic = (typeof TOPICS)[number];
 type SortOption = "relevance" | "citations" | "year" | "title";
-type SourceFilter = "All" | "arXiv" | "Google Scholar";
+type SourceFilter = "All" | "arXiv" | "Google Scholar" | "OpenAlex";
 
 const YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
 function getSourceFromPaper(p: Paper): string {
   return p.source || "arXiv";
+}
+
+// Some seed records store authors as a comma-separated string rather than an
+// array; coerce so downstream .some()/.length/[0] never crash on typing.
+function getAuthors(p: Paper): string[] {
+  if (Array.isArray(p.authors)) return p.authors;
+  if (typeof p.authors === "string") {
+    return (p.authors as string)
+      .split(/[,;]/)
+      .map((a) => a.trim())
+      .filter(Boolean);
+  }
+  return [];
 }
 
 function getVenueShort(p: Paper): string {
@@ -71,7 +89,7 @@ function getVenueShort(p: Paper): string {
       return "arXiv";
     }
   }
-  const m = v.match(/^[^,\-]+/);
+  const m = v.match(/^[^,-]+/);
   return m ? m[0].trim().slice(0, 18) : "Unknown";
 }
 
@@ -87,6 +105,52 @@ export default function Dashboard() {
   const [perPage, setPerPage] = useState(10);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
+  const [turkishOnly, setTurkishOnly] = useState(false);
+  const [thesesOnly, setThesesOnly] = useState(false);
+  const [semantic, setSemantic] = useState(false);
+
+  // Debounce the typed query so we don't fire a live request per keystroke.
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedQuery(searchQuery.trim()), 450);
+    return () => clearTimeout(id);
+  }, [searchQuery]);
+
+  const liveSource =
+    sourceFilter === "arXiv"
+      ? "arxiv"
+      : sourceFilter === "Google Scholar"
+        ? "scholar"
+        : sourceFilter === "OpenAlex"
+          ? "openalex"
+          : "all";
+
+  const isLive = debouncedQuery.length > 0;
+
+  const liveSearch = trpc.paper.searchLive.useQuery(
+    {
+      query: debouncedQuery,
+      source: liveSource,
+      limit: 30,
+      language: turkishOnly ? "tr" : "all",
+      docType: thesesOnly ? "dissertation" : "all",
+      semantic,
+    },
+    {
+      enabled: isLive,
+      staleTime: 5 * 60 * 1000,
+      retry: 1,
+    }
+  );
+
+  // When a query is active, search results come live from arXiv/Crossref;
+  // otherwise we show the bundled library so the dashboard is never empty.
+  const basePapers = useMemo<Paper[]>(() => {
+    if (isLive) {
+      return (liveSearch.data?.papers ?? []) as Paper[];
+    }
+    return allPapers as Paper[];
+  }, [isLive, liveSearch.data]);
 
   const toggleTopic = useCallback((topic: Topic) => {
     setActiveTopics((prev) =>
@@ -105,14 +169,17 @@ export default function Dashboard() {
   }, []);
 
   const filteredPapers = useMemo(() => {
-    let result = [...allPapers];
+    let result = [...basePapers];
 
-    if (searchQuery.trim()) {
+    // For the bundled library we filter by the typed text locally. For live
+    // results the source already matched the query, so we skip local text
+    // filtering (the match may live in the abstract/authors, not the title).
+    if (!isLive && searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
         (p) =>
           p.title.toLowerCase().includes(q) ||
-          p.authors.some((a) => a.toLowerCase().includes(q)) ||
+          getAuthors(p).some((a) => a.toLowerCase().includes(q)) ||
           p.abstract.toLowerCase().includes(q)
       );
     }
@@ -152,7 +219,7 @@ export default function Dashboard() {
     }
 
     return result;
-  }, [searchQuery, sourceFilter, sortBy, yearFrom, yearTo, minCitations, activeTopics]);
+  }, [basePapers, isLive, searchQuery, sourceFilter, sortBy, yearFrom, yearTo, minCitations, activeTopics]);
 
   const totalPages = Math.max(1, Math.ceil(filteredPapers.length / perPage));
   const currentPage = Math.min(page, totalPages);
@@ -303,15 +370,27 @@ export default function Dashboard() {
                     setSearchQuery(e.target.value);
                     setPage(1);
                   }}
-                  placeholder="Search papers across arXiv and Google Scholar..."
+                  placeholder="Search papers across arXiv, Google Scholar and OpenAlex..."
                   className="flex-1 bg-transparent text-lg text-[#F0F0F5] placeholder-[#5A5A68] outline-none"
                 />
-                <kbd className="hidden sm:inline-flex items-center px-2 py-1 rounded-md bg-[#1E1E28] text-[10px] text-[#5A5A68] font-mono border border-[#23232D]">
-                  ⌘K
-                </kbd>
+                {isLive && liveSearch.isFetching ? (
+                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#6366F1]/10 text-[10px] text-[#818CF8] font-medium border border-[#6366F1]/30">
+                    <Loader2 className="size-3 animate-spin" />
+                    Searching…
+                  </span>
+                ) : isLive ? (
+                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#22C55E]/10 text-[10px] text-[#22C55E] font-medium border border-[#22C55E]/30">
+                    <Radio className="size-3" />
+                    Live
+                  </span>
+                ) : (
+                  <kbd className="hidden sm:inline-flex items-center px-2 py-1 rounded-md bg-[#1E1E28] text-[10px] text-[#5A5A68] font-mono border border-[#23232D]">
+                    ⌘K
+                  </kbd>
+                )}
               </div>
-              <div className="flex items-center gap-2 mt-3">
-                {(["All", "arXiv", "Google Scholar"] as SourceFilter[]).map(
+              <div className="flex items-center gap-2 mt-3 flex-wrap">
+                {(["All", "arXiv", "Google Scholar", "OpenAlex"] as SourceFilter[]).map(
                   (src) => (
                     <button
                       key={src}
@@ -319,7 +398,8 @@ export default function Dashboard() {
                         setSourceFilter(src);
                         setPage(1);
                       }}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                      disabled={(turkishOnly || thesesOnly) && src !== "All" && src !== "OpenAlex"}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
                         sourceFilter === src
                           ? "bg-[#6366F1]/10 text-[#6366F1] border border-[#6366F1]/30"
                           : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
@@ -329,7 +409,77 @@ export default function Dashboard() {
                     </button>
                   )
                 )}
+                <span className="w-px h-5 bg-[#23232D]" />
+                <button
+                  onClick={() => {
+                    setTurkishOnly((v) => !v);
+                    setSourceFilter("All");
+                    setPage(1);
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    turkishOnly
+                      ? "bg-[#EF4444]/10 text-[#F87171] border border-[#EF4444]/30"
+                      : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                  }`}
+                  title="Yalnızca Türkçe yayınlar (DergiPark dahil, OpenAlex üzerinden)"
+                >
+                  Türkçe
+                </button>
+                <button
+                  onClick={() => {
+                    setThesesOnly((v) => !v);
+                    setSourceFilter("All");
+                    setPage(1);
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    thesesOnly
+                      ? "bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30"
+                      : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                  }`}
+                  title="Yalnızca tezler (OpenAlex üzerinden)"
+                >
+                  Tezler
+                </button>
+                <button
+                  onClick={() => {
+                    setSemantic((v) => !v);
+                    setPage(1);
+                  }}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    semantic
+                      ? "bg-[#6366F1]/10 text-[#818CF8] border border-[#6366F1]/40"
+                      : "text-[#8A8A98] border border-[#23232D] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                  }`}
+                  title="Türkçe sorguyu İngilizce literatüre genişletir (anlamsal arama)"
+                >
+                  <Sparkles className="size-3" />
+                  Anlamsal
+                </button>
               </div>
+
+              {/* Cross-lingual expansion transparency */}
+              {isLive && semantic && liveSearch.data?.expansion?.translated && (
+                <div className="flex items-center gap-2 mt-3 flex-wrap">
+                  <span className="inline-flex items-center gap-1 text-[10px] text-[#818CF8]">
+                    <Languages className="size-3" />
+                    İngilizce literatüre genişletildi:
+                  </span>
+                  {liveSearch.data.expansion.translations.map((t) => (
+                    <span
+                      key={t.en}
+                      className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#6366F1]/10 text-[#818CF8] text-[10px] font-medium border border-[#6366F1]/20"
+                    >
+                      {t.tr} → {t.en}
+                    </span>
+                  ))}
+                  {liveSearch.data.reranked && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#22C55E]/10 text-[#22C55E] text-[10px] font-medium border border-[#22C55E]/20">
+                      <Sparkles className="size-2.5" />
+                      anlam sıralaması
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
@@ -340,7 +490,7 @@ export default function Dashboard() {
                 icon: FileText,
                 label: "Papers Found",
                 value: filteredPapers.length.toLocaleString(),
-                change: `${allPapers.length} total`,
+                change: isLive ? "live results" : `${allPapers.length} in library`,
               },
               {
                 icon: TrendingUp,
@@ -358,7 +508,7 @@ export default function Dashboard() {
                 icon: Users,
                 label: "Authors",
                 value: String(
-                  new Set(allPapers.flatMap((p) => p.authors)).size
+                  new Set(basePapers.flatMap((p) => getAuthors(p))).size
                 ),
                 change: "unique researchers",
               },
@@ -523,13 +673,37 @@ export default function Dashboard() {
                         colSpan={7}
                         className="px-3 py-16 text-center text-[#5A5A68]"
                       >
-                        <Search className="size-12 mx-auto mb-3 opacity-40" />
-                        <p className="text-[#8A8A98] mb-1">
-                          No papers found matching your criteria
-                        </p>
-                        <p className="text-xs">
-                          Try adjusting your filters or search terms
-                        </p>
+                        {isLive && liveSearch.isFetching ? (
+                          <>
+                            <Loader2 className="size-12 mx-auto mb-3 opacity-60 animate-spin text-[#6366F1]" />
+                            <p className="text-[#8A8A98] mb-1">
+                              Searching arXiv and Google Scholar…
+                            </p>
+                            <p className="text-xs">Fetching live results</p>
+                          </>
+                        ) : isLive && liveSearch.isError ? (
+                          <>
+                            <X className="size-12 mx-auto mb-3 opacity-40 text-[#EF4444]" />
+                            <p className="text-[#8A8A98] mb-1">
+                              Live search failed
+                            </p>
+                            <p className="text-xs">
+                              Please try again in a moment
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <Search className="size-12 mx-auto mb-3 opacity-40" />
+                            <p className="text-[#8A8A98] mb-1">
+                              No papers found matching your criteria
+                            </p>
+                            <p className="text-xs">
+                              {isLive
+                                ? "Try a different search term"
+                                : "Try adjusting your filters or search terms"}
+                            </p>
+                          </>
+                        )}
                       </td>
                     </tr>
                   ) : (
@@ -565,8 +739,8 @@ export default function Dashboard() {
                             </div>
                           </td>
                           <td className="px-3 py-3 text-[#8A8A98] text-xs truncate max-w-40">
-                            {paper.authors[0]}
-                            {paper.authors.length > 1 ? " et al." : ""}
+                            {getAuthors(paper)[0] ?? "Unknown"}
+                            {getAuthors(paper).length > 1 ? " et al." : ""}
                           </td>
                           <td className="px-3 py-3 text-[#8A8A98] text-xs font-mono">
                             {paper.year}
@@ -588,7 +762,9 @@ export default function Dashboard() {
                               className={`text-[10px] font-medium ${
                                 source === "arXiv"
                                   ? "bg-[#6366F1]/10 text-[#6366F1] hover:bg-[#6366F1]/20"
-                                  : "bg-[#22C55E]/10 text-[#22C55E] hover:bg-[#22C55E]/20"
+                                  : source === "OpenAlex"
+                                    ? "bg-[#F59E0B]/10 text-[#F59E0B] hover:bg-[#F59E0B]/20"
+                                    : "bg-[#22C55E]/10 text-[#22C55E] hover:bg-[#22C55E]/20"
                               }`}
                             >
                               {source}

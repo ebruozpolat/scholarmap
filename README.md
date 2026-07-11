@@ -6,7 +6,10 @@ A premium academic research platform for discovering, analyzing, and organizing 
 
 ## Features
 
-- **Advanced search** — query papers across sources (arXiv, Google Scholar) with keyword, author, and year filters.
+- **Advanced search** — query papers across sources (arXiv, Google Scholar, OpenAlex) with keyword, author, and year filters, plus Turkish-language and thesis-only filters (DergiPark DOIs are covered via OpenAlex).
+- **Cross-lingual semantic search** — a Turkish query (e.g. "derin öğrenme ile tümör tespiti") is expanded with English academic terms so it also reaches the English literature; when a Workers AI binding is present, results are additionally reranked by multilingual embedding similarity. Degrades gracefully to keyword search when the binding is absent.
+- **Citation map** — paste a DOI or title and get an interactive graph (OpenAlex-powered) of the paper, its references, and the works citing it; click any node to read it or expand the map.
+- **AI detector (Beta)** — heuristic Turkish-academic-text AI-writing analysis: sentence rhythm, lexical diversity, n-gram repetition, connector density, and formulaic-phrase signals combined into a probabilistic score. Runs entirely server-side; the text is never stored.
 - **Interactive dashboard** — browse results in table/card views with sorting and filtering.
 - **Topic analysis** — automatic topic categorization, trend charts, and citation distribution.
 - **Personal library** — save favorite papers and organize them into collections.
@@ -24,7 +27,7 @@ A premium academic research platform for discovering, analyzing, and organizing 
 | Auth | Kimi OAuth (JWT sessions via `jose`) |
 | Deployment | Cloudflare Workers (edge) |
 
-The tRPC API is organized into four routers: `auth`, `paper`, `library`, and `subscription`.
+The tRPC API is organized into six routers: `auth`, `detector`, `map`, `paper`, `library`, and `subscription`. The citation map is rendered with Cytoscape.js on top of the OpenAlex API.
 
 ## Project structure
 
@@ -82,6 +85,13 @@ npx wrangler secret put KIMI_CLIENT_ID
 npx wrangler secret put KIMI_CLIENT_SECRET
 npx wrangler secret put SESSION_SECRET
 npx wrangler secret put JWT_SECRET
+
+# Billing (Lemon Squeezy — merchant of record, no company required)
+npx wrangler secret put LEMONSQUEEZY_API_KEY
+npx wrangler secret put LEMONSQUEEZY_STORE_ID
+npx wrangler secret put LEMONSQUEEZY_PRO_VARIANT_ID
+npx wrangler secret put LEMONSQUEEZY_PRO_YEARLY_VARIANT_ID
+npx wrangler secret put LEMONSQUEEZY_WEBHOOK_SECRET
 
 # 5. Deploy
 npm run deploy:cf

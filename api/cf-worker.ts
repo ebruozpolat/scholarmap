@@ -1,22 +1,30 @@
 import { Hono } from "hono";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "./router";
-import { createContext } from "./context";
+import { createContext, type TrpcContext } from "./context";
 import { Paths } from "@contracts/constants";
 import { createOAuthCallbackHandler } from "./kimi/auth";
+import { handleLemonSqueezyWebhook } from "./billing-router";
 
-// Import this for Cloudflare D1 type augmentation
-import type { ExecutionContext } from "@cloudflare/workers-types";
-
+// Bindings are typed structurally: @cloudflare/workers-types' nominal
+// Request/Response conflict with the Node lib types the rest of the API
+// compiles against.
 export interface Env {
   DATABASE_URL: string;
-  DB: D1Database; // D1 binding
+  DB: unknown; // D1 binding (accessed through the query layer at runtime)
+  AI?: { run(model: string, inputs: { text: string[] }): Promise<{ data?: number[][] }> };
+  ASSETS?: { fetch(request: Request): Promise<Response> };
   KIMI_CLIENT_ID: string;
   KIMI_CLIENT_SECRET: string;
   SESSION_SECRET: string;
   JWT_SECRET: string;
   APP_URL: string;
   KIMI_AUTH_URL: string;
+  LEMONSQUEEZY_API_KEY?: string;
+  LEMONSQUEEZY_STORE_ID?: string;
+  LEMONSQUEEZY_PRO_VARIANT_ID?: string;
+  LEMONSQUEEZY_PRO_YEARLY_VARIANT_ID?: string;
+  LEMONSQUEEZY_WEBHOOK_SECRET?: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -24,11 +32,20 @@ const app = new Hono<{ Bindings: Env }>();
 // Health check
 app.get("/api/health", (c) => c.json({ ok: true, env: "cloudflare-workers" }));
 
-// OAuth callback
-app.get(Paths.oauthCallback, async (c) => {
-  // Set env vars from bindings for the auth handler
-  const handler = createOAuthCallbackHandler();
-  return handler(c.req.raw as any, c.env as any);
+// OAuth callback (reads configuration from process.env via nodejs_compat)
+app.get(Paths.oauthCallback, createOAuthCallbackHandler());
+
+// Lemon Squeezy webhook (raw body required for signature verification)
+app.post("/api/webhooks/lemonsqueezy", async (c) => {
+  try {
+    const payload = await c.req.text();
+    const signature = c.req.header("x-signature") ?? null;
+    const result = await handleLemonSqueezyWebhook(c.env, payload, signature);
+    return c.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Webhook error";
+    return c.json({ error: message }, 400);
+  }
 });
 
 // tRPC API
@@ -38,9 +55,9 @@ app.use("/api/trpc/*", async (c) => {
     req: c.req.raw,
     router: appRouter,
     createContext: async (opts) => {
-      // Pass D1 database and env to context
+      // Pass D1 database, Workers AI, and other bindings to context.
       const ctx = await createContext(opts);
-      (ctx as any).env = c.env;
+      ctx.env = c.env as unknown as TrpcContext["env"];
       return ctx;
     },
   });
@@ -98,7 +115,7 @@ function getIndexHtml() {
     <p>The academic research platform backend is running on Cloudflare's edge network. Connect the React frontend to start using the app.</p>
     <a href="/api/health" class="btn">Check API Health</a>
     <div class="stats">
-      <div><div class="stat-value">30</div><div class="stat-label">Papers Ready</div></div>
+      <div><div class="stat-value">147</div><div class="stat-label">Papers Ready</div></div>
       <div><div class="stat-value">4</div><div class="stat-label">API Routers</div></div>
       <div><div class="stat-value">Edge</div><div class="stat-label">Deployment</div></div>
     </div>
@@ -108,7 +125,7 @@ function getIndexHtml() {
 }
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext) {
+  async fetch(request: Request, env: Env, ctx: Parameters<typeof app.fetch>[2]) {
     return app.fetch(request, env, ctx);
   },
 };

@@ -3,8 +3,45 @@ import { createRouter, publicQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import { papers } from "@db/schema";
 import { like, desc, sql, and, gte } from "drizzle-orm";
+import { searchLive } from "./sources/live-search";
+import { workersAiEmbedder } from "./sources/semantic-rerank";
 
 export const paperRouter = createRouter({
+  // Real-time search against external sources (arXiv + Crossref + OpenAlex).
+  // This does not touch the database, so it works on Cloudflare Workers via
+  // fetch. language/docType filters are served by OpenAlex (covers Turkish
+  // journals incl. DergiPark DOIs, and dissertations).
+  searchLive: publicQuery
+    .input(
+      z.object({
+        query: z.string().min(1),
+        source: z.enum(["all", "arxiv", "scholar", "openalex"]).default("all"),
+        limit: z.number().min(1).max(50).default(25),
+        language: z.enum(["all", "tr", "en"]).default("all"),
+        docType: z.enum(["all", "article", "dissertation"]).default("all"),
+        // Cross-lingual semantic search: expand a Turkish query with English
+        // academic terms and (when Workers AI is available) rerank by meaning.
+        semantic: z.boolean().default(false),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      const embed = input.semantic
+        ? (workersAiEmbedder(ctx.env?.AI) ?? undefined)
+        : undefined;
+      const { papers, sources, errors, expansion, reranked } = await searchLive({
+        ...input,
+        embed,
+      });
+      return {
+        papers,
+        total: papers.length,
+        sources,
+        errors,
+        expansion,
+        reranked,
+      };
+    }),
+
   list: publicQuery
     .input(
       z.object({
@@ -21,7 +58,7 @@ export const paperRouter = createRouter({
     )
     .query(async ({ input }) => {
       const db = getDb();
-      const filters = input || {};
+      const filters = input ?? { sortBy: "relevance" as const, page: 1, limit: 20 };
       const conditions = [];
 
       if (filters.query && filters.query.length > 0) {

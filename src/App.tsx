@@ -4,6 +4,8 @@ import Login from "./pages/Login"
 import NotFound from "./pages/NotFound"
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
+import MapView from './pages/MapView'
+import Detector from './pages/Detector'
 import Library from './pages/Library'
 import Analytics from './pages/Analytics'
 import Pricing from './pages/Pricing'
@@ -17,6 +19,8 @@ export default function App() {
       <Route path="/pricing" element={<Pricing />} />
       <Route element={<Layout />}>
         <Route path="/app" element={<Dashboard />} />
+        <Route path="/app/map" element={<MapView />} />
+        <Route path="/app/detector" element={<Detector />} />
         <Route path="/app/library" element={<Library />} />
         <Route path="/app/analytics" element={<Analytics />} />
         <Route path="/app/settings" element={<Settings />} />

@@ -16,7 +16,7 @@ export const libraryRouter = createRouter({
     .query(async ({ ctx, input }) => {
       const db = getDb();
       const userId = ctx.user.id;
-      const filters = input || {};
+      const filters = input ?? { page: 1, limit: 20 };
 
       const conditions = [eq(savedPapers.userId, userId)];
       if (filters.collection) {
