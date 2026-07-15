@@ -5,6 +5,7 @@ import { paperRouter } from "./paper-router";
 import { libraryRouter } from "./library-router";
 import { subscriptionRouter } from "./subscription-router";
 import { billingRouter } from "./billing-router";
+import { synthesisRouter } from "./synthesis-router";
 import { createRouter, publicQuery } from "./middleware";
 
 export const appRouter = createRouter({
@@ -16,6 +17,7 @@ export const appRouter = createRouter({
   library: libraryRouter,
   subscription: subscriptionRouter,
   billing: billingRouter,
+  synthesis: synthesisRouter,
 });
 
 export type AppRouter = typeof appRouter;

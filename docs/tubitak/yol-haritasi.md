@@ -44,10 +44,12 @@ Başvurudan önce demo ve repo profesyonel görünmeli:
 
 ## Faz 4 — LLM literatür sentezi (7–12. ay) · Ar-Ge
 
-- [ ] RAG mimarisi: kullanıcının koleksiyonu üzerinden kaynak-atıflı özet üretimi
-- [ ] Cümle düzeyinde kaynak gösterimi; sadakat (faithfulness) değerlendirme hattı
+- [x] RAG mimarisi: kullanıcının seçili makaleleri üzerinden kaynak-atıflı özet üretimi (Workers AI Llama — harici API anahtarı yok)
+- [x] Cümle düzeyinde kaynak gösterimi (`[n]` işaretleri + tıklanabilir kaynak listesi)
+- [ ] Sadakat (faithfulness) değerlendirme hattı
 - [ ] "Bu iki makaleyi karşılaştır", "bu alandaki açık problemler" şablon sorguları
-- [ ] Maliyet kontrolü: önbellek + kota + küçük model fallback
+- [x] Maliyet kontrolü: küçük model (Llama 3.1 8B fp8) + makale sayısı üst sınırı (12); kota katmanı sonraki adım
+- [ ] Pro kota / ücretsiz katman sınırları
 
 ## Faz 5 — Ticarileşme (10–14. ay)
 

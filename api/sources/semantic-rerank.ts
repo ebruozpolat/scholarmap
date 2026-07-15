@@ -74,11 +74,12 @@ export async function rerankBySimilarity(
 // ── Workers AI adapter ──────────────────────────────────────────────────
 // Minimal structural type for the Workers AI binding so this compiles
 // against Node lib types without pulling in @cloudflare/workers-types.
+/**
+ * Structural Workers AI binding. Inputs/outputs vary by model
+ * (embeddings vs chat); callers narrow the response shape.
+ */
 export interface WorkersAiBinding {
-  run(
-    model: string,
-    inputs: { text: string[] },
-  ): Promise<{ data?: number[][] } | { shape?: number[]; data?: number[][] }>;
+  run(model: string, inputs: Record<string, unknown>): Promise<unknown>;
 }
 
 export const EMBEDDING_MODEL = "@cf/baai/bge-m3";
@@ -88,7 +89,7 @@ export function workersAiEmbedder(ai: WorkersAiBinding | undefined): Embedder | 
   if (!ai || typeof ai.run !== "function") return null;
   return async (texts: string[]) => {
     const result = await ai.run(EMBEDDING_MODEL, { text: texts });
-    const data = (result as { data?: number[][] }).data;
+    const data = (result as { data?: number[][] } | null)?.data;
     if (!Array.isArray(data)) throw new Error("unexpected Workers AI response");
     return data;
   };

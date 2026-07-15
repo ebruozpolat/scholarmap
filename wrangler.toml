@@ -26,9 +26,11 @@ binding = "DB"
 database_name = "scholarmap-db"
 database_id = "9a9ab3e1-4e76-4400-a6ec-df6c996b9450"
 
-# ── Workers AI (multilingual embeddings for semantic search) ──
-# Free-tier daily allocation covers MVP traffic. Used by paper.searchLive
-# when semantic mode is on; search degrades to keyword order if unavailable.
+# ── Workers AI (embeddings + literature synthesis) ──
+# Free-tier daily allocation covers MVP traffic.
+# - bge-m3 embeddings: paper.searchLive semantic rerank
+# - Llama 3.1 8B fp8: synthesis.generate cited summaries
+# Both degrade cleanly when the binding is unavailable.
 [ai]
 binding = "AI"
 
