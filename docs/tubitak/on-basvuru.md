@@ -68,9 +68,11 @@ Edge mimarisi sayesinde rakiplerden çok daha düşük maliyet ve fiyat.
    Ar-Ge ile atıf/ko-atıf grafında topluluk tespiti (Louvain) eklenerek literatür kolları
    otomatik ayrıştırılacak, temel makaleler merkezîlik ölçütleriyle işaretlenecek ve
    görselleştirme 3B'ye taşınacak.
-3. **Kaynak-sadık LLM sentezi:** Üretilen her cümlenin kullanıcının kümesindeki makalelere
-   atıfla doğrulanabildiği RAG mimarisi (hedef: ≥%90 doğrulanabilir iddia oranı) — halüsinasyon
-   kontrolü açık bir araştırma problemidir.
+3. **Kaynak-sadık LLM sentezi:** İlk sürüm canlıda: kullanıcı arama sonuçlarından makale seçer,
+   sistem yalnızca seçilen özetleri bağlam alarak (RAG) kaynak-atıflı bir literatür sentezi üretir;
+   üretilen her cümle `[n]` biçiminde ilgili makaleye atıfla bağlanır ve model dış olgu eklememeye
+   yönlendirilir (Claude Sonnet). Ar-Ge ile bu, otomatik iddia-doğrulama katmanıyla derinleştirilecek
+   (hedef: ≥%90 doğrulanabilir iddia oranı) — halüsinasyon kontrolü açık bir araştırma problemidir.
 4. **Türkçe akademik ekosistem:** DergiPark, TR Dizin ve YÖK Tez içeriğini anlamsal keşfe açan
    ilk platform olma hedefi; hiçbir küresel rakipte (Semantic Scholar, Elicit, Connected Papers)
    bu kapsam yok.
@@ -105,7 +107,8 @@ gelişmiş analitik, atıf haritası, LLM sentezi) ile gelir. Lemon Squeezy (Mer
 gerçek zamanlı arama (Türkçe ve tez filtreleri dahil), çok dilli anlamsal aramanın ilk sürümü
 (Türkçe sorgu → İngilizce literatür + embedding yeniden sıralama), OpenAlex destekli interaktif
 atıf haritası (DOI/başlık → makale + referansları + atıf yapanlar; düğüme tıklayınca özet ve
-genişletme), Türkçe akademik metinler için AI dedektörü (ücretsiz edinim aracı), konu/trend analizi
+genişletme), seçilen makalelerden kaynak-atıflı LLM literatür sentezi (Claude Sonnet),
+Türkçe akademik metinler için AI dedektörü (ücretsiz edinim aracı), konu/trend analizi
 panosu, kişisel kütüphane, Lemon Squeezy ile Pro abonelik akışı ve
 147 makalelik başlangıç veri seti. Teknoloji Hazırlık Seviyesi: **TRL 6** (gerçek ortamda
 çalışan prototip). Teknik altyapı: React 19 + TypeScript, tRPC, Cloudflare Workers/D1 (edge).

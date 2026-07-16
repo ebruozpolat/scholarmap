@@ -13,6 +13,7 @@ export interface Env {
   DATABASE_URL: string;
   DB: unknown; // D1 binding (accessed through the query layer at runtime)
   AI?: { run(model: string, inputs: { text: string[] }): Promise<{ data?: number[][] }> };
+  ANTHROPIC_API_KEY?: string;
   ASSETS?: { fetch(request: Request): Promise<Response> };
   KIMI_CLIENT_ID: string;
   KIMI_CLIENT_SECRET: string;

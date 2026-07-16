@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/select";
 import paperData from "@/data/papers.json";
 import type { Paper } from "@/data/papers.json";
+import SynthesisDialog from "@/components/SynthesisDialog";
 import {
   BarChart,
   Bar,
@@ -257,6 +258,22 @@ export default function Dashboard() {
   const clearSelection = () => setSelectedIds(new Set());
 
   const selectedCount = selectedIds.size;
+
+  // Map the selected global indices back to paper objects for synthesis.
+  const selectedPapers = useMemo(
+    () =>
+      [...selectedIds]
+        .map((i) => filteredPapers[i])
+        .filter((p): p is Paper => Boolean(p))
+        .map((p) => ({
+          title: p.title,
+          authors: getAuthors(p),
+          year: p.year,
+          abstract: p.abstract,
+          url: p.url,
+        })),
+    [selectedIds, filteredPapers]
+  );
 
   const avgCitations = useMemo(() => {
     if (filteredPapers.length === 0) return 0;
@@ -891,6 +908,7 @@ export default function Dashboard() {
               </button>
             </div>
             <div className="flex items-center gap-2">
+              <SynthesisDialog papers={selectedPapers} />
               <Button
                 size="sm"
                 className="h-8 bg-[#6366F1] hover:bg-[#818CF8] text-white text-xs"
