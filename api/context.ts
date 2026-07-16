@@ -6,6 +6,7 @@ import { authenticateRequest } from "./kimi/auth";
 /** Runtime bindings injected by the Cloudflare Worker entry point. */
 export type RuntimeEnv = {
   AI?: WorkersAiBinding;
+  ANTHROPIC_API_KEY?: string;
   [key: string]: unknown;
 };
 

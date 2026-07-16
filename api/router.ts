@@ -2,6 +2,7 @@ import { authRouter } from "./auth-router";
 import { detectorRouter } from "./detector-router";
 import { mapRouter } from "./map-router";
 import { paperRouter } from "./paper-router";
+import { synthesisRouter } from "./synthesis-router";
 import { libraryRouter } from "./library-router";
 import { subscriptionRouter } from "./subscription-router";
 import { billingRouter } from "./billing-router";
@@ -13,6 +14,7 @@ export const appRouter = createRouter({
   detector: detectorRouter,
   map: mapRouter,
   paper: paperRouter,
+  synthesis: synthesisRouter,
   library: libraryRouter,
   subscription: subscriptionRouter,
   billing: billingRouter,

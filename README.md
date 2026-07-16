@@ -10,6 +10,7 @@ A premium academic research platform for discovering, analyzing, and organizing 
 - **Cross-lingual semantic search** — a Turkish query (e.g. "derin öğrenme ile tümör tespiti") is expanded with English academic terms so it also reaches the English literature; when a Workers AI binding is present, results are additionally reranked by multilingual embedding similarity. Degrades gracefully to keyword search when the binding is absent.
 - **Citation map** — paste a DOI or title and get an interactive graph (OpenAlex-powered) of the paper, its references, and the works citing it; click any node to read it or expand the map.
 - **AI detector (Beta)** — heuristic Turkish-academic-text AI-writing analysis: sentence rhythm, lexical diversity, n-gram repetition, connector density, and formulaic-phrase signals combined into a probabilistic score. Runs entirely server-side; the text is never stored.
+- **Literature synthesis (Beta)** — select papers from search results and get a coherent, **source-cited** synthesis (Claude Sonnet). A retrieval-augmented design grounds every claim in the selected abstracts with inline `[n]` citations back to the sources; the model is instructed not to introduce outside facts. Requires an `ANTHROPIC_API_KEY`.
 - **Interactive dashboard** — browse results in table/card views with sorting and filtering.
 - **Topic analysis** — automatic topic categorization, trend charts, and citation distribution.
 - **Personal library** — save favorite papers and organize them into collections.
@@ -27,7 +28,7 @@ A premium academic research platform for discovering, analyzing, and organizing 
 | Auth | Kimi OAuth (JWT sessions via `jose`) |
 | Deployment | Cloudflare Workers (edge) |
 
-The tRPC API is organized into six routers: `auth`, `detector`, `map`, `paper`, `library`, and `subscription`. The citation map is rendered with Cytoscape.js on top of the OpenAlex API.
+The tRPC API is organized into seven routers: `auth`, `detector`, `map`, `paper`, `synthesis`, `library`, and `subscription`. The citation map is rendered with Cytoscape.js on top of the OpenAlex API.
 
 ## Project structure
 
