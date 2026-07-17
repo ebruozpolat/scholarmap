@@ -187,7 +187,8 @@ describe("fetchCitationGraph", () => {
   it("keeps partial results when one request fails", async () => {
     mockFetch((url) => {
       if (url.includes("filter=cites")) {
-        return new Response("upstream down", { status: 503 });
+        // Non-retryable client error so the test stays fast.
+        return new Response("bad request", { status: 400 });
       }
       return Response.json({ results: [REF_WORK] });
     });
@@ -195,5 +196,26 @@ describe("fetchCitationGraph", () => {
     expect(graph.nodes.map((n) => n.id)).toContain("W100");
     expect(graph.errors).toHaveLength(1);
     expect(graph.errors[0]).toContain("citations");
+  });
+
+  it("retries on 429 then succeeds", async () => {
+    let calls = 0;
+    mockFetch((url) => {
+      if (url.includes("filter=cites")) {
+        return Response.json({ results: [CITING_WORK] });
+      }
+      calls += 1;
+      if (calls === 1) {
+        return new Response("rate limited", {
+          status: 429,
+          headers: { "retry-after": "0" },
+        });
+      }
+      return Response.json({ results: [REF_WORK] });
+    });
+    const graph = await fetchCitationGraph({ center: toMapPaper(CENTER_WORK) });
+    expect(calls).toBeGreaterThanOrEqual(2);
+    expect(graph.nodes.map((n) => n.id)).toContain("W100");
+    expect(graph.errors).toEqual([]);
   });
 });

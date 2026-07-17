@@ -19,11 +19,22 @@ import {
   Radio,
   Sparkles,
   Languages,
+  Wand2,
+  ExternalLink,
 } from "lucide-react";
 import { trpc } from "@/providers/trpc";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
@@ -93,6 +104,46 @@ function getVenueShort(p: Paper): string {
   return m ? m[0].trim().slice(0, 18) : "Unknown";
 }
 
+/** Render synthesis text with [n] markers linked to citation URLs. */
+function SynthesisBody({
+  markdown,
+  citations,
+}: {
+  markdown: string;
+  citations: { index: number; url: string; title: string }[];
+}) {
+  const byIndex = new Map(citations.map((c) => [c.index, c]));
+  const parts = markdown.split(/(\[\d+\])/g);
+  return (
+    <p className="whitespace-pre-wrap text-sm leading-relaxed text-[#C8C8D0]">
+      {parts.map((part, i) => {
+        const m = /^\[(\d+)\]$/.exec(part);
+        if (!m) return <span key={i}>{part}</span>;
+        const cite = byIndex.get(Number(m[1]));
+        if (!cite?.url) {
+          return (
+            <span key={i} className="text-[#818CF8] font-medium">
+              {part}
+            </span>
+          );
+        }
+        return (
+          <a
+            key={i}
+            href={cite.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={cite.title}
+            className="text-[#818CF8] font-medium hover:underline"
+          >
+            {part}
+          </a>
+        );
+      })}
+    </p>
+  );
+}
+
 export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>("All");
@@ -108,6 +159,8 @@ export default function Dashboard() {
   const [turkishOnly, setTurkishOnly] = useState(false);
   const [thesesOnly, setThesesOnly] = useState(false);
   const [semantic, setSemantic] = useState(false);
+  const [synthesisOpen, setSynthesisOpen] = useState(false);
+  const [synthesisQuestion, setSynthesisQuestion] = useState("");
 
   // Debounce the typed query so we don't fire a live request per keystroke.
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -258,6 +311,35 @@ export default function Dashboard() {
 
   const selectedCount = selectedIds.size;
 
+  const selectedPapers = useMemo(() => {
+    return [...selectedIds]
+      .sort((a, b) => a - b)
+      .map((i) => filteredPapers[i])
+      .filter((p): p is Paper => Boolean(p));
+  }, [selectedIds, filteredPapers]);
+
+  const synthesize = trpc.synthesis.generate.useMutation();
+
+  const openSynthesis = () => {
+    synthesize.reset();
+    setSynthesisQuestion("");
+    setSynthesisOpen(true);
+  };
+
+  const runSynthesis = () => {
+    if (selectedPapers.length < 2) return;
+    synthesize.mutate({
+      papers: selectedPapers.slice(0, 12).map((p) => ({
+        title: p.title,
+        authors: getAuthors(p),
+        year: typeof p.year === "number" ? p.year : Number(p.year) || 2020,
+        abstract: p.abstract ?? "",
+        url: p.url ?? "",
+      })),
+      question: synthesisQuestion.trim() || undefined,
+    });
+  };
+
   const avgCitations = useMemo(() => {
     if (filteredPapers.length === 0) return 0;
     return Math.round(
@@ -329,6 +411,7 @@ export default function Dashboard() {
   }, [venueDistribution]);
 
   return (
+    <>
     <div className="flex h-full bg-[#08080C]">
       {/* Main Content */}
       <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden">
@@ -456,6 +539,33 @@ export default function Dashboard() {
                   Anlamsal
                 </button>
               </div>
+
+              {/* Upstream source errors (e.g. OpenAlex 429) — don't silently look empty */}
+              {isLive &&
+                !liveSearch.isFetching &&
+                (liveSearch.data?.errors?.length ?? 0) > 0 && (
+                  <div className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-[11px] text-amber-200/90 space-y-1">
+                    <p className="font-medium text-amber-100">
+                      Bazı kaynaklar yanıt vermedi
+                      {(liveSearch.data?.papers.length ?? 0) > 0
+                        ? " — diğer kaynaklardan sonuçlar gösteriliyor"
+                        : ""}
+                      .
+                    </p>
+                    <ul className="list-disc pl-4 text-amber-200/70">
+                      {liveSearch.data!.errors.map((err) => (
+                        <li key={err}>{err}</li>
+                      ))}
+                    </ul>
+                    {liveSearch.data!.errors.some((e) => e.includes("429")) && (
+                      <p className="text-amber-200/60">
+                        OpenAlex şu an rate-limit altında (Cloudflare çıkış IP’leri
+                        paylaşılıyor). Filtreleri All + Anlamsal deneyin; bir dakika
+                        sonra tekrar deneyin.
+                      </p>
+                    )}
+                  </div>
+                )}
 
               {/* Cross-lingual expansion transparency */}
               {isLive && semantic && liveSearch.data?.expansion?.translated && (
@@ -695,12 +805,16 @@ export default function Dashboard() {
                           <>
                             <Search className="size-12 mx-auto mb-3 opacity-40" />
                             <p className="text-[#8A8A98] mb-1">
-                              No papers found matching your criteria
+                              {(liveSearch.data?.errors?.length ?? 0) > 0
+                                ? "Canlı kaynaklar sonuç döndürmedi"
+                                : "No papers found matching your criteria"}
                             </p>
                             <p className="text-xs">
-                              {isLive
-                                ? "Try a different search term"
-                                : "Try adjusting your filters or search terms"}
+                              {isLive && (liveSearch.data?.errors?.length ?? 0) > 0
+                                ? "Türkçe/Tez/OpenAlex filtrelerini kapatıp All ile deneyin"
+                                : isLive
+                                  ? "Try a different search term"
+                                  : "Try adjusting your filters or search terms"}
                             </p>
                           </>
                         )}
@@ -893,7 +1007,22 @@ export default function Dashboard() {
             <div className="flex items-center gap-2">
               <Button
                 size="sm"
-                className="h-8 bg-[#6366F1] hover:bg-[#818CF8] text-white text-xs"
+                onClick={openSynthesis}
+                disabled={selectedCount < 2}
+                title={
+                  selectedCount < 2
+                    ? "Select at least 2 papers to synthesize"
+                    : "Cited literature synthesis via Workers AI"
+                }
+                className="h-8 bg-[#6366F1] hover:bg-[#818CF8] text-white text-xs disabled:opacity-40"
+              >
+                <Wand2 className="size-3.5 mr-1" />
+                Sentezle
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="h-8 border-[#23232D] text-[#8A8A98] hover:bg-[#1E1E28] hover:text-[#F0F0F5] text-xs"
               >
                 <Library className="size-3.5 mr-1" />
                 Add to Library
@@ -1068,5 +1197,140 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+
+      <Dialog
+        open={synthesisOpen}
+        onOpenChange={(open) => {
+          setSynthesisOpen(open);
+          if (!open) synthesize.reset();
+        }}
+      >
+        <DialogContent className="bg-[#111118] border-[#23232D] text-[#F0F0F5] sm:max-w-2xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-[#F0F0F5]">
+              <Wand2 className="size-4 text-[#818CF8]" />
+              Kaynak-atıflı sentez
+            </DialogTitle>
+            <DialogDescription className="text-[#8A8A98]">
+              {selectedPapers.length} makale seçildi. Özetlerden Workers AI
+              (Llama) ile sentez üretilir; her iddia [n] kaynağa bağlanır.
+              Harici API anahtarı gerekmez.
+            </DialogDescription>
+          </DialogHeader>
+
+          {!synthesize.data && (
+            <div className="space-y-3">
+              <label className="block text-xs font-medium text-[#8A8A98]">
+                Odak sorusu (isteğe bağlı)
+              </label>
+              <Textarea
+                value={synthesisQuestion}
+                onChange={(e) => setSynthesisQuestion(e.target.value)}
+                placeholder='Örn. "derin öğrenme ile tümör tespitinde yöntemler nasıl karşılaştırılıyor?"'
+                className="min-h-[88px] bg-[#16161D] border-[#23232D] text-[#F0F0F5] placeholder:text-[#5A5A68]"
+              />
+              <ul className="text-[11px] text-[#5A5A68] space-y-1 max-h-28 overflow-y-auto">
+                {selectedPapers.slice(0, 12).map((p, i) => (
+                  <li key={`${p.title}-${i}`}>
+                    <span className="text-[#818CF8]">[{i + 1}]</span> {p.title}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {synthesize.isPending && (
+            <div className="flex items-center gap-2 py-8 justify-center text-sm text-[#8A8A98]">
+              <Loader2 className="size-4 animate-spin text-[#818CF8]" />
+              Sentez üretiliyor…
+            </div>
+          )}
+
+          {synthesize.error && (
+            <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+              {synthesize.error.message}
+            </div>
+          )}
+
+          {synthesize.data && (
+            <div className="space-y-4">
+              <SynthesisBody
+                markdown={synthesize.data.markdown}
+                citations={synthesize.data.citations}
+              />
+              <div className="border-t border-[#23232D] pt-3 space-y-2">
+                <h4 className="text-xs font-semibold text-[#F0F0F5]">Kaynaklar</h4>
+                <ol className="space-y-1.5">
+                  {synthesize.data.citations.map((c) => (
+                    <li
+                      key={c.index}
+                      className="text-[11px] text-[#8A8A98] flex gap-2"
+                    >
+                      <span className="text-[#818CF8] shrink-0">[{c.index}]</span>
+                      <span className="min-w-0">
+                        {c.url ? (
+                          <a
+                            href={c.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#C8C8D0] hover:text-[#818CF8] hover:underline inline-flex items-center gap-1"
+                          >
+                            {c.title}
+                            <ExternalLink className="size-3 shrink-0 opacity-60" />
+                          </a>
+                        ) : (
+                          <span className="text-[#C8C8D0]">{c.title}</span>
+                        )}
+                        <span className="text-[#5A5A68]"> ({c.year})</span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="text-[10px] text-[#5A5A68]">
+                  Model: {synthesize.data.model}
+                  {synthesize.data.citedIndices.length > 0
+                    ? ` · atıf işaretleri: ${synthesize.data.citedIndices
+                        .map((n) => `[${n}]`)
+                        .join(" ")}`
+                    : " · model atıf işareti kullanmadı; kaynak listesi yine gösteriliyor"}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <DialogFooter className="gap-2">
+            {synthesize.data ? (
+              <Button
+                size="sm"
+                variant="outline"
+                className="border-[#23232D] text-[#8A8A98] hover:bg-[#1E1E28] hover:text-[#F0F0F5]"
+                onClick={() => synthesize.reset()}
+              >
+                Yeniden sor
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                onClick={runSynthesis}
+                disabled={synthesize.isPending || selectedPapers.length < 2}
+                className="bg-[#6366F1] hover:bg-[#818CF8] text-white"
+              >
+                {synthesize.isPending ? (
+                  <>
+                    <Loader2 className="size-3.5 mr-1 animate-spin" />
+                    Üretiliyor
+                  </>
+                ) : (
+                  <>
+                    <Wand2 className="size-3.5 mr-1" />
+                    Sentez üret
+                  </>
+                )}
+              </Button>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

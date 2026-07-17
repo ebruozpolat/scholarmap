@@ -68,20 +68,52 @@ interface OpenAlexWork {
   referenced_works?: string[];
 }
 
+const MAX_RETRIES = 3;
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Fetch OpenAlex JSON with polite-pool identity and retries.
+ * Cloudflare Worker egress IPs are often rate-limited (429); honor
+ * Retry-After and fall back to exponential backoff before failing.
+ */
 async function fetchJson<T>(path: string, params: URLSearchParams): Promise<T> {
   params.set("mailto", CONTACT);
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-  try {
-    const resp = await fetch(`${OPENALEX_ENDPOINT}${path}?${params.toString()}`, {
-      headers: { "User-Agent": `ScholarMap/1.0 (mailto:${CONTACT})` },
-      signal: controller.signal,
-    });
-    if (!resp.ok) throw new Error(`OpenAlex responded ${resp.status}`);
-    return (await resp.json()) as T;
-  } finally {
-    clearTimeout(timer);
+  const url = `${OPENALEX_ENDPOINT}${path}?${params.toString()}`;
+  const headers = { "User-Agent": `ScholarMap/1.0 (mailto:${CONTACT})` };
+
+  let lastError: Error | null = null;
+  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    try {
+      const resp = await fetch(url, { headers, signal: controller.signal });
+      if (resp.status === 429 || resp.status >= 500) {
+        lastError = new Error(`OpenAlex responded ${resp.status}`);
+        const retryAfterHeader = resp.headers.get("retry-after");
+        const retryAfter = retryAfterHeader != null ? Number(retryAfterHeader) : NaN;
+        const delayMs = Number.isFinite(retryAfter)
+          ? Math.max(0, retryAfter * 1000)
+          : 400 * 2 ** attempt;
+        await sleep(delayMs);
+        continue;
+      }
+      if (!resp.ok) throw new Error(`OpenAlex responded ${resp.status}`);
+      return (await resp.json()) as T;
+    } catch (err) {
+      // Non-retryable HTTP errors (already thrown above for non-429/5xx) rethrow.
+      if (err instanceof Error && err.message.startsWith("OpenAlex responded")) {
+        throw err;
+      }
+      lastError = err instanceof Error ? err : new Error(String(err));
+      await sleep(400 * 2 ** attempt);
+    } finally {
+      clearTimeout(timer);
+    }
   }
+  throw lastError ?? new Error("OpenAlex request failed");
 }
 
 /** "https://openalex.org/W123" → "W123" (already-short ids pass through). */

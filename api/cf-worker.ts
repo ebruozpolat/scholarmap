@@ -12,7 +12,8 @@ import { handleLemonSqueezyWebhook } from "./billing-router";
 export interface Env {
   DATABASE_URL: string;
   DB: unknown; // D1 binding (accessed through the query layer at runtime)
-  AI?: { run(model: string, inputs: { text: string[] }): Promise<{ data?: number[][] }> };
+  /** Workers AI — embeddings (bge-m3) and LLM synthesis (Llama). */
+  AI?: { run(model: string, inputs: Record<string, unknown>): Promise<unknown> };
   ASSETS?: { fetch(request: Request): Promise<Response> };
   KIMI_CLIENT_ID: string;
   KIMI_CLIENT_SECRET: string;
