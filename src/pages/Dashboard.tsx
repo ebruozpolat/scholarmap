@@ -540,6 +540,33 @@ export default function Dashboard() {
                 </button>
               </div>
 
+              {/* Upstream source errors (e.g. OpenAlex 429) — don't silently look empty */}
+              {isLive &&
+                !liveSearch.isFetching &&
+                (liveSearch.data?.errors?.length ?? 0) > 0 && (
+                  <div className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-[11px] text-amber-200/90 space-y-1">
+                    <p className="font-medium text-amber-100">
+                      Bazı kaynaklar yanıt vermedi
+                      {(liveSearch.data?.papers.length ?? 0) > 0
+                        ? " — diğer kaynaklardan sonuçlar gösteriliyor"
+                        : ""}
+                      .
+                    </p>
+                    <ul className="list-disc pl-4 text-amber-200/70">
+                      {liveSearch.data!.errors.map((err) => (
+                        <li key={err}>{err}</li>
+                      ))}
+                    </ul>
+                    {liveSearch.data!.errors.some((e) => e.includes("429")) && (
+                      <p className="text-amber-200/60">
+                        OpenAlex şu an rate-limit altında (Cloudflare çıkış IP’leri
+                        paylaşılıyor). Filtreleri All + Anlamsal deneyin; bir dakika
+                        sonra tekrar deneyin.
+                      </p>
+                    )}
+                  </div>
+                )}
+
               {/* Cross-lingual expansion transparency */}
               {isLive && semantic && liveSearch.data?.expansion?.translated && (
                 <div className="flex items-center gap-2 mt-3 flex-wrap">
@@ -778,12 +805,16 @@ export default function Dashboard() {
                           <>
                             <Search className="size-12 mx-auto mb-3 opacity-40" />
                             <p className="text-[#8A8A98] mb-1">
-                              No papers found matching your criteria
+                              {(liveSearch.data?.errors?.length ?? 0) > 0
+                                ? "Canlı kaynaklar sonuç döndürmedi"
+                                : "No papers found matching your criteria"}
                             </p>
                             <p className="text-xs">
-                              {isLive
-                                ? "Try a different search term"
-                                : "Try adjusting your filters or search terms"}
+                              {isLive && (liveSearch.data?.errors?.length ?? 0) > 0
+                                ? "Türkçe/Tez/OpenAlex filtrelerini kapatıp All ile deneyin"
+                                : isLive
+                                  ? "Try a different search term"
+                                  : "Try adjusting your filters or search terms"}
                             </p>
                           </>
                         )}

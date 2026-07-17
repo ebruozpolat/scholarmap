@@ -227,19 +227,23 @@ export async function searchLive(opts: {
   const expansion = semantic ? expandQuery(rawQuery) : undefined;
   const query = expansion?.expandedQuery || rawQuery;
 
-  // Language and document-type filters are only supported by OpenAlex;
-  // when either is active the other sources would pollute the results,
-  // so the search is routed to OpenAlex alone.
+  // Language and document-type filters are best served by OpenAlex
+  // (DergiPark / theses). Prefer OpenAlex alone first; if it fails
+  // (common 429 from shared Worker IPs), fall back to arXiv + Crossref
+  // so the dashboard is never empty solely due to rate limits.
   const filtered = language !== "all" || docType !== "all";
+  const wantOpenAlex = filtered || source === "all" || source === "openalex";
+  const wantArxiv = !filtered && (source === "all" || source === "arxiv");
+  const wantScholar = !filtered && (source === "all" || source === "scholar");
 
   const tasks: { name: string; run: Promise<LivePaper[]> }[] = [];
-  if (!filtered && (source === "all" || source === "arxiv")) {
+  if (wantArxiv) {
     tasks.push({ name: "arXiv", run: searchArxiv(query, limit) });
   }
-  if (!filtered && (source === "all" || source === "scholar")) {
+  if (wantScholar) {
     tasks.push({ name: "Google Scholar", run: searchCrossref(query, limit) });
   }
-  if (filtered || source === "all" || source === "openalex") {
+  if (wantOpenAlex) {
     tasks.push({
       name: "OpenAlex",
       run: searchOpenAlex(query, limit, language, docType),
@@ -259,6 +263,35 @@ export async function searchLive(opts: {
       errors.push(`${tasks[i].name}: ${String(res.reason?.message ?? res.reason)}`);
     }
   });
+
+  // OpenAlex-only path (Türkçe / tez / OpenAlex filter) failed → broaden.
+  if (
+    collected.length === 0 &&
+    filtered &&
+    source !== "openalex" &&
+    errors.some((e) => e.startsWith("OpenAlex:"))
+  ) {
+    const fallbackTasks: { name: string; run: Promise<LivePaper[]> }[] = [
+      { name: "arXiv", run: searchArxiv(query, limit) },
+      { name: "Google Scholar", run: searchCrossref(query, limit) },
+    ];
+    const fallbackSettled = await Promise.allSettled(fallbackTasks.map((t) => t.run));
+    fallbackSettled.forEach((res, i) => {
+      if (res.status === "fulfilled" && res.value.length > 0) {
+        collected.push(...res.value);
+        sources.push(fallbackTasks[i].name);
+      } else if (res.status === "rejected") {
+        errors.push(
+          `${fallbackTasks[i].name}: ${String(res.reason?.message ?? res.reason)}`,
+        );
+      }
+    });
+    if (collected.length > 0) {
+      errors.push(
+        "OpenAlex rate-limited — showing arXiv/Crossref results without language/thesis filter.",
+      );
+    }
+  }
 
   let papers = dedupeByTitle(collected);
   let reranked = false;

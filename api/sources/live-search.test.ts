@@ -198,7 +198,7 @@ describe("searchLive", () => {
     mockFetch((url) =>
       url.includes("crossref")
         ? Response.json(CROSSREF_JSON)
-        : new Response("upstream down", { status: 503 }),
+        : new Response("upstream down", { status: 400 }),
     );
     const { papers, sources, errors } = await searchLive({ query: "attention", source: "all" });
     expect(sources).toEqual(["Google Scholar"]);
@@ -206,5 +206,27 @@ describe("searchLive", () => {
     expect(errors).toHaveLength(2);
     expect(errors[0]).toContain("arXiv");
     expect(errors[1]).toContain("OpenAlex");
+  });
+
+  it("falls back to arXiv/Crossref when OpenAlex-only TR filter is rate-limited", async () => {
+    mockFetch((url) => {
+      if (url.includes("openalex.org")) {
+        return new Response("rate limited", {
+          status: 429,
+          headers: { "retry-after": "0" },
+        });
+      }
+      if (url.includes("arxiv.org")) return new Response(ARXIV_XML, { status: 200 });
+      if (url.includes("crossref")) return Response.json(CROSSREF_JSON);
+      return new Response("missing", { status: 404 });
+    });
+    const result = await searchLive({
+      query: "derin öğrenme",
+      source: "all",
+      language: "tr",
+    });
+    expect(result.papers.length).toBeGreaterThan(0);
+    expect(result.sources).toEqual(expect.arrayContaining(["arXiv", "Google Scholar"]));
+    expect(result.errors.some((e) => e.includes("rate-limited"))).toBe(true);
   });
 });
